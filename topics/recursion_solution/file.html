@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Functional Recursion (Editable)</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+      }
+
+      .header {
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      pre {
+        background-color: #f9f9f9;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+        margin: 0;
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0;
+      }
+
+      .editable input {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <div class="header">
+      <div class="header-content editable">
+        <h2>Reverse array and check string is palindrome</h2>
+      </div>
+      <button onclick="editContent(this)">Edit</button>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC editable1">
+        <pre><code class="language-cpp line-numbers">
+        // C++ solution code goes here
+      </code></pre>
+      </div>
+      <button onclick="editContent(this)">Edit</button>
+      <button onclick="saveContent(this, 'editable1')">Save</button>
+
+      <h2>Java Solution</h2>
+      <div class="codeC editable2">
+        <pre><code class="language-java line-numbers">
+        // Java solution code goes here
+      </code></pre>
+      </div>
+      <button onclick="editContent(this)">Edit</button>
+      <button onclick="saveContent(this, 'editable2')">Save</button>
+
+      <h2>Python Solution</h2>
+      <div class="codeC editable3">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+      </code></pre>
+      </div>
+      <button onclick="editContent(this)">Edit</button>
+      <button onclick="saveContent(this, 'editable3')">Save</button>
+    </div>
+
+    <script>
+      // Define editContent function (globally accessible)
+      function editContent(button) {
+        var content = $(button).prev();
+        var isEditing = content.hasClass("editing");
+
+        if (!isEditing) {
+          var text = content.text().trim();
+          content.html("<input type='text' value='" + text + "'>");
+          content.addClass("editing");
+        } else {
+          var input = content.find("input");
+          var newText = input.val().trim();
+          content.html(newText);
+          content.removeClass("editing");
+        }
+      }
+
+      // Define saveContent function (globally accessible)
+      var savedContent = {};
+
+      function saveContent(button, containerClass) {
+        var content = $(button).prev().prev(); // Get the editable content element (pre)
+        var newText = content.text().trim();
+
+        // Update the displayed content (pre element) with the edited text
+        content.text(newText);
+
+        // Save the edited content to the savedContent variable
+        var key = $("." + containerClass)
+          .prev("h2")
+          .text()
+          .trim();
+        savedContent[key] = newText;
+
+        // Log the saved content to the console
+        console.log("Saved content:", savedContent);
+      }
+    </script>
+  </body>
+</html>

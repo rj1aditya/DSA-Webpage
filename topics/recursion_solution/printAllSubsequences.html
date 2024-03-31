@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PrintAllSubsequences</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Print All Subsequences of an array or string</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+class solution
+{
+    public:
+    void printAllSubsequences(int arr[], vector<int> &ds, int i, int n)
+    {
+        if( i >= n)
+        {
+            if(ds.size() > 0)
+            {
+                for(int k = 0; k < ds.size(); k++)
+                    cout << ds[k] << " ";
+            }
+            else
+                cout << "{}";
+            
+            cout << endl;
+            return;
+        }
+
+        printAllSubsequences(arr, ds, i+1, n);
+        ds.push_back(arr[i]);
+        printAllSubsequences(arr, ds, i+1, n);
+        ds.pop_back();
+    }
+};
+            
+        </code></pre>
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+// Java solution code goes here
+//https://www.geeksforgeeks.org/generating-all-possible-subsequences-using-recursion/
+import java.util.*;
+                        
+public class printAllSubSequences {
+    public static void printSubSeq(int[] arr, ArrayList<Integer> ds, int indx)
+    {
+        if(indx >= arr.length)
+        {
+            if(ds.size() > 0)
+            {
+                System.out.print(ds);
+            }
+            else
+                System.out.print("{}");
+
+                System.out.println();
+
+            return;
+        }
+        ds.add(arr[indx]);
+        printSubSeq(arr, ds, indx+1);
+        //in vector ds.pop_back() used while here remove used to remove last indx var
+        ds.remove(ds.size()-1);
+        printSubSeq(arr, ds, indx+1);
+    }
+            
+    public static void main(String[] args)
+    {
+        ArrayList<Integer> ds = new ArrayList<>();
+        int[] arr = {1,2,3};
+        printSubSeq(arr, ds, 0);
+    }
+}            
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Subset Sum 1</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+      }
+      .header {
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      pre {
+        background-color: #f9f9f9;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+        margin: 0;
+      }
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <h2>Subset Sum1</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+class Solution
+{
+    bool isSubSetSum(vector&lt;int&gt;& arr, int sum, vector&lt;vector&lt;int&gt;&gt;& dp, int ind)
+    {
+        if(ind == arr.size())
+            return false;
+
+        if (sum == 0 || sum == arr[ind])
+            return true;
+
+        if (dp[ind][sum] != -1)
+            return dp[ind][sum];
+
+        if(sum &gt;= arr[ind])
+            if (isSubSetSum(arr, sum-arr[ind], dp, ind + 1) == true)
+                return true;
+
+        if (isSubSetSum(arr, sum, dp, ind+1) == true)
+            return true;
+        
+        return dp[ind][sum] = false;
+    }
+public:
+    bool isSubsetSum(vector&lt;int&gt;arr, int sum){
+        // code here
+        vector&lt;vector&lt;int&gt;&gt; dp(arr.size(), vector&lt;int&gt;(sum+1, -1) );
+        return isSubSetSum(arr, sum, dp, 0);
+    }
+};
+      </code></pre>
+      </div>
+    </div>
+  </body>
+</html>
