@@ -48,6 +48,10 @@ body {
   .question-title {
     cursor: pointer; /* Change cursor to pointer for clickable titles */
   }
+.question-title:hover,
+.notes:hover {
+  color: #c89666; /* Change text color to #c89666 on hover */
+}
   .notes{
     cursor: pointer; /* Change cursor to pointer for clickable titles */
   }

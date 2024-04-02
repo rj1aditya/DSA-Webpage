@@ -86,6 +86,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 'Try [2, 3, 1, 1] target=4.',
                 'When you will draw a tree of recursion you will get overlapping if we start recursion from the last index.']
         },
+        {
+            title: 'Subset sum2',
+            description: [
+                'https://leetcode.com/problems/subsets-ii/submissions/808067059/'
+            ],
+            solution: 'recursion_solution/subsetSum2.html',
+            nt: ['this is same question as combination sum2 but here we have to pick each combination.']
+        },
+        {
+            title: 'Print all permutation of an array',
+            description: [
+                'https://leetcode.com/problems/permutations/description/','solve this problem using both way: using map and without using map'
+            ],
+            solution: 'recursion_solution/printAllPermutation.html',
+            nt: '--'
+        },
+        {
+            title: 'N Queens',
+            description: [
+                'https://leetcode.com/problems/n-queens/'
+            ],
+            solution: 'recursion_solution/NQueen.html',
+            nt: ['Lower diagonal trick: start with filling 0 from the last row and first col, then to guess what could be the formula see the middle diagonal. Middle diagonal for lower diagonal case will be the n-1 number.']
+        },
         // Add more question objects here
     ];
     //this section is to add element dynamically and make hidden element visible

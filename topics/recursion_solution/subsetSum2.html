@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Subset Sum 2</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+      }
+      .header {
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      pre {
+        background-color: #f9f9f9;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+        margin: 0;
+      }
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <h2>Subset Sum2</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+class Solution {
+  vector&lt;vector&lt;int&gt;&gt; ans;
+  vector&lt;int&gt; dp;
+  
+  void f(vector&lt;int&gt;& arr, int ind)
+  {
+      ans.push_back(dp);
+      
+      for(int i = ind; i &lt; arr.size(); i++)
+      {
+          if(i != ind && arr[i] == arr[i-1]) continue;
+          
+          dp.push_back(arr[i]);
+          f(arr, i+1);
+          dp.pop_back();
+      }
+  }
+public:
+  vector&lt;vector&lt;int&gt;&gt; subsetsWithDup(vector&lt;int&gt;& nums) {
+      
+      sort(nums.begin(), nums.end());
+      f(nums, 0);
+      return ans;
+  }
+};
+      </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

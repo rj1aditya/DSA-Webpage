@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>N Queens</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>N Queens</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+class Solution 
+{
+    bool isSafe(int row, int col, vector&lt;string&gt; &dp, int n)
+    {
+        int dupR = row;
+        int dupC = col;
+        
+        while(row &gt;= 0 && col &gt;= 0)
+        {
+            if(dp[row][col] == 'Q')
+                return false;
+            
+            row--;
+            col--;
+        }
+        
+        
+        row = dupR;
+        col = dupC;
+        while(col &gt;= 0)
+        {
+            if(dp[row][col] == 'Q')
+                return false;
+
+            col--;
+        }
+        
+        row = dupR;
+        col = dupC;
+        while(row &lt; n && col &gt;= 0)
+        {
+            if(dp[row][col] == 'Q')
+                return false;
+            
+            row++;
+            col--;
+        }
+        
+        return true;
+    }
+    
+    void findAns(vector&lt;vector&lt;string&gt;&gt; &ans, vector&lt;string&gt; &dp, int col, int N , vector&lt;int&gt; &left, vector&lt;int&gt; &lowerDiag, vector&lt;int&gt; &upperDiag)
+    {
+        if(col == N)
+        {
+            ans.push_back(dp);
+            return;
+        }
+        
+        for(int r = 0; r &lt; N; r++)
+        {
+        if (left[r] == 1 || lowerDiag[r + col] == 1 || upperDiag[N - 1 + col - r] == 1)
+            continue;
+
+        //Setting
+        left[r] =1; 
+        lowerDiag[r + col] = 1; 
+        upperDiag[N - 1 + col - r] = 1;
+        dp[r][col] = 'Q';
+        findAns(ans, dp, col + 1, N, left, lowerDiag, upperDiag);
+
+        //Resetting
+        dp[r][col] = '.';
+        left[r] = 0; 
+        lowerDiag[r + col] = 0; 
+        upperDiag[N - 1 + col - r] = 0;
+        }
+    }
+public:
+    vector&lt;vector&lt;string&gt;&gt; solveNQueens(int N) {
+        string s(N, '.');
+        vector&lt;vector&lt;string&gt;&gt; ans;
+        vector&lt;string&gt; dp(N);
+
+        vector&lt;int&gt; left(N, 0), lowerDiag(2 * N - 1, 0), upperDiag(2 * N - 1, 0);
+        
+        for(int i = 0; i &lt; N; i++)
+            dp[i] = s;
+        
+        findAns(ans, dp, 0, N, left, lowerDiag, upperDiag);
+        return ans;
+    }
+};
+        </code></pre>
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>
