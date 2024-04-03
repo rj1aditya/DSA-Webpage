@@ -110,6 +110,31 @@ document.addEventListener('DOMContentLoaded', function() {
             solution: 'recursion_solution/NQueen.html',
             nt: ['Lower diagonal trick: start with filling 0 from the last row and first col, then to guess what could be the formula see the middle diagonal. Middle diagonal for lower diagonal case will be the n-1 number.']
         },
+        {
+            title: 'Sudoku',
+            description: [
+                'https://leetcode.com/problems/sudoku-solver/'
+            ],
+            solution: 'recursion_solution/Sudoku.html',
+            nt: '--'
+        },
+        {
+            title: 'M-Coloring Problem',
+            description: [
+                'https://practice.geeksforgeeks.org/problems/m-coloring-problem-1587115620/1'
+            ],
+            solution: 'recursion_solution/MColoring.html',
+            nt: '--'
+        },
+        {
+            title: 'Palindrome Partitioning',
+            description: [
+                'https://leetcode.com/problems/palindrome-partitioning/'
+            ],
+            solution: 'recursion_solution/palindromePartitioning.html',
+            nt: '--'
+        },
+        
         // Add more question objects here
     ];
     //this section is to add element dynamically and make hidden element visible
