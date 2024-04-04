@@ -134,7 +134,22 @@ document.addEventListener('DOMContentLoaded', function() {
             solution: 'recursion_solution/palindromePartitioning.html',
             nt: '--'
         },
-        
+        {
+            title: 'Rat in a Maze Problem - I',
+            description: [
+                'https://practice.geeksforgeeks.org/problems/rat-in-a-maze-problem/1'
+            ],
+            solution: 'recursion_solution/RatInMaze1.html',
+            nt: '--'
+        },
+        {
+            title: 'Permutation Sequence',
+            description: [
+                'https://leetcode.com/problems/permutation-sequence/description/'
+            ],
+            solution: 'recursion_solution/permutationSequence.html',
+            nt: '--'
+        },
         // Add more question objects here
     ];
     //this section is to add element dynamically and make hidden element visible
