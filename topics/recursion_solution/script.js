@@ -150,6 +150,22 @@ document.addEventListener('DOMContentLoaded', function() {
             solution: 'recursion_solution/permutationSequence.html',
             nt: '--'
         },
+        {
+            title: 'Merge sort',
+            description: [
+                'Merge sort, Sorting algorithm'
+            ],
+            solution: 'recursion_solution/mergeSort.html',
+            nt: '--'
+        },
+        {
+            title: 'Count inversion in an array',
+            description: [
+                'https://www.codingninjas.com/codestudio/problems/number-of-inversions_6840276?utm_source=youtube&utm_medium=affiliate&utm_campaign=striver_Arrayproblems'
+            ],
+            solution: 'recursion_solution/CountInversion.html',
+            nt: '--'
+        },
         // Add more question objects here
     ];
     //this section is to add element dynamically and make hidden element visible

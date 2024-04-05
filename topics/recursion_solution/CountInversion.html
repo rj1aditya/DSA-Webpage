@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Count inversion in an array</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Count inversion in an array</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+#include&lt;iostream&gt;
+#include&lt;vector&gt;
+using namespace std;
+
+int merge(vector&lt;int&gt; &arr, int low, int mid, int high)
+{
+    int cnt = 0;
+    int left = low;
+    int right = mid+1;
+    vector&lt;int&gt; ds;
+
+    while(left &lt;= mid && right &lt;= high)
+    {
+        if(arr[left] &lt;= arr[right])
+            ds.push_back(arr[left++]);
+        else
+        {
+            cnt += (mid - left + 1);
+            ds.push_back(arr[right++]);
+        }
+    }
+    while(left &lt;= mid)
+    {
+        ds.push_back(arr[left++]);
+    }
+    while(right &lt;= high)
+    {
+        ds.push_back(arr[right++]);
+    }
+    for(int i = low; i &lt;= high; i++)
+    {
+        arr[i] = ds[i-low];
+    }
+    
+    return cnt;
+}
+int mergeSort(vector&lt;int&gt; &arr, int low, int high)
+{
+    int cnt = 0;
+
+    if(low&gt;=high)
+        return cnt;
+
+    int mid = (high+low)/2;
+    cnt += mergeSort(arr, low, mid);
+    cnt += mergeSort(arr, mid+1, high);
+    cnt +=merge(arr, low, mid, high);
+
+    return cnt;
+}
+int numberOfInversions(vector&lt;int&gt;&a, int n) {
+    // Write your code here.
+    return mergeSort(a, 0, n-1);
+}
+        </code></pre>
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>
