@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>All Kind of patterns in Recursion</title>
+    <title>Count Ways To Reach The N-th Stairs</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -17,7 +17,7 @@
       }
 
       .header {
-        background-color: #c89666;
+        background-color: #4056a1;
         color: white;
         text-align: center;
         padding: 20px 0;
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>All Kind of patterns in Recursion</h2>
+        <h2>Count Ways To Reach The N-th Stairs</h2>
       </div>
     </div>
     <div class="container">
@@ -58,83 +58,21 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-//Print All subsequences of an array whose sum is K
-class solution
+#include &lt;bits/stdc++.h&gt;
+int mod=1e9+7;
+int fun(int n, vector&lt;int&gt; &dp)
 {
-    public:
-    void printSub(int arr[], vector<int> &ds, int sum, int k, int idx, int n)
-    {
-        if(sum > k)
-            return;
-        if(idx == n)
-        {
-            if(sum == k)
-            {
-                for(auto s: ds)
-                    cout<< s << " ";
-                cout << endl;
-            }
-            return;
-        }
-        ds.push_back(arr[idx]);
-        printSub(arr, ds, sum+arr[idx], k, idx+1, n);
-        ds.pop_back();
-        printSub(arr, ds, sum, k, idx+1, n);
-    }
-};
-
-//Print ANY subsequences of an array whose sum is K
-class solution2
-{
-    public:
-    bool printSub(int arr[], vector<int> &ds, int sum, int k, int idx, int n)
-    {
-        if(sum > k)
-            return false;
-        if(idx == n)
-        {
-            if(sum == k)
-            {
-                for(auto s: ds)
-                    cout<< s << " ";
-                return true;
-            }
-            return false;
-        }
-        ds.push_back(arr[idx]);
-        if(printSub(arr, ds, sum+arr[idx], k, idx+1, n) == true)
-            return true;
-        ds.pop_back();
-        if(printSub(arr, ds, sum, k, idx+1, n) == true)
-            return true;
-        
-        return false;
-    }
-};
-
-//Print COUNT subsequences of an array whose sum is K
-class solution
-{
-    public:
-    int printSub(int arr[], vector<int> &ds, int sum, int k, int idx, int n)
-    {
-        if(sum > k)
-            return 0;
-        if(idx == n)
-        {
-            if(sum == k)
-            {
-                return 1;
-            }
-            return 0;
-        }
-        ds.push_back(arr[idx]);
-        int l = printSub(arr, ds, sum+arr[idx], k, idx+1, n);
-        ds.pop_back();
-        int r = printSub(arr, ds, sum, k, idx+1, n);
-        return l+r;
-    }
-};
+    if(n &lt;= 1)
+      return 1;
+    if(dp[n] != -1)
+      return dp[n];
+    return dp[n] = (fun(n-1, dp)%mod + fun(n-2,dp)%mod)%mod;
+} 
+int countDistinctWays(int n) {
+    //  Write your code here.
+  vector&lt;int&gt; dp(n+1, -1);
+  return fun(n, dp);
+}
         </code></pre>
       </div>
 
