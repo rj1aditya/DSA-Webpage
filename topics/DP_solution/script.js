@@ -22,6 +22,12 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "DP_solution/FrogJumpWithKDistance.html",
       nt: "--",
     },
+    {
+      title: "Maximum Sum of Non-Adjacent Elements",
+      description: ["https://bit.ly/3PURfqU"],
+      solution: "DP_solution/MaxSumOfNonAdjcElems.html",
+      nt: "--",
+    },
     // Add more question objects here
   ];
   {
