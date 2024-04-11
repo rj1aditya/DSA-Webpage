@@ -28,6 +28,21 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "DP_solution/MaxSumOfNonAdjcElems.html",
       nt: "--",
     },
+    {
+      title: "House Robber II",
+      description: ["https://bit.ly/49vceYm"],
+      solution: "DP_solution/HouserRobber2.html",
+      nt: [
+        "This question is similar to Maximum Sum of Non-Adjacent Elements only modification to handle cirle neighboorhood so it is handle by taking max of 2 ans in first ans not considering 0th element then in second ans not considering last the element. Reason is as mentioned in the question 1st and last neighbour are adjacent, so in the ans either 0th element wont come or last element wont come thats why we eleminate either 0th element or last element",
+        "this question is only solved in tabulation mode since similar question to Maximum Sum of Non-Adjacent Elements.",
+      ],
+    },
+    {
+      title: "Ninjas Training ***",
+      description: ["https://bit.ly/49w8Lsr"],
+      solution: "DP_solution/ninjaTraining.html",
+      nt: ["--"],
+    },
     // Add more question objects here
   ];
   {
