@@ -43,6 +43,14 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "DP_solution/ninjaTraining.html",
       nt: ["--"],
     },
+    {
+      title: "Unique paths",
+      description: ["https://bit.ly/3TOpWzq"],
+      solution: "DP_solution/UniquePath.html",
+      nt: [
+        "This question has been solved in two way, coz in first way TC was not sufficient.",
+      ],
+    },
     // Add more question objects here
   ];
   {
