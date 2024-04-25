@@ -51,6 +51,26 @@ document.addEventListener("DOMContentLoaded", function () {
         "This question has been solved in two way, coz in first way TC was not sufficient.",
       ],
     },
+    {
+      title: "Unique Paths 2 | DP on Grid with Maze Obstacles",
+      description: ["https://bit.ly/4dfsUG7"],
+      solution: "DP_solution/uniquePath2.html",
+      nt: ["--"],
+    },
+    {
+      title: "Minimum Path Sum in Grid",
+      description: ["https://bit.ly/3UgrtyN"],
+      solution: "DP_solution/MinPathSumInGrid.html",
+      nt: [""],
+    },
+    {
+      title: "Triangle | Fixed Starting Point and Variable Ending Point",
+      description: ["https://bit.ly/3UxeREz"],
+      solution: "DP_solution/triangle.html",
+      nt: [
+        "This question has been solved in two way, coz in first way TC was not sufficient.",
+      ],
+    },
     // Add more question objects here
   ];
   {
