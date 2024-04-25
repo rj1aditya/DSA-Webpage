@@ -67,9 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
       title: "Triangle | Fixed Starting Point and Variable Ending Point",
       description: ["https://bit.ly/3UxeREz"],
       solution: "DP_solution/triangle.html",
-      nt: [
-        "This question has been solved in two way, coz in first way TC was not sufficient.",
-      ],
+      nt: ["--"],
     },
     // Add more question objects here
   ];
