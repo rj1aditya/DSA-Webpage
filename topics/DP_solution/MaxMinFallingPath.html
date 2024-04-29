@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minimum/Maximum Falling Path Sum</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #4056a1;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 820px; /* Increased width by 20 pixels to accommodate 10px padding on both sides */
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px; /* Padding remains the same */
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <h2>Minimum/Maximum Falling Path Sum</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+#include &lt;bits/stdc++.h&gt; 
+//Recursion
+int fun(vector&lt;vector&lt;int&gt;&gt; &matrix, vector&lt;vector&lt;int&gt;&gt; &dp, int i, int j)
+{
+    if( j &lt; 0 || j &gt;= matrix[0].size() )
+        return -1e9;
+    if(i == 0)
+        return matrix[0][j];
+
+    if(dp[i][j] != -1)
+        return dp[i][j];
+
+    int u = matrix[i][j] + fun(matrix, dp, i-1, j);
+    int leftdig = matrix[i][j] + fun(matrix, dp, i-1, j-1);
+    int rightdig = matrix[i][j] + fun(matrix, dp, i-1, j+1);
+
+    return dp[i][j] = max(max(u, leftdig), rightdig);
+}
+
+//Recursion --&gt; Tabulation
+int fun1(vector&lt;vector&lt;int&gt;&gt; &matrix, vector&lt;vector&lt;int&gt;&gt; &dp, int n, int m)
+{
+    for(int j = 0; j &lt; m; j++)
+        dp [0][j] = matrix[0][j];
+
+    for( int i = 1; i &lt; n; i++)
+    {
+        for( int j = 0; j &lt; m; j++)
+        {
+            int u = matrix[i][j] + dp[i-1][j];
+            int leftdig = -1e9;
+            int rightdig = -1e9;
+            if(j-1 &gt;= 0)
+                leftdig = matrix[i][j] + dp[i-1][j-1];
+            if(j+1 &lt; m)
+                rightdig = matrix[i][j] + dp[i-1][j+1];
+            dp[i][j] = max(max(u, leftdig), rightdig);
+        }
+    }
+
+    int maxi = -1e9;
+    for(int j = 0; j &lt; m; j++)
+    {
+        maxi = max(maxi, dp[n-1][j]);
+    }
+    return maxi;
+}
+
+//Recursion --&gt; Tabulation
+int fun2(vector&lt;vector&lt;int&gt;&gt; &matrix, int n, int m)
+{
+    vector&lt;int&gt; prev(m, 0);
+   
+    for(int j = 0; j &lt; m; j++)
+        prev[j] = matrix[0][j];
+
+    for( int i = 1; i &lt; n; i++)
+    {
+        vector&lt;int&gt; cur(m, 0);
+        for( int j = 0; j &lt; m; j++)
+        {
+            int u = matrix[i][j] + prev[j];
+            int leftdig = -1e9;
+            int rightdig = -1e9;
+            if(j-1 &gt;= 0)
+                leftdig = matrix[i][j] + prev[j-1];
+            if(j+1 &lt; m)
+                rightdig = matrix[i][j] + prev[j+1];
+            cur[j] = max(max(u, leftdig), rightdig);
+        }
+        prev = cur;
+    }
+
+    int maxi = -1e9;
+    for(int j = 0; j &lt; m; j++)
+    {
+        maxi = max(maxi, prev[j]);
+    }
+    return maxi;
+}
+
+int getMaxPathSum(vector&lt;vector&lt;int&gt;&gt; &matrix)
+{
+    //  Write your code here.
+    int n = matrix.size();
+    int m = matrix[0].size();
+
+    vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(m, -1));
+    /*recursion
+    int maxi = -1e9;
+    for(int j = 0; j &lt; m; j++)
+        maxi = max(maxi, fun(matrix, dp, n-1, j));
+    return maxi;
+    */
+    //Tabulation
+    //return fun1(matrix, dp, n, m);
+
+    //Space optimization
+    return fun2(matrix, n, m);
+}
+            </code></pre>
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+// Java solution code goes here
+            </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+# Python solution code goes here
+            </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

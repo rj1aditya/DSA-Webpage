@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Subset Sum Equals to Target</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #4056a1;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 820px; /* Increased width by 20 pixels to accommodate 10px padding on both sides */
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px; /* Padding remains the same */
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <h2>Subset Sum Equals to Target</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+#include &lt;bits/stdc++.h&gt; 
+
+//recursion
+int fun(vector&lt;int&gt; &arr, vector&lt;vector&lt;int&gt;&gt; &dp, int target, int i)
+{
+    if(target == 0)
+        return true;
+    if(i==0)
+        return arr[0] == target;
+    
+    if(dp[i][target] != -1)
+        return dp[i][target];
+    
+    int notPick = fun(arr, dp, target, i-1);
+
+    int pick = false;
+    if(target-arr[i] &gt;= 0)
+        pick = fun(arr, dp, target-arr[i], i-1);
+
+    dp[i][target] = pick | notPick;
+}
+
+//Recursion --&gt; Tabulation
+int fun1(vector&lt;int&gt; &arr, int target, int n)
+{
+    vector&lt;vector&lt;bool&gt;&gt; dp(n, vector&lt;bool&gt;(target+1, 0));
+    for(int i = 0; i &lt; n; i++)
+        dp[i][0] = true;
+    
+    dp[0][arr[0]] = true;
+
+    for(int i = 1; i &lt; n; i++)
+    {
+        for(int k = 1; k &lt;= target; k++)
+        {
+            bool notPick = dp[i-1][k];
+            bool pick = false;
+            if(k-arr[i] &gt;= 0)
+                pick = dp[i-1][k-arr[i]];
+
+            dp[i][k] = pick | notPick;
+        }
+    }
+    
+    return dp[n-1][target];
+}
+
+//Space optimization
+int fun2(vector&lt;int&gt; &arr, int target, int n)
+{
+    vector&lt;bool&gt; cur(target+1, 0), prev(target+1, 0);
+    prev[0] = true;
+    cur[0]  = true;
+    prev[arr[0]] = true;
+
+    for(int i = 1; i &lt; n; i++)
+    {
+        for(int k = 1; k &lt;= target; k++)
+        {
+            bool notPick = prev[k];
+            bool pick = false;
+            if(k-arr[i] &gt;= 0)
+                pick = prev[k-arr[i]];
+
+            cur[k] = pick | notPick;
+        }
+        prev = cur;
+    }
+    
+    return prev[target];
+}
+bool subsetSumToK(int n, int k, vector&lt;int&gt; &arr) {
+    vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(k+1, -1));
+    //Recursion
+    //return fun(arr, dp, k, n-1);
+    
+    //Tabulation
+    //return fun1(arr, k, n);
+
+    //Tabulation
+    return fun2(arr, k, n);
+    // Write your code here.
+}
+            </code></pre>
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+// Java solution code goes here
+            </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+# Python solution code goes here
+            </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

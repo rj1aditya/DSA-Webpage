@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cherry Pickup II | 3D DP</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #4056a1;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 820px; /* Increased width by 20 pixels to accommodate 10px padding on both sides */
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px; /* Padding remains the same */
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <h2>Cherry Pickup II | 3D DP</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+#include &lt;bits/stdc++.h&gt; 
+int func(vector&lt;vector&lt;int&gt;&gt; &grid, vector&lt;vector&lt;vector&lt;int&gt;&gt;&gt; &dp, int i, int j1, int j2)
+{
+    if(j1 &lt; 0 || j1 &gt;= grid[0].size() || j2 &lt; 0 || j2 &gt;= grid[0].size())
+        return -1e9;
+    
+    if(i == grid.size()-1)
+    {
+        if(j1 == j2)
+            return grid[i][j1];
+        else
+            return grid[i][j1] + grid[i][j2];
+    }
+    if(dp[i][j1][j2] != -1)
+        return dp[i][j1][j2];
+
+    int maxi = -1e9;
+    for(int dgj1 = -1; dgj1 &lt;= 1; dgj1++)
+    {
+        for(int dgj2 = -1; dgj2 &lt;= 1; dgj2++)
+        {
+            int value=0;
+            if(j1 == j2)
+                value = grid[i][j1];
+            else
+                value = grid[i][j1] + grid[i][j2];
+            value += func(grid, dp, i+1, j1+dgj1, j2+dgj2);
+
+            maxi = max(maxi, value);
+        }
+    }
+    return dp[i][j1][j2] = maxi;
+}
+int maximumChocolates(int r, int c, vector&lt;vector&lt;int&gt;&gt; &grid) {
+    // Write your code here.
+    int n = grid.size();
+    int m = grid[0].size();
+    vector&lt;vector&lt;vector&lt;int&gt;&gt;&gt; dp(n, vector&lt;vector&lt;int&gt;&gt;(m, vector&lt;int&gt;(m, -1)));
+
+    return func(grid, dp,0,  0, m-1);
+}
+            </code></pre>
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+// Java solution code goes here
+            </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+# Python solution code goes here
+            </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

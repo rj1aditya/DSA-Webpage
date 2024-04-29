@@ -69,6 +69,34 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "DP_solution/triangle.html",
       nt: ["--"],
     },
+    {
+      title: "Triangle | Fixed Starting Point and Variable Ending Point",
+      description: ["https://bit.ly/3UxeREz"],
+      solution: "DP_solution/triangle.html",
+      nt: ["--"],
+    },
+    {
+      title: "Minimum/Maximum Falling Path Sum",
+      description: ["https://bit.ly/3xWqtbp"],
+      solution: "DP_solution/MaxMinFallingPath.html",
+      nt: ["--"],
+    },
+    {
+      title: "Cherry Pickup II | 3D DP",
+      description: ["https://bit.ly/3QnEwNL"],
+      solution: "DP_solution/CherryPickup2.html",
+      nt: [
+        "This is a 3D DP problem, tabulation and space optimization is not done yet will solve it later.",
+      ],
+    },
+    {
+      title: "Subset Sum Equals to Target",
+      description: ["https://bit.ly/3ukNmRZ"],
+      solution: "DP_solution/subsetSumEqToTarget.html",
+      nt: [
+        "Tabulation is not clear fully, space optimization is also not clear",
+      ],
+    },
     // Add more question objects here
   ];
   {
