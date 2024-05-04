@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Frog Jump</title>
+    <title>Partition Equal Subset Sum</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -24,10 +24,10 @@
       }
 
       .container {
-        max-width: 800px;
+        max-width: 820px; /* Increased width by 20 pixels to accommodate 10px padding on both sides */
         margin: 20px auto;
         background-color: #fff; /* White background color for container */
-        padding: 20px;
+        padding: 20px; /* Padding remains the same */
         border-radius: 5px; /* Rounded corners */
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
       }
@@ -49,8 +49,7 @@
   <body>
     <div class="header">
       <div class="header-content">
-        <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Frog Jump</h2>
+        <h2>Partition Equal Subset Sum</h2>
       </div>
     </div>
     <div class="container">
@@ -58,22 +57,56 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+//recursion
+int fun(vector&lt;int&gt; &arr, vector&lt;vector&lt;int&gt;&gt; &dp, int target, int i)
+{
+    if(target == 0)
+        return true;
+    if(i==0)
+        return arr[0] == target;
+    
+    if(dp[i][target] != -1)
+        return dp[i][target];
+    
+    int notPick = fun(arr, dp, target, i-1);
 
-        </code></pre>
+    int pick = false;
+    if(target-arr[i] &gt;= 0)
+        pick = fun(arr, dp, target-arr[i], i-1);
+
+    dp[i][target] = pick | notPick;
+}
+
+bool canPartition(vector&lt;int&gt; &arr, int n)
+{
+	int totalSum=0;
+	for(int i = 0; i &lt; n; i++)
+		totalSum += arr[i];
+
+
+	if(totalSum %2 ) return false;
+
+	vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(totalSum+1, -1));
+	return fun(arr, dp, totalSum/2, n-1);
+
+	// Write your code here.
+}
+
+            </code></pre>
       </div>
 
       <h2>Java Solution</h2>
       <div class="codeC">
         <pre><code class="language-java line-numbers">
-            // Java solution code goes here
-        </code></pre>
+// Java solution code goes here
+            </code></pre>
       </div>
 
       <h2>Python Solution</h2>
       <div class="codeC">
         <pre><code class="language-python line-numbers">
-        # Python solution code goes here
-        </code></pre>
+# Python solution code goes here
+            </code></pre>
       </div>
     </div>
   </body>

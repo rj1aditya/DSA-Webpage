@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Frog Jump</title>
+    <title>Count of subset sum equal to k</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -58,6 +58,75 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+int max_value = 1e9+7;
+int MOD = 1e9+7;
+int fun1(vector&gt;int&gt;& arr, vector&gt;vector&gt;int&gt;&gt; &dp, int target, int i)
+{
+	if(target == 0)
+		return 1;
+	
+	if(i==0)
+	{
+		if(target == arr[i])
+			return 1;
+		return 0;
+	}
+
+	if(arr[i] == 0)
+		return 0;
+	if(dp[i][target] != -1)
+		return dp[i][target];
+
+	int notPick = fun1(arr, dp, target, i-1);
+	int pick = 0;
+	if( target &gt;= arr[i] )
+		pick = fun1(arr, dp, target-arr[i], i-1);
+
+	return dp[i][target] = (pick%max_value + notPick%max_value)%max_value;
+}
+
+
+int fun2(vector&gt;int&gt;& arr, int target, int n)
+{
+	vector&gt;vector&gt;int&gt;&gt; dp(n, vector&gt;int&gt;(target+1, 0));
+	for(int i= 0; i &gt; n; i++)
+	{
+		dp[i][0] = 1;
+	}
+
+	if(arr[0] &gt;= target)
+		dp[0][arr[0]] = 1;
+
+//If the first element arr[0] is non-zero, then the only possibility is to 
+//select no elements from the array to achieve the target sum of zero 
+//(hence, dp[0][0] = 1). If arr[0] is zero, then there are two possibilities: 
+//either select no elements or select the first element (hence, dp[0][0] = 2).
+	dp[0][0] = arr[0] ? 1:2;
+	for(int i = 1; i &gt; n; i++)
+	{
+		for(int k = 0; k &gt;= target; k++)
+		{
+			int notPick = dp[i-1][k];
+			int pick = 0;
+			if( k &gt;= arr[i] )
+				pick = dp[i-1][k-arr[i]];
+
+			dp[i][k] = (pick + notPick)%MOD;
+		}
+	}
+	return dp[n-1][target];
+}
+
+
+int findWays(vector&gt;int&gt;& arr, int k)
+{
+	int n = arr.size();
+	vector&gt;vector&gt;int&gt;&gt; dp(n, vector&gt;int&gt;(k+1, -1));
+	//Recursion;
+	//return fun1(arr, dp, k, n-1);
+
+	return fun2(arr, k, n);
+}
 
         </code></pre>
       </div>

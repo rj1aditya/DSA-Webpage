@@ -97,6 +97,29 @@ document.addEventListener("DOMContentLoaded", function () {
         "Tabulation is not clear fully, space optimization is also not clear",
       ],
     },
+    {
+      title: "Partition Equal Subset Sum",
+      description: ["https://bit.ly/34iIIsH"],
+      solution: "DP_solution/partitionEqualSubsetSum.html",
+      nt: [
+        "this question is similar to Subset Sum Equals to Target, but here target just changed to totalSum/2 to for the 1st subset and for the 2nd subset other totalSum/2 would be the ans.",
+      ],
+    },
+    {
+      title:
+        "Partition A Set Into Two Subsets With Minimum Absolute Sum Difference",
+      description: ["https://bit.ly/3t62bqQ"],
+      solution: "DP_solution/PartitionIn2SubsetWithMinDiff.html",
+      nt: [
+        "this question is similar to Subset Sum Equals to Target, but here target just changed to totalSum/2 to for the 1st subset and for the 2nd subset other totalSum/2 would be the ans.",
+      ],
+    },
+    {
+      title: "Counts Subsets with Sum K",
+      description: ["https://bit.ly/3B5JBkU"],
+      solution: "DP_solution/countOfSubsetSumEqToK.html",
+      nt: [""],
+    },
     // Add more question objects here
   ];
   {

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Partition A Set Into Two Subsets With Minimum Absolute Sum Difference
+    </title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #4056a1;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 820px; /* Increased width by 20 pixels to accommodate 10px padding on both sides */
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px; /* Padding remains the same */
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <h2>
+          Partition A Set Into Two Subsets With Minimum Absolute Sum Difference
+        </h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+//Recursion --&gt; Tabulation
+//With this 50th test case was not geeting passed due to TC,
+//so check fun2 with optimization.
+int fun1(vector&lt;int&gt; &arr, int target, int n)
+{
+    vector&lt;vector&lt;bool&gt;&gt; dp(n, vector&lt;bool&gt;(target+1, 0));
+    for(int i = 0; i &lt; n; i++)
+        dp[i][0] = true;
+    
+    if(arr[0] &lt;= target) 
+		dp[0][arr[0]] = true;
+
+    for(int i = 1; i &lt; n; i++)
+    {
+        for(int k = 1; k &lt;= target; k++)
+        {
+            bool notPick = dp[i-1][k];
+            bool pick = false;
+            if(k-arr[i] &gt;= 0)
+                pick = dp[i-1][k-arr[i]];
+
+            dp[i][k] = pick | notPick;
+        }
+    }
+	
+	int mini = 1e9;
+    /* OPTIMIZATION EXPLAINATION
+    HOW OPTIMIZATION HAS BEEN DONE IN FUNC2?
+    AS WE CAN CHECK HERE WE ARE CHEKING TARGET UPTO ONLY TARGET/2
+    SO IN ABOVE DP[X][Y] WHY TO CALCULATE FOR ALL totalSum Y INDEX.
+    SO IN OPTIMIZED CODE WE CALCULATE UPTO DP[X][totalSum/2] INDEX ONLY, 
+    SO WE SAVE TC
+    THEN IN FINDING THE ANS WE TOOK THE DP[N-1][K] MAX VALUE
+    THEN ANS = ABS((totalSum-MAXVALUE) - MAXVALUE)
+    E.G. 1 2 3 4 IS THE ARRAY
+    totalSum=10
+    TARGET=5
+    HERE DP[3][0,1,2,3,4,5] WOULD BE - TRUE TRUE TRUE TRUE TRUE TRUE
+    AS LAST INDEX FOR DP[N-1][5] IS TRUE WE TOOK MAXVALUE = 5, 
+    SO IF 5 CAN WE FORMED AS A SUBSET,
+    THEN DEFINETLY OTHER SUBSET WOULD ALSO MAKE AS SUM OF REST OF THE TARGET
+    RESTTARGET = ABS(totalSum-MAXVALUE)
+    ANS = RESTTARGET-MAXVALUE;
+    */
+	for(int i = 0; i &lt;= target/2; i++)
+	{
+		if(dp[n-1][i] == true)
+		{
+			mini = min(mini, abs((target - i)-i));
+		}
+	}
+    return mini;
+}
+
+
+
+//Recursion --&gt; Tabulation
+int fun2(vector&lt;int&gt; &arr, int totalSum, int n)
+{
+	int target = totalSum/2;
+	vector&lt;vector&lt;bool&gt;&gt; dp(n, vector&lt;bool&gt;(target+1, 0));
+    for(int i = 0; i &lt; n; i++)
+        dp[i][0] = true;
+    
+    if(arr[0] &lt;= target) 
+		dp[0][arr[0]] = true;
+
+    for(int i = 1; i &lt; n; i++)
+    {
+        for(int k = 1; k &lt;= target; k++)
+        {
+            bool notPick = dp[i-1][k];
+            bool pick = false;
+            if(k-arr[i] &gt;= 0)
+                pick = dp[i-1][k-arr[i]];
+
+            dp[i][k] = pick | notPick;
+        }
+    }
+	
+	int maxPossibleSum=0;
+	for(int i = target; i &gt;= 0; i--)
+	{
+		if(dp[n-1][i] == true)
+		{
+			maxPossibleSum = i;
+			break;
+		}
+	}
+
+    return abs((totalSum-maxPossibleSum) - maxPossibleSum);
+}
+
+
+int minSubsetSumDifference(vector&lt;int&gt;& arr, int n)
+{
+	int totalSum = 0;
+	for(int i = 0; i &lt; n; i++)
+		totalSum += arr[i];
+	
+	return fun2(arr, totalSum, n);
+
+	// Write your code here.
+}
+
+            </code></pre>
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+// Java solution code goes here
+            </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+# Python solution code goes here
+            </code></pre>
+      </div>
+    </div>
+  </body>
+</html>
