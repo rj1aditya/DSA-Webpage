@@ -101,6 +101,8 @@ int fun2(vector&gt;int&gt;& arr, int target, int n)
 //select no elements from the array to achieve the target sum of zero 
 //(hence, dp[0][0] = 1). If arr[0] is zero, then there are two possibilities: 
 //either select no elements or select the first element (hence, dp[0][0] = 2).
+//e.g. 0 4 1 2 === possible subset: 0,4,1 and 4,1 
+//that why for arr[0] if 0 then took 2 answer. 
 	dp[0][0] = arr[0] ? 1:2;
 	for(int i = 1; i &gt; n; i++)
 	{
