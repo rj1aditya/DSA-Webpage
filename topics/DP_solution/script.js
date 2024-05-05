@@ -120,6 +120,26 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "DP_solution/countOfSubsetSumEqToK.html",
       nt: [""],
     },
+    {
+      title: "Count Partitions With Given Difference",
+      description: ["https://bit.ly/3r8mG5b"],
+      solution: "DP_solution/countPartitionWithGivenDiff.html",
+      nt: [""],
+    },
+    {
+      title: "Knapsack",
+      description: ["https://bit.ly/3KHpP3v"],
+      solution: "DP_solution/Knapsack.html",
+      nt: [
+        "In this question have learned more about space optimization, recommended to check the code comments if not understood then check in corresponding video.",
+      ],
+    },
+    {
+      title: "Minimum Coins",
+      description: ["https://bit.ly/3HJTeIl"],
+      solution: "DP_solution/MinimumCoins.html",
+      nt: [""],
+    },
     // Add more question objects here
   ];
   {

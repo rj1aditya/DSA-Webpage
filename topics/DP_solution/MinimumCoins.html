@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Count of subset sum equal to k</title>
+    <title>Minimum coins</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Frog Jump</h2>
+        <h2>Minimum coins</h2>
       </div>
     </div>
     <div class="container">
@@ -58,77 +58,71 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-int max_value = 1e9+7;
-int MOD = 1e9+7;
-int fun1(vector&gt;int&gt;& arr, vector&gt;vector&gt;int&gt;&gt; &dp, int target, int i)
-{	
-	if(i==0)
-	{
-    if(sum == 0 && arr[0] == 0)
-      return 2;
-		if(target == arr[0] || target == 0)
-			return 1;
-		return 0;
-	}
-
-	if(arr[i] == 0)
-		return 0;
-	if(dp[i][target] != -1)
-		return dp[i][target];
-
-	int notPick = fun1(arr, dp, target, i-1);
-	int pick = 0;
-	if( target &gt;= arr[i] )
-		pick = fun1(arr, dp, target-arr[i], i-1);
-
-	return dp[i][target] = (pick%max_value + notPick%max_value)%max_value;
-}
-
-
-int fun2(vector&gt;int&gt;& arr, int target, int n)
+#include &lt;bits/stdc++.h&gt; 
+//Recursion
+int func1(vector&lt;int&gt; &num, vector&lt;vector&lt;int&gt;&gt; &dp, int i, int target)
 {
-	vector&gt;vector&gt;int&gt;&gt; dp(n, vector&gt;int&gt;(target+1, 0));
-	for(int i= 0; i &gt; n; i++)
-	{
-		dp[i][0] = 1;
-	}
+    if(i == 0)
+    {
+        if(target%num[0]==0)
+            return target/num[0];
 
-	if(arr[0] &gt;= target)
-		dp[0][arr[0]] = 1;
+        return 1e9;
+    }
 
-//If the first element arr[0] is non-zero, then the only possibility is to 
-//select no elements from the array to achieve the target sum of zero 
-//(hence, dp[0][0] = 1). If arr[0] is zero, then there are two possibilities: 
-//either select no elements or select the first element (hence, dp[0][0] = 2).
-//e.g. 0 4 1 2 === possible subset: 0,4,1 and 4,1 
-//that why for arr[0] if 0 then took 2 answer. 
-	dp[0][0] = arr[0] ? 1:2;
-	for(int i = 1; i &gt; n; i++)
-	{
-		for(int k = 0; k &gt;= target; k++)
-		{
-			int notPick = dp[i-1][k];
-			int pick = 0;
-			if( k &gt;= arr[i] )
-				pick = dp[i-1][k-arr[i]];
+    if(dp[i][target] != -1)
+        return dp[i][target];
 
-			dp[i][k] = (pick + notPick)%MOD;
-		}
-	}
-	return dp[n-1][target];
+    int nottake = 0 + func1(num, dp, i-1, target);
+    int take = 1e9;
+    if(num[i] &lt;= target)
+        take = 1 + func1(num, dp, i, target-num[i]);
+
+    dp[i][target] = min(nottake, take);
 }
 
-
-int findWays(vector&gt;int&gt;& arr, int k)
+//Recursion -- &gt; tabulation
+int func2(vector&lt;int&gt; &num, int n, int target)
 {
-	int n = arr.size();
-	vector&gt;vector&gt;int&gt;&gt; dp(n, vector&gt;int&gt;(k+1, -1));
-	//Recursion;
-	//return fun1(arr, dp, k, n-1);
+    vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(target+1, 0));
 
-	return fun2(arr, k, n);
+    for(int tar = 0; tar &lt;= target; tar++)
+    {
+        if(tar%num[0] == 0)
+            dp[0][tar] = tar/num[0];
+        else
+            dp[0][tar] = 1e9;
+    }
+    
+    for(int i = 1; i &lt; n; i++)
+    {
+        for(int tar = 0; tar &lt;= target; tar++)
+        {
+            int nottake = 0 + dp[i-1][tar];
+            int take = 1e9;
+            if(num[i] &lt;= tar)
+                take = 1 + dp[i][tar-num[i]];
+
+            dp[i][tar] = min(nottake, take);
+        }
+    }
+
+    return dp[n-1][target];
 }
 
+int minimumElements(vector&lt;int&gt; &num, int x)
+{
+    // Write your code here.q
+
+    int n = num.size();
+    vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(x+1, -1));
+
+    //Recursion
+    //int ans = func1(num, dp, n-1, x);
+
+    int ans = func2(num, n, x);
+    return ans &gt;= 1e9 ? -1 : ans ;
+}
         </code></pre>
       </div>
 

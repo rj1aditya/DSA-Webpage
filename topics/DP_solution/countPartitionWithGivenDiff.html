@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Count of subset sum equal to k</title>
+    <title>Count Partitions With Given Difference</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Frog Jump</h2>
+        <h2>Count Partitions With Given Difference</h2>
       </div>
     </div>
     <div class="container">
@@ -58,77 +58,77 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-int max_value = 1e9+7;
-int MOD = 1e9+7;
-int fun1(vector&gt;int&gt;& arr, vector&gt;vector&gt;int&gt;&gt; &dp, int target, int i)
-{	
-	if(i==0)
-	{
-    if(sum == 0 && arr[0] == 0)
-      return 2;
-		if(target == arr[0] || target == 0)
-			return 1;
-		return 0;
-	}
+#include &lt;bits/stdc++.h&gt; 
+int mod=1e9+7;
 
-	if(arr[i] == 0)
-		return 0;
-	if(dp[i][target] != -1)
-		return dp[i][target];
-
-	int notPick = fun1(arr, dp, target, i-1);
-	int pick = 0;
-	if( target &gt;= arr[i] )
-		pick = fun1(arr, dp, target-arr[i], i-1);
-
-	return dp[i][target] = (pick%max_value + notPick%max_value)%max_value;
-}
-
-
-int fun2(vector&gt;int&gt;& arr, int target, int n)
+//Recursion
+int findCount(int i, int target, vector&lt;int&gt; &arr, vector&lt;vector&lt;int&gt;&gt; &dp)
 {
-	vector&gt;vector&gt;int&gt;&gt; dp(n, vector&gt;int&gt;(target+1, 0));
-	for(int i= 0; i &gt; n; i++)
-	{
-		dp[i][0] = 1;
-	}
+    if(i == 0)
+    {
+        if(target == 0 && arr[0] == 0)
+            return 2;
+        if(target == arr[0] || target == 0)
+            return 1;
+        return 0;
+    }
 
-	if(arr[0] &gt;= target)
-		dp[0][arr[0]] = 1;
+    if(dp[i][target] != -1)
+        return dp[i][target];
 
-//If the first element arr[0] is non-zero, then the only possibility is to 
-//select no elements from the array to achieve the target sum of zero 
-//(hence, dp[0][0] = 1). If arr[0] is zero, then there are two possibilities: 
-//either select no elements or select the first element (hence, dp[0][0] = 2).
-//e.g. 0 4 1 2 === possible subset: 0,4,1 and 4,1 
-//that why for arr[0] if 0 then took 2 answer. 
-	dp[0][0] = arr[0] ? 1:2;
-	for(int i = 1; i &gt; n; i++)
-	{
-		for(int k = 0; k &gt;= target; k++)
-		{
-			int notPick = dp[i-1][k];
-			int pick = 0;
-			if( k &gt;= arr[i] )
-				pick = dp[i-1][k-arr[i]];
+    //not pick case
+    int count = findCount(i-1, target, arr, dp);
 
-			dp[i][k] = (pick + notPick)%MOD;
-		}
-	}
-	return dp[n-1][target];
+    //pick
+    if(arr[i] &lt;= target)
+        count += findCount(i-1, target-arr[i], arr, dp);
+
+    dp[i][target] = count%mod;
 }
 
 
-int findWays(vector&gt;int&gt;& arr, int k)
+//Recursion -- Tabulation
+int findCount1(int n, int target, vector&lt;int&gt; &arr)
 {
-	int n = arr.size();
-	vector&gt;vector&gt;int&gt;&gt; dp(n, vector&gt;int&gt;(k+1, -1));
-	//Recursion;
-	//return fun1(arr, dp, k, n-1);
+    vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(target+1, 0));
 
-	return fun2(arr, k, n);
+    dp[0][0] = arr[0] ?1:2;
+    if(arr[0] != 0) dp[0][arr[0]] = 1;
+
+    for(int i = 1; i &lt; n; i++)
+    {
+        for(int k = 0; k &lt;= target; k++)
+        {
+            //not pick case
+            int count = dp[i-1][k];
+
+            if(arr[i] &lt;= k)
+                count += dp[i-1][k-arr[i]];
+
+            dp[i][k] = count%mod;
+        }
+    }
+    return dp[n-1][target];
+
 }
+int countPartitions(int n, int d, vector&lt;int&gt; &arr) {
+    // Write your code here.
+    int total=0;
+    for(int i =0; i &lt; n; i++)
+        total += arr[i];
 
+    int target = total+d;
+    if(target%2 != 0)
+        return false;
+    
+    target = target/2;
+    vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(target+1, -1));
+    //recursion
+    //return findCount(n-1, target, arr, dp);
+
+    //tabulation
+    return findCount1(n, target, arr);
+}
         </code></pre>
       </div>
 
