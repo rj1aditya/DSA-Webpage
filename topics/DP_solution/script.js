@@ -140,6 +140,21 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "DP_solution/MinimumCoins.html",
       nt: [""],
     },
+    {
+      title: "Target Sum",
+      description: ["https://bit.ly/3swy5uL"],
+      solution: "DP_solution/targetSum.html",
+      nt: [
+        "this question is exact similar to Question 18: Count Partitions With Given Difference. In this question just changed the language.",
+      ],
+    },
+    {
+      title: "Coin Change 2",
+      description: ["https://bit.ly/33Kd8o2"],
+      solution: "DP_solution/coinChange2.html",
+      nt: [""],
+    },
+
     // Add more question objects here
   ];
   {
