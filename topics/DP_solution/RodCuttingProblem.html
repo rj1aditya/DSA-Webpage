@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rod cutting problem</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #4056a1;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Rod cutting problem</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+
+//Recursion
+int func1(vector&lt;int&gt; &price, vector&lt;vector&lt;int&gt;&gt; &dp, int i, int n)
+{
+	if(i == 0)
+	{
+		return n*price[0];
+	}
+
+	if(dp[i][n] != -1)
+		return dp[i][n];
+
+	int nottake = 0 + func1(price, dp, i-1, n);
+	int take = INT_MIN;
+	int rodLength = i + 1;
+	if(rodLength &lt;= n)
+		take = price[i] + func1(price, dp, i, n - rodLength);
+
+	return max(take, nottake);
+}
+
+
+//Recursion--&gt;tabulation
+int func2(vector&lt;int&gt; &price, int size, int n)
+{
+	vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(n+1, 0));
+	for(int i = 0; i &lt;= n; i++)
+	{
+		dp[0][i] = i*price[0];
+	}
+
+	for(int i = 1; i &lt; size; i++)
+	{
+		for(int j = 0; j &lt;= n; j++)
+		{
+			int nottake = 0 + dp[i-1][j];
+			int take = INT_MIN;
+			int rodLength = i + 1;
+			if(rodLength &lt;= j)
+				take = price[i] + dp[i][j - rodLength];
+
+			dp[i][j] =  max(take, nottake);
+		}
+	}
+	return dp[size-1][n];
+}
+
+
+//tabulation--&gt;SO
+int func3(vector&lt;int&gt; &price, int size, int n)
+{
+	vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(n+1, 0));
+	vector&lt;int&gt; prev(n+1, 0), cur(n+1, 0);
+	for(int i = 0; i &lt;= n; i++)
+	{
+		prev[i] = i*price[0];
+	}
+
+	for(int i = 1; i &lt; size; i++)
+	{
+		for(int j = 0; j &lt;= n; j++)
+		{
+			int nottake = 0 + prev[j];
+			int take = INT_MIN;
+			int rodLength = i + 1;
+			if(rodLength &lt;= j)
+				take = price[i] + cur[j - rodLength];
+
+			cur[j] =  max(take, nottake);
+		}
+		prev = cur;
+	}
+	return prev[n];
+}
+
+//SO --&gt; SO l2
+int func4(vector&lt;int&gt; &price, int size, int n)
+{
+	vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(n+1, 0));
+	vector&lt;int&gt; prev(n+1, 0);
+	for(int i = 0; i &lt;= n; i++)
+	{
+		prev[i] = i*price[0];
+	}
+
+	for(int i = 1; i &lt; size; i++)
+	{
+		for(int j = 0; j &lt;= n; j++)
+		{
+			int nottake = 0 + prev[j];
+			int take = INT_MIN;
+			int rodLength = i + 1;
+			if(rodLength &lt;= j)
+				take = price[i] + prev[j - rodLength];
+
+			prev[j] =  max(take, nottake);
+		}
+	}
+	return prev[n];
+}
+
+
+int cutRod(vector&lt;int&gt; &price, int n)
+{
+	// Write your code here
+	int size = price.size();
+	vector&lt;vector&lt;int&gt;&gt; dp(size, vector&lt;int&gt;(n+1, -1) );
+	
+	//Recursion
+	//return func1(price, dp, size-1, n);
+
+	//Tabulation
+	//return func2(price, size, n);
+
+	//Tabulation--Space Optimization
+	//return func3(price, size, n);
+
+	//Tabulation--Space Optimization level 2
+	return func4(price, size, n);
+}
+
+        </code></pre>
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

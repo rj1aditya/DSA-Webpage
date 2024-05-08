@@ -154,6 +154,18 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "DP_solution/coinChange2.html",
       nt: [""],
     },
+    {
+      title: "Unbounded Knapsack",
+      description: ["https://bit.ly/3IvPdXS"],
+      solution: "DP_solution/unboundedKnapsack.html",
+      nt: [""],
+    },
+    {
+      title: "Rod Cutting Problem",
+      description: ["https://bit.ly/3H10kYJ"],
+      solution: "DP_solution/RodCuttingProblem.html",
+      nt: [""],
+    },
 
     // Add more question objects here
   ];
