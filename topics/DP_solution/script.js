@@ -166,6 +166,24 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "DP_solution/RodCuttingProblem.html",
       nt: [""],
     },
+    {
+      title: "Longest Common Subsequence",
+      description: ["https://bit.ly/3pvkqUd"],
+      solution: "DP_solution/LongestCommonSubsequence.html",
+      nt: [
+        "In this code we done right shift of the index.. Read the code for reason or else check its video",
+      ],
+    },
+    {
+      title: "Print Longest Common Subsequence",
+      description: [
+        "https://www.naukri.com/code360/problems/print-longest-common-subsequence_8416383",
+      ],
+      solution: "DP_solution/PrintLongestCommonSubsequence.html",
+      nt: [
+        "1st we make the dp matrix then in matrix if we look the last index dp[n][m] there we will get the max lenght of the ans. Now we have to make string. So we backtrace the matrix from the last index and make the longest common subsequence string.",
+      ],
+    },
 
     // Add more question objects here
   ];

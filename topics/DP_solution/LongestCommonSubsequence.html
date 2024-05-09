@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Longest Common Subsequence</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #4056a1;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Longest Common Subsequence</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+#include&lt;bits/stdc++.h&gt;
+//Recursion
+int func1(string s, string t, int i, int j, vector&lt;vector&lt;int&gt;&gt; &dp)
+{
+	if(i &lt; 0 || j &lt; 0)
+		return 0;
+
+	if(dp[i][j] != -1)
+		return dp[i][j];
+
+	if(s[i] == t[j])
+		return dp[i][j] = 1 + func1(s, t, i-1, j-1, dp);
+	
+	return dp[i][j] = max(func1(s, t, i-1, j, dp), func1(s, t, i, j-1, dp));
+}
+
+//Recursion --&gt; right shifting the index since in a base case i &lt; 0 or j &lt; 0 taking us
+//to -ve index, which is not possible to implement while making tabulation 
+//solution
+int func2(string s, string t, int i, int j, vector&lt;vector&lt;int&gt;&gt; &dp)
+{
+	if(i == 0 || j == 0)
+		return 0;
+
+	if(dp[i+1][j+1] != -1)
+		return dp[i+1][j+1];
+
+	if(s[i] == t[j])
+		return dp[i+1][j+1] = 1 + func1(s, t, i-1, j-1, dp);
+	
+	return dp[i+1][j+1] = max(func1(s, t, i-1, j, dp), func1(s, t, i, j-1, dp));
+}
+
+//Recursion --&gt; right shifting the index since in a base case i &lt; 0 or j &lt; 0 taking us
+//to -ve index, which is not possible to implement while making tabulation 
+//solution
+//Recursion--Tabulation
+int func3(string s, string t)
+{
+	int n= s.length();
+	int m = t.length();
+
+	vector&lt;vector&lt;int&gt;&gt; dp(n+1, vector&lt;int&gt;(m+1, 0));
+
+	for(int i = 0; i &lt;= n; i++)
+		dp[i][0] = 0;
+	for(int j = 0; j &lt;= m; j++)
+		dp[0][j] = 0;
+
+	for(int i = 1; i &lt;= n; i++)
+	{
+		for(int j = 1; j &lt;= m; j++)
+		{
+			if(s[i-1] == t[j-1])
+				dp[i][j] = 1 + dp[i-1][j-1];
+			else
+				dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+		}
+	}
+
+	return dp[n][m];
+}
+
+//Tabulation -- SO
+int func4(string s, string t)
+{
+	int n= s.length();
+	int m = t.length();
+
+	vector&lt;int&gt; prev(m+1,0), cur(m+1, 0);
+
+	for(int j = 0; j &lt;= m; j++)
+		prev[j] = 0;
+
+	for(int i = 1; i &lt;= n; i++)
+	{
+		for(int j = 1; j &lt;= m; j++)
+		{
+			if(s[i-1] == t[j-1])
+				cur[j] = 1 + prev[j-1];
+			else
+				cur[j] = max(prev[j], cur[j-1]);
+		}
+		prev = cur;
+	}
+
+	return prev[m];
+}
+
+
+int lcs(string s, string t)
+{
+	//Write your code here
+	int n = s.length();
+	int m = t.length();
+
+	vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(m, -1));
+	
+	//For Right shifting the indexses
+	vector&lt;vector&lt;int&gt;&gt; dp1(n+1, vector&lt;int&gt;(m+1, -1));
+
+	//Recursion
+	//return func1(s, t, n-1, m-1, dp);
+
+	//Recursion -- Right shifting the indexses
+	//return func2(s, t, n-1, m-1, dp1);
+
+	//Recursion -- tabulation
+	//return func3(s, t);
+
+	//tabulation--SO
+	return func4(s, t);
+}
+        </code></pre>
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>
