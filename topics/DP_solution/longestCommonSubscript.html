@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Frog Jump</title>
+    <title>Longest Common Subscript</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Frog Jump</h2>
+        <h2>Longest Common Subscript</h2>
       </div>
     </div>
     <div class="container">
@@ -58,7 +58,33 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+#include&lt;bits/stdc++.h&gt;
+int lcs(string &str1, string &str2){
+    // Write your code here.
+    int n = str1.size();
+    int m = str2.size();
 
+
+    vector&lt;vector&lt;int&gt;&gt; dp(n+1, vector&lt;int&gt;(m+1, 0));
+
+    int ans = INT_MIN;
+    for(int i = 1; i &lt;= n; i++)
+    {
+        for(int j = 1; j &lt;= m; j++)
+        {
+            if(str1[i-1] == str2[j-1])
+            {
+                dp[i][j] = 1 + dp[i-1][j-1];
+                ans = max(ans, dp[i][j]);
+            }
+            else
+            {
+                dp[i][j] = 0;
+            }
+        }
+    }
+    return ans;
+}
         </code></pre>
         <!-- <img
           src="images/"

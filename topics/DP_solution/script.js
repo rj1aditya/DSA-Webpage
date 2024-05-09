@@ -184,7 +184,22 @@ document.addEventListener("DOMContentLoaded", function () {
         "1st we make the dp matrix then in matrix if we look the last index dp[n][m] there we will get the max lenght of the ans. Now we have to make string. So we backtrace the matrix from the last index and make the longest common subsequence string.",
       ],
     },
-
+    {
+      title: "Longest Common Substring ",
+      description: ["https://bit.ly/3H2M3KS"],
+      solution: "DP_solution/longestCommonSubscript.html",
+      nt: [""],
+    },
+    {
+      title: "Longest Palindromic Subsequence",
+      description: [
+        "https://www.naukri.com/code360/problems/longest-palindromic-subsequence_842787?leftPanelTabValue=PROBLEM",
+      ],
+      solution: "DP_solution/longestPalindromicSubsequence.html",
+      nt: [
+        "In this question has given only 1 string. For which we have to find out the longest palindromic subsequence. For a solution we make another string by just making reverse of the given string and treted this question similar as LONGEST COMMON SUBSEQUENCE. Go to the video if not understood.",
+      ],
+    },
     // Add more question objects here
   ];
   {
