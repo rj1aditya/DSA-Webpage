@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Minimum Insertions/Deletions to Convert String A to String B</title>
+    <title>Minimum insertions to make a string palindrome</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Minimum Insertions/Deletions to Convert String A to String B</h2>
+        <h2>Minimum insertions to make a string palindrome</h2>
       </div>
     </div>
     <div class="container">
@@ -58,6 +58,41 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+//Tabulation -- SO
+int func4(string s, string t)
+{
+	int n= s.length();
+	int m = t.length();
+
+	vector&lt;int&gt; prev(m+1,0), cur(m+1, 0);
+
+	for(int j = 0; j &lt;= m; j++)
+		prev[j] = 0;
+
+	for(int i = 1; i &lt;= n; i++)
+	{
+		for(int j = 1; j &lt;= m; j++)
+		{
+			if(s[i-1] == t[j-1])
+				cur[j] = 1 + prev[j-1];
+			else
+				cur[j] = max(prev[j], cur[j-1]);
+		}
+		prev = cur;
+	}
+
+	return prev[m];
+}
+
+int minimumInsertions(string &str1)
+{
+	//Write your code here
+    string  str2 = str1;
+    reverse(str1.begin(), str1.end());
+
+	//tabulation--SO
+	return str1.length() - func4(str1, str2);
+}
 
         </code></pre>
         <!-- <img

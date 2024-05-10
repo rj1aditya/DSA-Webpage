@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Minimum Insertions/Deletions to Convert String A to String B</title>
+    <title>Shortest Common Supersequence</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Minimum Insertions/Deletions to Convert String A to String B</h2>
+        <h2>Shortest Common Supersequence</h2>
       </div>
     </div>
     <div class="container">
@@ -58,15 +58,87 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+#include &lt;bits/stdc++.h&gt; 
 
+//Recursion--Tabulation
+string func3(string s1, string s2, int n, int m)
+{
+	vector&lt;vector&lt;int&gt;&gt; dp(n+1, vector&lt;int&gt;(m+1, 0));
+
+	for(int i = 0; i &lt;= n; i++)
+		dp[i][0] = 0;
+	for(int j = 0; j &lt;= m; j++)
+		dp[0][j] = 0;
+
+	for(int i = 1; i &lt;= n; i++)
+	{
+		for(int j = 1; j &lt;= m; j++)
+		{
+			if(s1[i-1] == s2[j-1])
+				dp[i][j] = 1 + dp[i-1][j-1];
+			else
+				dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+		}
+	}
+
+	int i = n;
+	int j = m;
+	string ans = "";
+	while(i &gt; 0 && j &gt; 0)
+	{
+		if(s1[i-1] == s2[j-1])
+		{
+			ans = s1[i-1]+ans;
+			i--;
+			j--;
+		}
+		else if(dp[i-1][j] &gt; dp[i][j-1])
+		{
+			ans = s1[i-1] + ans;
+			i--;
+		}
+		else
+		{
+			ans = s2[j-1] + ans;
+			j--;
+		}
+	}
+
+	while(i&gt;0)
+	{
+			ans = s1[i-1] + ans;
+			i--;
+	}
+
+	while(j&gt;0)
+	{
+			ans = s2[j-1] + ans;
+			j--;
+	}
+	return ans;
+}
+
+string shortestSupersequence(string a, string b)
+{
+	// Write your code here.
+	//Tabulation
+	return func3(a, b, a.size(), b.size());	
+}
         </code></pre>
-        <!-- <img
-          src="images/"
+        <img
+          src="images/ShortestCommonSupersequence1.png"
           alt="Longest Common Subsequence Image"
           width="700"
           height="450"
           style="display: block; margin: 0 auto"
-        /> -->
+        />
+        <img
+          src="images/ShortestCommonSupersequence2.png"
+          alt="Longest Common Subsequence Image"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        />
       </div>
 
       <h2>Java Solution</h2>

@@ -58,7 +58,40 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+//Tabulation -- SO
+int func4(string s, string t)
+{
+	int n= s.length();
+	int m = t.length();
 
+	vector&lt;int&gt; prev(m+1,0), cur(m+1, 0);
+
+	for(int j = 0; j &lt;= m; j++)
+		prev[j] = 0;
+
+	for(int i = 1; i &lt;= n; i++)
+	{
+		for(int j = 1; j &lt;= m; j++)
+		{
+			if(s[i-1] == t[j-1])
+				cur[j] = 1 + prev[j-1];
+			else
+				cur[j] = max(prev[j], cur[j-1]);
+		}
+		prev = cur;
+	}
+
+	return prev[m];
+}
+
+int canYouMake(string &s1, string &s2){
+    // Write your code here.
+    //tabulation--SO
+    int n = s1.size();
+    int m = s2.size();
+
+	return n + m - 2*func4(s1, s2);
+}
         </code></pre>
         <!-- <img
           src="images/"

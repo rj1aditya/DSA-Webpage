@@ -200,6 +200,32 @@ document.addEventListener("DOMContentLoaded", function () {
         "In this question has given only 1 string. For which we have to find out the longest palindromic subsequence. For a solution we make another string by just making reverse of the given string and treted this question similar as LONGEST COMMON SUBSEQUENCE. Go to the video if not understood.",
       ],
     },
+    {
+      title: "Minimum insertions to make a string palindrome",
+      description: ["https://bit.ly/3H2ZtGP"],
+      solution: "DP_solution/MinInsertToMakeStrPalindrome.html",
+      nt: [
+        "This question is similar to - Question 28: Longest Palindromic Subsequence. With small addition like str.length - longestPalindromicSubsequence",
+      ],
+    },
+    {
+      title: "Minimum Insertions/Deletions to Convert String A to String B",
+      description: ["https://bit.ly/3pya8CP"],
+      solution: "DP_solution/MinInsert_DeletionToMakeStr1toStr2.html",
+      nt: [
+        "This question is similar to - Question 28: Longest Palindromic Subsequence. With small addition like:",
+        "for deletion of char str1.length - longestPalindromicSubsequence",
+        "for addition of char str2.length - longestPalindromicSubsequence",
+      ],
+    },
+    {
+      title: "Shortest Common Supersequence",
+      description: ["https://bit.ly/3vEYKce"],
+      solution: "DP_solution/ShortestCommonSupersequence.html",
+      nt: [
+        "This problem is similar to Question 26: Print Longest Common Subsequence, with small addition to form a super string. Check the image in the solution page.",
+      ],
+    },
     // Add more question objects here
   ];
   {
