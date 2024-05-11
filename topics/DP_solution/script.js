@@ -226,6 +226,43 @@ document.addEventListener("DOMContentLoaded", function () {
         "This problem is similar to Question 26: Print Longest Common Subsequence, with small addition to form a super string. Check the image in the solution page.",
       ],
     },
+
+    {
+      title: "Distinct Subsequences",
+      description: ["https://bit.ly/3nZNxy7"],
+      solution: "DP_solution/DistinctSubsequences.html",
+      nt: [""],
+    },
+    {
+      title: "Edit Distance",
+      description: ["https://bit.ly/3HcTJdy"],
+      solution: "DP_solution/EditDistance.html",
+      nt: [""],
+    },
+    {
+      title: "Shortest Common Supersequence",
+      description: ["https://bit.ly/3vEYKce"],
+      solution: "DP_solution/ShortestCommonSupersequence.html",
+      nt: [
+        "This problem is similar to Question 26: Print Longest Common Subsequence, with small addition to form a super string. Check the image in the solution page.",
+      ],
+    },
+    {
+      title: "Shortest Common Supersequence",
+      description: ["https://bit.ly/3vEYKce"],
+      solution: "DP_solution/ShortestCommonSupersequence.html",
+      nt: [
+        "This problem is similar to Question 26: Print Longest Common Subsequence, with small addition to form a super string. Check the image in the solution page.",
+      ],
+    },
+    {
+      title: "Shortest Common Supersequence",
+      description: ["https://bit.ly/3vEYKce"],
+      solution: "DP_solution/ShortestCommonSupersequence.html",
+      nt: [
+        "This problem is similar to Question 26: Print Longest Common Subsequence, with small addition to form a super string. Check the image in the solution page.",
+      ],
+    },
     // Add more question objects here
   ];
   {

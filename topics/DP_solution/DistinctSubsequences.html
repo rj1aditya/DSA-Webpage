@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Distinc Subsequence</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #4056a1;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Distinc Subsequence</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+int mod=1e9+7;
+//Recursion
+int func1(string &s1, string &s2, vector&lt;vector&lt;int&gt;&gt; &dp, int i, int j)
+{
+	if(j &lt; 0)
+		return 1;
+	if(i &lt; 0)
+		return 0;
+
+	if(dp[i][j] != -1)
+		return dp[i][j];
+
+	if(s1[i] == s2[j])
+		return dp[i][j] = (func1(s1, s2, dp, i-1, j-1) + func1(s1, s2, dp, i-1, j))%mod;
+	else
+		return dp[i][j] = func1(s1, s2, dp, i-1, j)%mod;
+}
+
+
+//Recursion index start with 1
+int func2(string &s1, string &s2, vector&lt;vector&lt;int&gt;&gt; &dp, int i, int j)
+{
+	if(j == 0)
+		return 1;
+	if(i == 0)
+		return 0;
+
+	if(dp[i][j] != -1)
+		return dp[i][j];
+
+	if(s1[i-1] == s2[j-1])
+		return dp[i][j] = (func2(s1, s2, dp, i-1, j-1) + func2(s1, s2, dp, i-1, j))%mod;
+	else
+		return dp[i][j] = func2(s1, s2, dp, i-1, j)%mod;
+}
+
+
+//Recursion index start with 1
+int func3(string &s1, string &s2)
+{
+	int n = s1.size();
+	int m = s2.size();
+
+	vector&lt;vector&lt;int&gt;&gt; dp(n+1, vector&lt;int&gt;(m+1, 0));
+	for(int i = 0; i &lt;= n; i++)
+	{
+		dp[i][0] = 1;
+	}
+	//Below logic not needed since it is already initialized with 0
+	for(int j = 1; j &lt;= m; j++)
+	{
+		dp[0][j] = 0;
+	}
+
+	for(int i = 1; i &lt;= n; i++)
+	{
+		for(int j = 1; j &lt;= m; j++)
+		{
+			if(s1[i-1] == s2[j-1])
+				dp[i][j] = (dp[i-1][j-1] + dp[i-1][j])%mod;
+			else
+				dp[i][j] = dp[i-1][j]%mod;
+		}
+	}
+	return dp[n][m];
+}
+
+//Tabulation--&gt;SO
+int func4(string &s1, string &s2)
+{
+	int n = s1.size();
+	int m = s2.size();
+
+	vector&lt;int&gt; prev(m+1, 0), cur(m+1, 0);
+	prev[0] = cur[0] = 1;	
+
+	for(int i = 1; i &lt;= n; i++)
+	{
+		for(int j = 1; j &lt;= m; j++)
+		{
+			if(s1[i-1] == s2[j-1])
+				cur[j] = (prev[j-1] + prev[j])%mod;
+			else
+				cur[j] = prev[j]%mod;
+		}
+		prev = cur;
+	}
+	return prev[m];
+}
+
+
+//Tabulation--&gt;SO l1
+int func5(string &s1, string &s2)
+{
+	int n = s1.size();
+	int m = s2.size();
+
+	vector&lt;int&gt; prev(m+1, 0);
+	prev[0] = 1;	
+
+	for(int i = 1; i &lt;= n; i++)
+	{
+		for(int j = m; j &gt;= 1; j--)
+		{
+			if(s1[i-1] == s2[j-1])
+				prev[j] = (prev[j-1] + prev[j])%mod;
+			else
+				prev[j] = prev[j]%mod;
+		}
+	}
+	return prev[m];
+}
+
+
+int distinctSubsequences(string &str, string &sub)
+{
+	// Write your code here.
+	int n = str.size();
+	int m = sub.size();
+	vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(m, -1));
+
+	//Recursion
+	//return func1(str, sub, dp, n-1, m-1);
+	
+	//Recursion right shift index
+	vector&lt;vector&lt;int&gt;&gt; dp1(n+1, vector&lt;int&gt;(m+1, -1));
+	//return func2(str, sub, dp1, n, m);
+
+	////Recursion right shift index --&gt; Tabulation
+	//return func3(str, sub);
+
+	//Tabulation -- SO
+	//return func4(str, sub);
+
+	//Tabulation -- SO l1
+	return func5(str, sub);
+}
+
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>
