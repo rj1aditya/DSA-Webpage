@@ -240,28 +240,22 @@ document.addEventListener("DOMContentLoaded", function () {
       nt: [""],
     },
     {
-      title: "Shortest Common Supersequence",
+      title: "Wildcard Matching",
       description: ["https://bit.ly/3vEYKce"],
-      solution: "DP_solution/ShortestCommonSupersequence.html",
-      nt: [
-        "This problem is similar to Question 26: Print Longest Common Subsequence, with small addition to form a super string. Check the image in the solution page.",
-      ],
+      solution: "DP_solution/WildcardMatching.html",
+      nt: [""],
     },
     {
-      title: "Shortest Common Supersequence",
-      description: ["https://bit.ly/3vEYKce"],
-      solution: "DP_solution/ShortestCommonSupersequence.html",
-      nt: [
-        "This problem is similar to Question 26: Print Longest Common Subsequence, with small addition to form a super string. Check the image in the solution page.",
-      ],
+      title: "Best Time to Buy and Sell Stock",
+      description: ["https://bit.ly/3rN7GIL"],
+      solution: "DP_solution/BestTimetoBuy_SellStock.html",
+      nt: [""],
     },
     {
-      title: "Shortest Common Supersequence",
-      description: ["https://bit.ly/3vEYKce"],
-      solution: "DP_solution/ShortestCommonSupersequence.html",
-      nt: [
-        "This problem is similar to Question 26: Print Longest Common Subsequence, with small addition to form a super string. Check the image in the solution page.",
-      ],
+      title: "Buy and Sell Stock - II",
+      description: ["https://bit.ly/3nYO17H"],
+      solution: "DP_solution/BuyAndSell2.html",
+      nt: [""],
     },
     // Add more question objects here
   ];
