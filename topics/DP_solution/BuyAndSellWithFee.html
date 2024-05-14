@@ -58,7 +58,36 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+#include&lt;bits/stdc++.h&gt;
 
+int func1(vector&lt;int&gt; &prices, int n, vector&lt;vector&lt;int&gt;&gt; &dp, int i, int buy, int fee)
+{
+    if(i == n)
+        return 0;
+
+    if(dp[i][buy] != -1)
+        return dp[i][buy];
+
+    int profit;
+    if(buy)
+    {
+        profit = max( -prices[i] -fee + func1(prices, n, dp, i+1, 0, fee), func1(prices, n, dp, i+1, 1, fee));
+    }
+    else
+    {
+        profit = max( prices[i] + func1(prices, n, dp, i+1, 1, fee), func1(prices, n, dp, i+1, 0, fee));
+    }
+
+    return dp[i][buy] = profit;
+}
+
+int maximumProfit(vector&lt;int&gt; &prices, int n, int fee)
+{
+	// Write your code here.
+
+	vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(2, -1));
+	return func1(prices, n, dp, 0, 1, fee);
+}
         </code></pre>
         <!-- <img
           src="images/"

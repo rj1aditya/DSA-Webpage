@@ -257,6 +257,45 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "DP_solution/BuyAndSell2.html",
       nt: [""],
     },
+
+    {
+      title: "Buy and Sell Stock - III",
+      description: ["https://bit.ly/3rLHkqQ"],
+      solution: "DP_solution/BuyAndSell3.html",
+      nt: [""],
+    },
+    {
+      title: "Buy and Sell Stock - IV",
+      description: ["https://bit.ly/346R72e"],
+      solution: "DP_solution/BuyAndSell4.html",
+      nt: ["This question is solved using total no of transaction as well"],
+    },
+    {
+      title: "Buy and Sell Stocks With Cooldown",
+      description: ["https://bit.ly/3tZsYWA"],
+      solution: "DP_solution/BuyAndSellWithCooldown.html",
+      nt: [""],
+    },
+    {
+      title: "Buy and Sell Stocks With Transaction Fee",
+      description: ["https://bit.ly/3nZucNH"],
+      solution: "DP_solution/BuyAndSellWithFee.html",
+      nt: ["Similar to Buy and Sell Stock - II, only fee added here"],
+    },
+    {
+      title: "Longest Increasing Subsequence",
+      description: ["https://bit.ly/3rVoIoq"],
+      solution: "DP_solution/LongestIncresSubsequence.html",
+      nt: [
+        "All test cases not solved, TLE coming since TC of all solution given is n^2",
+      ],
+    },
+    {
+      title: "( @ @ ) Printing Longest Increasing Subsequence",
+      description: ["https://bit.ly/3nYO17H"],
+      solution: "DP_solution/PrintLongestIncresSubsequence.html",
+      nt: ["This is tricky problem, first try to solve it on white board..."],
+    },
     // Add more question objects here
   ];
   {

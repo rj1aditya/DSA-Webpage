@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Buy and Sell Stocks With Transaction Fee</title>
+    <title>Printing Longest Increasing Subsequence</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Buy and Sell Stocks With Transaction Fee</h2>
+        <h2>Printing Longest Increasing Subsequence</h2>
       </div>
     </div>
     <div class="container">
@@ -58,6 +58,51 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+#include&lt;bits/stdc++.h&gt;
+
+//Another approach
+//TC - n^2
+vector&lt;int&gt; func4(vector&lt;int&gt; arr, int n)
+{
+    vector&lt;int&gt; dp(n, 1), hash(n);
+    int maxi = 1;
+	int lastInd = 0;
+    for(int i = 0; i &lt; n; i++)
+    {
+		hash[i] = i;
+        for( int j = 0; j &lt; i; j++)
+        {
+            if(arr[j] &lt; arr[i] && 1+dp[j] &gt; dp[i])
+            {
+                dp[i] = 1+dp[j];
+				hash[i] = j;
+             }
+        }
+		if(dp[i] &gt; maxi)
+		{
+			maxi = dp[i];
+			lastInd = i;
+		}
+    }
+
+	//Take the solution to print LIS
+	vector&lt;int&gt; temp;
+	temp.push_back(arr[lastInd]);
+
+	while(hash[lastInd] != lastInd)
+	{
+		lastInd = hash[lastInd];
+		temp.push_back(arr[lastInd]);
+	}
+
+	reverse(temp.begin(), temp.end());
+	return temp;
+}
+
+vector&lt;int&gt; printingLongestIncreasingSubsequence(vector&lt;int&gt; arr, int n) {
+	// Write your code here
+	return func4(arr, n);
+}
 
         </code></pre>
         <!-- <img

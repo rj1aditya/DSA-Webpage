@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Longest Increasing Subsequence</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #4056a1;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Longest Increasing Subsequence</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+#include&lt;bits/stdc++.h&gt;
+
+//Recursion
+int func1(int *arr, int n, vector&lt;vector&lt;int&gt;&gt; &dp, int ind, int prevInd)
+{
+    if(ind == n)
+        return 0;
+
+    if(dp[ind][prevInd+1] != -1)
+        return dp[ind][prevInd+1];
+
+    int nottake = func1(arr, n, dp, ind+1, prevInd);
+    int take=0;
+    if(prevInd == -1 || arr[ind] &gt; arr[prevInd])
+        take = 1 + func1(arr, n, dp, ind+1, ind);
+
+    return dp[ind][prevInd+1] = max(take, nottake);
+}
+
+
+//Recursion --&gt; Tabulatoin
+int func2(int *arr, int n)
+{
+    vector&lt;vector&lt;int&gt;&gt; dp(n+1, vector&lt;int&gt;(n+1, 0));
+
+    for(int ind = n-1; ind &gt;= 0; ind--)
+    {
+        for (int prevInd = ind - 1; prevInd &gt;= -1; prevInd--) {
+          int nottake = dp[ind + 1][prevInd+1];
+          int take = 0;
+          if (prevInd == -1 || arr[ind] &gt; arr[prevInd])
+            take = 1 + dp[ind + 1][ind+1];
+
+          dp[ind][prevInd+1] = max(take, nottake);
+        }
+    }
+    return dp[0][0];
+}
+
+//Tabulatoin --&gt; SO
+int func3(int *arr, int n)
+{
+    vector&lt;int&gt; next(n+1, 0), cur(n+1, 0);
+
+    for(int ind = n-1; ind &gt;= 0; ind--)
+    {
+        for (int prevInd = ind - 1; prevInd &gt;= -1; prevInd--) {
+          int nottake = next[prevInd+1];
+          int take = 0;
+          if (prevInd == -1 || arr[ind] &gt; arr[prevInd])
+            take = 1 + next[ind+1];
+
+          cur[prevInd+1] = max(take, nottake);
+        }
+        next = cur;
+    }
+    return next[0];
+}
+
+
+//Another approach
+//TC - n^2
+int func4(int *arr, int n)
+{
+    vector&lt;int&gt; dp(n, 1);
+    int maxi = 1;
+
+    for(int i = 0; i &lt; n; i++)
+    {
+        for( int j = 0; j &lt; i; j++)
+        {
+            if(arr[j] &lt; arr[i])
+            {
+                dp[i] = max(dp[i], 1+dp[j]);
+                maxi = max(maxi, dp[i]);
+             }
+        }
+    }
+    return maxi;
+}
+
+int longestIncreasingSubsequence(int arr[], int n)
+{
+    //Recursion
+    //vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(n+1, -1));
+    //return func1(arr, n, dp, 0, -1);
+    
+    //Recursion --&gt; Tabulation
+    //return func2(arr, n);
+
+    //Tabulation - SO
+    //return func3(arr, n);
+
+    //Another approach since it is not solved by above solution TLE coming
+    //This is also not solving the problem since TC is n^2
+    return func4(arr, n);
+}
+
+#include&lt;bits/stdc++.h&gt;
+int longestIncreasingSubsequence(int arr[], int n)
+{
+    // Write Your Code here
+    vector&lt;int&gt; temp;
+    temp.push_back(arr[0]);
+
+    for(int ind = 1; ind &lt; n; ind++)
+    {
+        if(arr[ind] &gt; temp.back())
+            temp.push_back(arr[ind]);
+        else
+        {
+            int i = std::lower_bound(temp.begin(), temp.end(), arr[ind]) - temp.begin();
+            temp[i] = arr[ind];
+        }
+    }
+    return temp.size();
+}
+
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>
