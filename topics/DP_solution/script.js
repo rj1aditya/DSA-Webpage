@@ -296,6 +296,35 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "DP_solution/PrintLongestIncresSubsequence.html",
       nt: ["This is tricky problem, first try to solve it on white board..."],
     },
+    {
+      title: "Largest Divisible Subset",
+      description: ["https://bit.ly/3rON1Ef"],
+      solution: "DP_solution/PrintLargestDivisibleSubset.html",
+      nt: [""],
+    },
+    {
+      title: "Longest String Chain",
+      description: ["https://bit.ly/3KHsl9J"],
+      solution: "DP_solution/LongestStringChain.html",
+      nt: [
+        "This is almost similar to LIS problem, but you have to match is with Tabulation method. To understand this problem check the image and notes on this mention on solution page.",
+      ],
+    },
+    {
+      title: "Longest Bitonic Subsequence",
+      description: ["https://bit.ly/3r4o1JB"],
+      solution: "DP_solution/LongestBitonicSubsequence.html",
+      nt: [
+        "What is bitonic? first increasing then decresing sequence is called the bitonic.",
+        "this will be solve like first we calculate the LIS from left then right, then add the dp1[i]+dp2[i]-1 where i:0-->n-1. Check its image in solution",
+      ],
+    },
+    {
+      title: "** Number of Longest Increasing Subsequence",
+      description: ["https://bit.ly/3fTRGiz"],
+      solution: "DP_solution/NumberofLongestIncreasingSubsequence.html",
+      nt: [""],
+    },
     // Add more question objects here
   ];
   {
