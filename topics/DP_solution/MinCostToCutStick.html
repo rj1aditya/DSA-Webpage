@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minimum Cost to Cut the Stick</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #4056a1;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Minimum Cost to Cut the Stick</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+#include &lt;bits/stdc++.h&gt; 
+
+//Recursion
+int func1(vector&lt;vector&lt;int&gt;&gt; &dp, int i, int j, vector&lt;int&gt; &cuts)
+{
+    if(i &gt; j)
+        return 0;
+
+    if(dp[i][j] != -1)
+        return dp[i][j];
+
+    int mini = INT_MAX;
+    for(int ind = i; ind &lt;= j; ind++)
+    {
+        int x = cuts[j+1] - cuts[i-1] +
+                        func1(dp, i, ind-1, cuts) +
+                        func1(dp, ind+1, j, cuts);
+        if(mini &gt; x)
+            mini = x;
+    }
+
+    return dp[i][j] = mini;
+}
+
+////Recursion - &gt; tabulation
+int func2(vector&lt;int&gt; &cuts, int c)
+{
+    vector&lt;vector&lt;int&gt;&gt; dp(c+2, vector&lt;int&gt;(c+2, 0));
+ 
+    for(int i = c; i &gt;= 1; i--)
+    {
+        for(int j = 1; j &lt;= c; j++)
+        {
+            if(i &gt; j)
+                continue;
+
+            int mini = INT_MAX;
+            for(int ind = i; ind &lt;= j; ind++)
+            {
+                int x = cuts[j+1] - cuts[i-1] +
+                                dp[i][ind-1] +
+                                dp[ind+1][j];
+                if(mini &gt; x)
+                    mini = x;
+            }
+            dp[i][j] = mini;
+        }
+    }
+
+    return dp[1][c];
+}
+
+int cost(int n, int c, vector&lt;int&gt; &cuts){
+    // Write your code here.
+
+    cuts.push_back(n);
+    cuts.insert(cuts.begin(), 0);
+    sort(cuts.begin(), cuts.end());
+    
+    //Recursion
+    //vector&lt;vector&lt;int&gt;&gt; dp(c+2, vector&lt;int&gt;(c+2, -1));
+    //return func1(dp, 1, c, cuts);
+
+    //Recursion - &gt; tabulation
+    return func2(cuts, c);
+}
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

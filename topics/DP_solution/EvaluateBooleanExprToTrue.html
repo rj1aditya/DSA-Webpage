@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Evaluate expression to true</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #4056a1;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Evaluate expression to true</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+#include&lt;bits/stdc++.h&gt;
+
+#define ll long long
+const int mod = 1000000007;
+
+ll func(string &exp, vector&lt;vector&lt;vector&lt;ll&gt;&gt;&gt; &dp, int i, int j, int istrue)
+{
+    if(i &gt; j) return 0;
+    if(i == j)
+    {
+        if(istrue)
+            return exp[i] == 'T' ? 1 : 0;
+        else
+            return exp[i] == 'F' ? 1 : 0;
+    }
+
+    if(dp[i][j][istrue] != -1)
+        return dp[i][j][istrue];
+
+    ll ways = 0;
+    for(int ind = i+1; ind &lt;= j-1; ind = ind+2)
+    {
+        ll lt = func(exp, dp, i, ind-1, 1);
+        ll lf = func(exp, dp, i, ind-1, 0);
+        ll rt = func(exp, dp, ind+1, j, 1);
+        ll rf = func(exp, dp, ind+1, j, 0);
+
+        
+        if(exp[ind] == '&')
+        {
+            if(istrue) ways = (ways + (lt*rt)%mod)%mod;
+            else ways = (ways + (lt*rf)%mod + (rt*lf)%mod + (rf*lf)%mod)%mod;
+        }
+        else if(exp[ind] == '|')
+        {
+            if(istrue) ways = (ways + (lt*rt)%mod + (lt*rf)%mod + (lf*rt)%mod)%mod;
+            else ways = (ways + (lf*rf)%mod)%mod;
+        }
+        else if(exp[ind] == '^')
+        {
+            if(istrue) ways = (ways + (rt*lf)%mod + (rf*lt)%mod)%mod;
+            else ways = (ways + (rf*lf)%mod + (lt*rt)%mod)%mod; 
+        }
+    }
+
+    return dp[i][j][istrue] = ways;
+}
+
+ll evaluateExp(string & exp) {
+    // Write your code here.
+    int n = exp.size();
+    vector&lt;vector&lt;vector&lt;ll&gt;&gt;&gt; dp(n, vector&lt;vector&lt;ll&gt;&gt;(n, vector&lt;ll&gt;(2, -1)));
+
+    return func(exp, dp, 0, n-1, 1)%mod;
+}
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>
