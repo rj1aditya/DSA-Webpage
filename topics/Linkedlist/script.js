@@ -7,6 +7,12 @@ document.addEventListener("DOMContentLoaded", function () {
       nt: "",
     },
     {
+      title: "Double Linked list program",
+      description: [""],
+      solution: "Linkedlist/DoublelinkedList.html",
+      nt: "",
+    },
+    {
       title: "Delete Node In A Linked List",
       description: [
         "https://www.naukri.com/code360/problems/delete-node-in-a-linked-list_1105578?leftPanelTabValue=PROBLEM",
