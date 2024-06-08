@@ -1,9 +1,29 @@
 document.addEventListener("DOMContentLoaded", function () {
   const questions = [
     {
-      title: "",
+      title: "Linked list program",
       description: [""],
-      solution: "Linkedlist/",
+      solution: "Linkedlist/linkedList.html",
+      nt: "",
+    },
+    {
+      title: "Delete Node In A Linked List",
+      description: [
+        "https://www.naukri.com/code360/problems/delete-node-in-a-linked-list_1105578?leftPanelTabValue=PROBLEM",
+      ],
+      solution: "Linkedlist/deleteNode.html",
+      nt: "In this problem you will be given only single node that needs to be deleted and no other node will be given.",
+    },
+    {
+      title: "Convert Array into a single linklist",
+      description: [""],
+      solution: "Linkedlist/convertArrayToSingleLL.html",
+      nt: "",
+    },
+    {
+      title: "Convert Array into a double linklist",
+      description: [""],
+      solution: "Linkedlist/convertArrayToDoubleLL.html",
       nt: "",
     },
     // Add more question objects here

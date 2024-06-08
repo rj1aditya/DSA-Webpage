@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ffffffff</title>
+    <title>Delete Node In A Linked List</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>ffffff</h2>
+        <h2>Delete Node In A Linked List</h2>
       </div>
     </div>
     <div class="container">
@@ -59,6 +59,14 @@
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
 
+void deleteNode(LinkedListNode&lt;int&gt; * node) {
+    // Write your code here.
+
+    node-&gt;data = node-&gt;next-&gt;data;
+    LinkedListNode&lt;int&gt; *temp = node-&gt;next;
+    node-&gt;next = node-&gt;next-&gt;next;
+    delete temp;
+}
         </code></pre>
         <!-- <img
           src="images/"
