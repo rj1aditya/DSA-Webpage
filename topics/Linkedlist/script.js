@@ -32,6 +32,34 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "Linkedlist/convertArrayToDoubleLL.html",
       nt: "",
     },
+    {
+      title: "Reverse Double link list",
+      description: ["https://tinyurl.com/mw45vuf6"],
+      solution: "Linkedlist/revereseDoubleLL.html",
+      nt: "Use the swapping algo here, just difference here is instead of 2 variable to swap here next and prev to swap",
+    },
+    {
+      title: "Reverse link list",
+      description: [
+        "https://www.naukri.com/code360/problems/reverse-linked-list_920513?leftPanelTabValue=PROBLEM",
+      ],
+      solution: "Linkedlist/revereseLL.html",
+      nt: "",
+    },
+    {
+      title: "Add 2 numbers in LinkedList",
+      description: [
+        "https://www.naukri.com/code360/problems/reverse-linked-list_920513?leftPanelTabValue=PROBLEM",
+      ],
+      solution: "Linkedlist/Add2NumberInLL.html",
+      nt: "",
+    },
+    {
+      title: "Odd Even Linked List",
+      description: ["https://tinyurl.com/47fu86tm"],
+      solution: "Linkedlist/OddEvenLinkedList.html",
+      nt: "",
+    },
     // Add more question objects here
   ];
   {
