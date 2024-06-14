@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reverse linklist</title>
+    <title>Detect a loop or cycle in LinkedList</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Reverse linklist</h2>
+        <h2>Detect a loop or cycle in LinkedList</h2>
       </div>
     </div>
     <div class="container">
@@ -58,39 +58,7 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-Node* reverseLinkedList(Node *head)
-{
-    // Write your code here
-    if(head == nullptr || head-&gt;next == nullptr)
-        return head;
-    
-    Node *curr = head;
-    Node *last = nullptr;
-    Node *nxt = nullptr;
 
-    while(curr)
-    {
-        nxt = curr-&gt;next;
-        curr-&gt;next = last;
-        last = curr;
-        curr = nxt;
-    }
-    return last;
-}
-
-//Recursive approach
-Node* reverseLinkedList(Node *head)
-{
-    if(head == nullptr || head-&gt;next == nullptr)
-        return head;
-
-    Node *newHead = reverseLinkedList(head-&gt;next);
-    Node *frontN = head-&gt;next;
-    frontN-&gt;next = head;
-    head-&gt;next = nullptr;
-
-    return newHead;
-}
         </code></pre>
         <!-- <img
           src="images/"
@@ -104,7 +72,7 @@ Node* reverseLinkedList(Node *head)
       <h2>Java Solution</h2>
       <div class="codeC">
         <pre><code class="language-java line-numbers">
-            // Java solution code goes here
+// Java solution code goes here
         </code></pre>
       </div>
 
@@ -112,23 +80,19 @@ Node* reverseLinkedList(Node *head)
       <div class="codeC">
         <pre><code class="language-python line-numbers">
 # Python solution code goes here
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-        
+def detectCycle(head) :
+    # Write your code here.
+    slow = head
+    fast = head
 
-def reverseLinkedList(head):
-    # write your code here
-    if head is None or head.next is None:
-        return head
-    
-    newHead = reverseLinkedList(head.next)
-    frontNode = head.next
-    frontNode.next = head
-    head.next = None
+    while fast is not None and fast.next is not None:
+        slow = slow.next
+        fast = fast.next.next
 
-    return newHead
+        if fast is slow:
+            return True
+
+    return False
         </code></pre>
       </div>
     </div>

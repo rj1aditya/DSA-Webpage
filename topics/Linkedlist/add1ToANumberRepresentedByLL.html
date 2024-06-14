@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reverse linklist</title>
+    <title>Add 1 to a number represented by LinkedList</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Reverse linklist</h2>
+        <h2>Add 1 to a number represented by LinkedList</h2>
       </div>
     </div>
     <div class="container">
@@ -58,39 +58,52 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-Node* reverseLinkedList(Node *head)
-{
-    // Write your code here
-    if(head == nullptr || head-&gt;next == nullptr)
-        return head;
-    
-    Node *curr = head;
-    Node *last = nullptr;
-    Node *nxt = nullptr;
-
-    while(curr)
-    {
-        nxt = curr-&gt;next;
-        curr-&gt;next = last;
-        last = curr;
-        curr = nxt;
-    }
-    return last;
-}
-
-//Recursive approach
-Node* reverseLinkedList(Node *head)
-{
-    if(head == nullptr || head-&gt;next == nullptr)
-        return head;
-
-    Node *newHead = reverseLinkedList(head-&gt;next);
-    Node *frontN = head-&gt;next;
-    frontN-&gt;next = head;
-    head-&gt;next = nullptr;
-
-    return newHead;
-}
+/**
+ * Definition of linked list:
+ *
+ * class Node {
+ * public:
+ *      int data;
+ *      Node *next;
+ *      Node() {
+ *          this-&gt;data = 0;
+ *          this-&gt;next = NULL;
+ *      }
+ *      Node(int data) {
+ *          this-&gt;data = data;
+ *          this-&gt;next = NULL;
+ *      }
+ *      Node (int data, Node *next) {
+ *          this-&gt;data = data;
+ *          this-&gt;next = next;
+ *      }
+ * };
+ *
+ *************************************************************************/
+ int helper(Node *head)
+ {
+     if(head == nullptr)
+         return 1;
+     
+     int carry = helper(head-&gt;next);
+ 
+     int val = head-&gt;data + carry;
+     head-&gt;data = val%10;
+     carry = val/10;
+     return carry;
+ }
+ Node *addOne(Node *head)
+ {
+     // Write Your Code Here.
+     if( helper(head) == 1)
+     {
+         Node *newN = new Node(1);
+         newN-&gt;next = head;
+         head = newN;
+     }
+ 
+     return head;
+ }
         </code></pre>
         <!-- <img
           src="images/"
@@ -104,7 +117,7 @@ Node* reverseLinkedList(Node *head)
       <h2>Java Solution</h2>
       <div class="codeC">
         <pre><code class="language-java line-numbers">
-            // Java solution code goes here
+// Java solution code goes here
         </code></pre>
       </div>
 
@@ -112,23 +125,6 @@ Node* reverseLinkedList(Node *head)
       <div class="codeC">
         <pre><code class="language-python line-numbers">
 # Python solution code goes here
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-        
-
-def reverseLinkedList(head):
-    # write your code here
-    if head is None or head.next is None:
-        return head
-    
-    newHead = reverseLinkedList(head.next)
-    frontNode = head.next
-    frontNode.next = head
-    head.next = None
-
-    return newHead
         </code></pre>
       </div>
     </div>

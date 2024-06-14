@@ -40,9 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     {
       title: "Reverse link list",
-      description: [
-        "https://www.naukri.com/code360/problems/reverse-linked-list_920513?leftPanelTabValue=PROBLEM",
-      ],
+      description: ["https://tinyurl.com/2ajt9262"],
       solution: "Linkedlist/revereseLL.html",
       nt: "",
     },
@@ -59,6 +57,48 @@ document.addEventListener("DOMContentLoaded", function () {
       description: ["https://tinyurl.com/47fu86tm"],
       solution: "Linkedlist/OddEvenLinkedList.html",
       nt: "",
+    },
+    {
+      title: "Sort linked list of 0s 1s 2s",
+      description: ["https://tinyurl.com/47fu86tm"],
+      solution: "Linkedlist/SortLLOf012.html",
+      nt: "",
+    },
+    {
+      title: "Remove Nth Node from the end of the LinkedList ",
+      description: ["https://tinyurl.com/4txecfpz"],
+      solution: "Linkedlist/deleteNthNodefromLast.html",
+      nt: "To solve this problem, fast and slow pointer algo is used. Firs move the fast pointer by N value, then point slow to head and move both slow and fast pointer until fast->next reach to null",
+    },
+    {
+      title: "Check ll is palindrome or not",
+      description: ["https://tinyurl.com/2p869csv"],
+      solution: "Linkedlist/checkPalindromeLL.html",
+      nt: "Basic algo is first we figure out the middle of the linkedlist using fast and slow pointer algo, the will reverese the second half of the linkedlist then compare the ll, then revert the 2nd half of ll which was reversed",
+    },
+    {
+      title: "Add 1 to a number represented by LinkedList",
+      description: ["https://tinyurl.com/3hrjsb36	"],
+      solution: "Linkedlist/add1ToANumberRepresentedByLL.html",
+      nt: "Basic algo is first we figure out the middle of the linkedlist using fast and slow pointer algo, the will reverese the second half of the linkedlist then compare the ll, then revert the 2nd half of ll which was reversed",
+    },
+    {
+      title: "Find the intersection point of Y LinkedList",
+      description: ["https://tinyurl.com/yc344rnt"],
+      solution: "Linkedlist/YintersectionLL.html",
+      nt: "Naive approach: store all elment node 1st ll in hash map, then start store 2nd ll element node in same hash map, if encounter same node then return that node else return null.",
+    },
+    {
+      title: "Find middle node of the LinkedList",
+      description: ["https://tinyurl.com/ykfyj5cd"],
+      solution: "Linkedlist/middleNode.html",
+      nt: "Naive approach: find the lend of ll then divide by 2, then traverse to that mid node element",
+    },
+    {
+      title: "Detect a loop or cycle in LinkedList",
+      description: ["https://tinyurl.com/3rxwup5c"],
+      solution: "Linkedlist/detectCircleInLL.html",
+      nt: "people could ask, why fastPointer will collied with slow pointer if loop is there in LL, why not fast pointer cross over slow pointer? check striver video he explained it.",
     },
     // Add more question objects here
   ];

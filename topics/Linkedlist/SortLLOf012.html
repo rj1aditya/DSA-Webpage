@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sort linked list of 0s 1s 2s</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #a13f80;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Sort linked list of 0s 1s 2s</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+/*
+Following is the class structure of the Node class:
+
+class Node
+{
+public:
+    int data;
+    Node *next;
+    Node()
+    {
+        this-&gt;data = 0;
+        next = NULL;
+    }
+    Node(int data)
+    {
+        this-&gt;data = data; 
+        this-&gt;next = NULL;
+    }
+    Node(int data, Node* next)
+    {
+        this-&gt;data = data;
+        this-&gt;next = next;
+    }
+};
+*/
+
+Node* sortList(Node *head){
+    // Write your code here.
+
+    Node *zeroH = new Node(-1); Node *zeroN = zeroH;
+    Node *oneH = new Node(-1); Node *oneN = oneH;
+    Node *twoH = new Node(-1); Node *twoN = twoH;
+
+    Node *temp = head;
+    while(temp != nullptr)
+    {
+        if(temp-&gt;data == 0)
+        {
+            zeroN-&gt;next = temp;
+            zeroN = temp;
+        }
+        else if(temp-&gt;data == 1)
+        {
+            oneN-&gt;next = temp;
+            oneN = temp;
+        }
+        else{
+            twoN-&gt;next = temp;
+            twoN = temp;
+        }
+        temp = temp-&gt;next;
+    }
+
+    zeroN-&gt;next = oneH-&gt;next ? oneH-&gt;next : twoH-&gt;next;
+    oneN-&gt;next = twoH-&gt;next;
+    twoN-&gt;next = nullptr;//This line is important, else it cause LTE
+    return zeroH-&gt;next;
+}
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+
+        '''Following is the structure of the Node class already defined'''
+
+        class Node:
+            def __init__(self, data):
+                self.data = data
+                self.next = None
+        
+        def sortList(head):
+            # Write your code here
+            zeroH = Node(-1)
+            zeroN = zeroH
+            oneH = Node(-1)
+            oneN = oneH
+            twoH = Node(-1)
+            twoN = twoH
+        
+            temp = head
+        
+            while temp is not None:
+                if temp.data == 0:
+                    zeroN.next = temp
+                    zeroN = temp
+                elif temp.data == 1:
+                    oneN.next = temp
+                    oneN = temp
+                elif temp.data == 2:
+                    twoN.next = temp
+                    twoN = temp
+                temp = temp.next
+        
+            zeroN.next = oneH.next if oneH.next is not None else twoH.next
+            
+            oneN.next = twoH.next
+            twoN.next = None
+            return zeroH.next
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reverse linklist</title>
+    <title>Check ll is palindrome or not</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Reverse linklist</h2>
+        <h2>Check ll is palindrome or not</h2>
       </div>
     </div>
     <div class="container">
@@ -58,39 +58,7 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-Node* reverseLinkedList(Node *head)
-{
-    // Write your code here
-    if(head == nullptr || head-&gt;next == nullptr)
-        return head;
-    
-    Node *curr = head;
-    Node *last = nullptr;
-    Node *nxt = nullptr;
 
-    while(curr)
-    {
-        nxt = curr-&gt;next;
-        curr-&gt;next = last;
-        last = curr;
-        curr = nxt;
-    }
-    return last;
-}
-
-//Recursive approach
-Node* reverseLinkedList(Node *head)
-{
-    if(head == nullptr || head-&gt;next == nullptr)
-        return head;
-
-    Node *newHead = reverseLinkedList(head-&gt;next);
-    Node *frontN = head-&gt;next;
-    frontN-&gt;next = head;
-    head-&gt;next = nullptr;
-
-    return newHead;
-}
         </code></pre>
         <!-- <img
           src="images/"
@@ -104,7 +72,7 @@ Node* reverseLinkedList(Node *head)
       <h2>Java Solution</h2>
       <div class="codeC">
         <pre><code class="language-java line-numbers">
-            // Java solution code goes here
+// Java solution code goes here
         </code></pre>
       </div>
 
@@ -112,12 +80,34 @@ Node* reverseLinkedList(Node *head)
       <div class="codeC">
         <pre><code class="language-python line-numbers">
 # Python solution code goes here
+'''
+Following is the structure of the Node class already defined.
+'''
 class Node:
     def __init__(self, data):
         self.data = data
         self.next = None
-        
 
+class list:
+    def __init__(self):
+        self.head = None
+
+    def append(self, val):
+        newN = Node(val)
+        if self.head is None:
+            self.head = newN
+        else:
+            curN = self.head
+            while curN.next is not None:
+                curN = curN.next
+            curN.next = newN
+
+    def display(self):
+        curN = self.head
+        while curN is not None:
+            print(curN.data, end=' ')
+            curN = curN.next
+            
 def reverseLinkedList(head):
     # write your code here
     if head is None or head.next is None:
@@ -129,6 +119,46 @@ def reverseLinkedList(head):
     head.next = None
 
     return newHead
+
+def isPalindrome(head):
+    # write your code here
+    fastN = head
+    slowN = head
+
+    while fastN.next is not None and fastN.next.next is not None:
+        fastN = fastN.next.next
+        slowN = slowN.next
+
+    firstN = head
+    newHead = reverseLinkedList(slowN.next)
+    secondN = newHead
+    print(id(newHead))
+    ans = True
+    while secondN is not None:
+        if secondN.data != firstN.data:
+            ans = False
+            break
+        secondN = secondN.next
+        firstN = firstN.next
+    
+    reverseLinkedList(newHead)
+    print(id(fastN.next))
+
+    return ans
+
+
+list = list()
+list.append(10)
+list.append(20)
+list.append(30)
+list.append(30)
+list.append(20)
+list.append(10)
+list.display()
+
+ans = isPalindrome(list.head)
+print(ans)
+list.display()
         </code></pre>
       </div>
     </div>
