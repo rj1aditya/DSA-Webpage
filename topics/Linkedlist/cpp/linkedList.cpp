@@ -239,12 +239,64 @@ public:
     {
         clear();
     }
+    Node *findKthNode(Node *head, int k)
+    {
+        Node *cur = head;
+
+        while (cur && --k)
+            cur = cur->next;
+
+        return k == 0 ? cur : nullptr;
+    }
+
+    Node *reverese(Node *head)
+    {
+        if (!head || !head->next)
+            return head;
+
+        Node *newH = reverese(head->next);
+        Node *front = head->next;
+        front->next = head;
+        head->next = nullptr;
+
+        return newH;
+    }
+    void kReverse(int k)
+    {
+        // Write your code here.
+        Node *temp = head;
+        Node *prevNode = nullptr;
+        Node *nextNode = nullptr;
+        while (temp)
+        {
+            Node *kthNode = findKthNode(temp, k);
+            if (kthNode == nullptr)
+            {
+                // cout <<"kthnode is null";
+                if (prevNode)
+                    prevNode->next = temp;
+                break;
+            }
+
+            nextNode = kthNode->next;
+            kthNode->next = nullptr;
+
+            Node *newH = reverese(temp);
+            if (temp == head)
+                head = newH;
+            else
+                prevNode->next = newH;
+            prevNode = temp;
+            temp = nextNode;
+        }
+        // return head;
+    }
 };
 
 int main()
 {
     // forward_list will be created with intitializer list with 4 element value{1,2,3,4}
-    forward_list obj1{1, 2, 3, 4};
+    forward_list obj1{1, 2};
     // forward_list will be created with 4 element value{5,5,5,5}
     forward_list obj2(4, 5);
     // forward_list will be created with 4 element value{0,0,0,0}
@@ -260,8 +312,8 @@ int main()
     obj4.append(9);
     obj1.printlinkedlist();
     cout << endl;
-    obj1.deleteFirstNode();
-    obj1.printlinkedlist();
+    // obj1.deleteFirstNode();
+    // obj1.printlinkedlist();
     cout << endl;
     obj2.printlinkedlist();
     cout << endl;
@@ -272,8 +324,11 @@ int main()
     obj4.insertElemAfterKthNode(10, -2);
     obj4.printlinkedlist();
     cout << endl;
-    obj1.clear();
+    // obj1.clear();
     obj2.clear();
     obj3.clear();
     obj4.clear();
+
+    obj1.kReverse(3);
+    obj1.printlinkedlist();
 }

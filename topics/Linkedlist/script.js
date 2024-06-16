@@ -100,6 +100,69 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "Linkedlist/detectCircleInLL.html",
       nt: "people could ask, why fastPointer will collied with slow pointer if loop is there in LL, why not fast pointer cross over slow pointer? check striver video he explained it.",
     },
+    {
+      title: "Find the length of the Loop in LinkedList",
+      description: ["https://tinyurl.com/5n78kcda"],
+      solution: "Linkedlist/lengthOfLoopInLL.html",
+      nt: "",
+    },
+    {
+      title: "Delete middle node of the LL",
+      description: ["https://tinyurl.com/4c5a64xv"],
+      solution: "Linkedlist/deleteMiddleNode.html",
+      nt: "",
+    },
+    {
+      title: "Detect the starting node of the Loop in LL",
+      description: ["https://tinyurl.com/4c5a64xv"],
+      solution: "Linkedlist/detectStartingNodeInLL.html",
+      nt: "Check striver video to know why slow and fast will collied at the starting of the loop in 2nd step.",
+    },
+    {
+      title: "Delete all occurrences of a Key in DLL",
+      description: ["https://tinyurl.com/yc7znssk"],
+      solution: "Linkedlist/delAllOccurencesOfKeyInDLL.html",
+      nt: "",
+    },
+    {
+      title: "Find all Pairs with given Sum in DLL",
+      description: ["https://tinyurl.com/y4xca7e5"],
+      solution: "Linkedlist/findPairWithGivenSuminDLL.html",
+      nt: "",
+    },
+
+    {
+      title: "Remove duplicates from sorted DLL",
+      description: ["https://tinyurl.com/5n8ndcuu"],
+      solution: "Linkedlist/RemduplicatesfrmsortedDLL.html",
+      nt: "",
+    },
+    {
+      title: "*** Reverse Nodes in K Group Size of LinkedList",
+      description: ["https://tinyurl.com/4dbz8fnn"],
+      solution: "Linkedlist/ReverseNodeInKGroupSize.html",
+      nt: "",
+    },
+    {
+      title: "Rotate a LinkedList",
+      description: [
+        "https://leetcode.com/problems/rotate-list/description/?submissionId=657895105",
+      ],
+      solution: "Linkedlist/RotateLL.html",
+      nt: "",
+    },
+    {
+      title: "Merge two sorted Linked Lists",
+      description: ["https://bit.ly/3vjuaGQ"],
+      solution: "Linkedlist/merge2SortedLL.html",
+      nt: "",
+    },
+    {
+      title: "Flattening a LinkedList",
+      description: ["https://tinyurl.com/2p9ns48e"],
+      solution: "Linkedlist/FlatteningLinkedList.html",
+      nt: "",
+    },
     // Add more question objects here
   ];
   {
