@@ -163,6 +163,33 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "Linkedlist/FlatteningLinkedList.html",
       nt: "",
     },
+    {
+      title: "***Merge K Sorted Lists",
+      description: [
+        "https://www.naukri.com/code360/problems/merge-k-sorted-lists_992772",
+      ],
+      solution: "Linkedlist/mergeKSortedLL.html",
+      nt: "",
+    },
+    {
+      title: "Sort a Linked List | Merge Sort and Brute Force",
+      description: ["https://bit.ly/4aSKrTF	"],
+      solution: "Linkedlist/sortLL.html",
+      nt: "",
+    },
+    {
+      title:
+        "Clone a LinkedList with Next and Random Pointers | Copy List with Random Pointers",
+      description: ["https://tinyurl.com/ytkm6xuz"],
+      solution: "Linkedlist/cloneLLWithNextAndRandomPointers.html",
+      nt: "It's a 3 step process to solve this problem",
+    },
+    {
+      title: "Design a Browser History",
+      description: ["https://bit.ly/3tHiY6k"],
+      solution: "Linkedlist/DesignABrowserHistory.html",
+      nt: "",
+    },
     // Add more question objects here
   ];
   {
