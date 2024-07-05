@@ -1,6 +1,7 @@
 {
   "files.associations": {
     "__config": "cpp",
-    "vector": "cpp"
+    "vector": "cpp",
+    "ostream": "cpp"
   }
 }

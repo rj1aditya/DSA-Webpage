@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ffff</title>
+    <title>Right/Left View of Binary Tree</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>ffffff</h2>
+        <h2>Right/Left View of Binary Tree</h2>
       </div>
     </div>
     <div class="container">
@@ -58,7 +58,61 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+    void preOrderRecursion(TreeNode* node, vector&lt;int&gt; &ans, int lvl)
+    {
+        if(node==nullptr)
+            return;
+        
+        if(ans.size() == lvl)
+            ans.push_back(node-&gt;val);
 
+        preOrderRecursion(node-&gt;right, ans, lvl+1);        
+        preOrderRecursion(node-&gt;left, ans, lvl+1);
+    }
+
+    void lvlOrderTraverse(TreeNode* node, vector&lt;int&gt; &ans, int lvl)
+    {
+        if(node==nullptr)
+            return;
+        
+        queue&lt;pair&lt;TreeNode*,int&gt;&gt; q;
+        q.push({node, lvl});
+
+        while(!q.empty())
+        {
+            TreeNode* tmp = q.front().first;
+            int lvl = q.front().second;
+            q.pop();
+
+            if(ans.size() == lvl)
+                ans.push_back(tmp-&gt;val);
+
+            if(tmp-&gt;right)
+                q.push({tmp-&gt;right,lvl+1});
+            if(tmp-&gt;left)
+                q.push({tmp-&gt;left,lvl+1});
+        }
+    }
+public:
+    vector&lt;int&gt; rightSideView(TreeNode* root) {
+        vector&lt;int&gt; ans;
+        //preOrderRecursion(root, ans, 0);
+        lvlOrderTraverse(root, ans, 0);
+        return ans;   
+    }
+};
         </code></pre>
         <!-- <img
           src="images/"

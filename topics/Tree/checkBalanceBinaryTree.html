@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ffff</title>
+    <title>Check for Balanced Binary Tree</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>ffffff</h2>
+        <h2>Check for Balanced Binary Tree</h2>
       </div>
     </div>
     <div class="container">
@@ -58,7 +58,22 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+int checkBalanceBinaryTree(Node* node)
+{
+    if(node==nullptr)
+        return 0;
+    
+    int leftH = checkBalanceBinaryTree(node-&gt;left);
+    int rightH = checkBalanceBinaryTree(node-&gt;right);
 
+    if(leftH == -1 || rightH == -1)
+        return -1;
+
+    if(abs(leftH-rightH) &gt; 1)
+        return -1;
+
+    return 1 + max(leftH, rightH);
+}
         </code></pre>
         <!-- <img
           src="images/"

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ffff</title>
+    <title>Zig-Zag or Spiral Traversal in Binary Tree</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>ffffff</h2>
+        <h2>Zig-Zag or Spiral Traversal in Binary Tree</h2>
       </div>
     </div>
     <div class="container">
@@ -58,7 +58,50 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    vector&lt;vector&lt;int&gt;&gt; zigzagLevelOrder(TreeNode* root) {
+        vector&lt;vector&lt;int&gt;&gt; ans;
 
+        queue&lt;TreeNode*&gt; q;
+        if(root)
+            q.push(root);
+
+        bool leftToRight = true;
+
+        while(!q.empty())
+        {
+            int size = q.size();
+            vector&lt;int&gt; row(size);
+            for(int i = 0; i &lt; size; i++)
+            {
+                TreeNode* temp = q.front();
+                q.pop();
+                int index = leftToRight ? i : (size - i - 1);
+                row[index] = temp-&gt;val;
+
+                if(temp-&gt;left)
+                    q.push(temp-&gt;left);
+                if(temp-&gt;right)
+                    q.push(temp-&gt;right);
+            }
+            leftToRight = !leftToRight;
+            ans.push_back(row);
+        }        
+        return ans;
+    }
+};
         </code></pre>
         <!-- <img
           src="images/"

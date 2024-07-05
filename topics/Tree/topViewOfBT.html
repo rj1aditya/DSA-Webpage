@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ffff</title>
+    <title>Top View of Binary Tree</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>ffffff</h2>
+        <h2>Top View of Binary Tree</h2>
       </div>
     </div>
     <div class="container">
@@ -58,7 +58,48 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+struct Node
+{
+    int data;
+    Node* left;
+    Node* right;
+};
 
+class Solution
+{
+    public:
+    //Function to return a list of nodes visible from the top view 
+    //from left to right in Binary Tree.
+    vector&lt;int&gt; topView(Node *root)
+    {
+        //Your code here
+        vector&lt;int&gt; ans;
+        queue&lt;pair&lt;Node*, int&gt;&gt; q;
+        map&lt;int,int&gt; m;
+        
+        q.push({root,0});
+        
+        while(!q.empty())
+        {
+            Node* tmp = q.front().first;
+            int lvl = q.front().second;
+            q.pop();
+            if(m.find(lvl)==m.end())
+                m[lvl] = tmp-&gt;data;
+            
+            if(tmp-&gt;left)
+                q.push({tmp-&gt;left, lvl-1});
+            if(tmp-&gt;right)
+                q.push({tmp-&gt;right, lvl+1});
+        }
+        
+        for(auto val: m)
+            ans.push_back(val.second);
+            
+        return ans;
+    }
+
+};
         </code></pre>
         <!-- <img
           src="images/"

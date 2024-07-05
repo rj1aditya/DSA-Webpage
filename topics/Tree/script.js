@@ -1,9 +1,92 @@
 document.addEventListener("DOMContentLoaded", function () {
   const questions = [
     {
-      title: "",
+      title: "Basic Tree Program",
       description: [""],
-      solution: "Tree/",
+      solution: "Tree/tree.html",
+      nt: "",
+    },
+    {
+      title: "preOrder inOrder postOrder in 1 go using iterative approach",
+      description: ["check image in solution to see the algo"],
+      solution: "Tree/iterateApproachToTraverseTree.html",
+      nt: "",
+    },
+    {
+      title: "Check for Balanced Binary Tree",
+      description: ["Balanced Binary Tree is leftH-rightH <=1"],
+      solution: "Tree/checkBalanceBinaryTree.html",
+      nt: "",
+    },
+    {
+      title: "Diameter of binary tree",
+      description: [
+        "https://leetcode.com/problems/diameter-of-binary-tree/description/",
+        "Max path of a tree is the diameter, root not needed to be part of the path.",
+      ],
+      solution: "Tree/diameter.html",
+      nt: "",
+    },
+    {
+      title: "Maximum Path Sum in Binary Tree",
+      description: [
+        "https://leetcode.com/problems/binary-tree-maximum-path-sum/description/",
+      ],
+      solution: "Tree/maxPathSum.html",
+      nt: "",
+    },
+    {
+      title: "Check it two trees are Identical or Not ",
+      description: ["https://leetcode.com/problems/same-tree/description/"],
+      solution: "Tree/twoIdenticalTree.html",
+      nt: "just do the any traversal in both tree at the same time.",
+    },
+    {
+      title: "Zig-Zag or Spiral Traversal in Binary Tree",
+      description: [
+        "https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/",
+      ],
+      solution: "Tree/zigzagTraversal.html",
+      nt: "do a level order traversal with a flag help",
+    },
+    {
+      title: "Boundary Traversal in Binary Tree",
+      description: [
+        "https://www.naukri.com/code360/problems/boundary-traversal_790725",
+      ],
+      solution: "Tree/boundaryTraversal.html",
+      nt: "Check algo image in solution",
+    },
+    {
+      title: "Vertical Order Traversal of Binary Tree",
+      description: [
+        "https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/description/",
+      ],
+      solution: "Tree/verticalTraversal.html",
+      nt: "",
+    },
+    {
+      title: "Top View of Binary Tree",
+      description: [
+        "https://www.geeksforgeeks.org/problems/top-view-of-binary-tree/1",
+      ],
+      solution: "Tree/topViewOfBT.html",
+      nt: "",
+    },
+    {
+      title: "Bottom View of Binary Tree",
+      description: [
+        "https://www.geeksforgeeks.org/problems/bottom-view-of-binary-tree/1",
+      ],
+      solution: "Tree/BottomViewOfBT.html",
+      nt: "",
+    },
+    {
+      title: "Right/Left View of Binary Tree ",
+      description: [
+        "https://leetcode.com/problems/binary-tree-right-side-view/description/",
+      ],
+      solution: "Tree/rightSideViewBT.html",
       nt: "",
     },
     // Add more question objects here

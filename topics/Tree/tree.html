@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic Tree Program</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #008000;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Basic Tree Program</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+#include &lt;iostream&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;utility&gt; // For std::pair
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int val = 0) : data(val), left(nullptr), right(nullptr) {}
+};
+
+class BinaryTree
+{
+    Node *root;
+    Node *insertNode(Node *n, int data)
+    {
+        if (n == nullptr)
+        {
+            return new Node(data);
+        }
+
+        if (n-&gt;data &gt; data)
+            n-&gt;left = insertNode(n-&gt;left, data);
+        else
+            n-&gt;right = insertNode(n-&gt;right, data);
+
+        return n;
+    }
+
+    void inorderTraversal(Node *node)
+    {
+        if (node)
+        {
+            inorderTraversal(node-&gt;left);
+            cout &lt;&lt; node-&gt;data &lt;&lt; " ";
+            inorderTraversal(node-&gt;right);
+        }
+    }
+
+    void preOrderTraversal(Node *node)
+    {
+        if (node)
+        {
+            cout &lt;&lt; node-&gt;data &lt;&lt; " ";
+            preOrderTraversal(node-&gt;left);
+            preOrderTraversal(node-&gt;right);
+        }
+    }
+
+    void postOrderTraversal(Node *node)
+    {
+        if (node)
+        {
+            postOrderTraversal(node-&gt;left);
+            postOrderTraversal(node-&gt;right);
+            cout &lt;&lt; node-&gt;data &lt;&lt; " ";
+        }
+    }
+
+    int findHeight(Node *node)
+    {
+        if (node == nullptr)
+            return 0;
+
+        int leftH = findHeight(node-&gt;left);
+        int rightH = findHeight(node-&gt;right);
+
+        return 1 + max(leftH, rightH);
+    }
+
+public:
+    BinaryTree() : root(nullptr) {}
+    void insert(int data)
+    {
+        root = insertNode(root, data);
+    }
+
+    // left, root, right
+    void inorder()
+    {
+        inorderTraversal(root);
+    }
+
+    // root, left, right
+    void preinorder()
+    {
+        preOrderTraversal(root);
+    }
+
+    // left, right, root
+    void postorder()
+    {
+        postOrderTraversal(root);
+    }
+
+    void iterativePostorderTraversal()
+    {
+        stack&lt;Node *&gt; s1;
+        stack&lt;Node *&gt; s2;
+
+        s1.push(root);
+        while (!s1.empty())
+        {
+            Node *node = s1.top();
+            s1.pop();
+            s2.push(node);
+            if (node-&gt;left)
+                s1.push(node-&gt;left);
+            if (node-&gt;right)
+                s1.push(node-&gt;right);
+        }
+        cout &lt;&lt; "Post Order traversal using iterative approach:\n";
+        while (!s2.empty())
+        {
+            Node *node = s2.top();
+            s2.pop();
+            cout &lt;&lt; node-&gt;data &lt;&lt; " ";
+        }
+        cout &lt;&lt; endl;
+    }
+    void levelorder()
+    {
+        queue&lt;Node *&gt; q;
+        if (root)
+            q.push(root);
+        else
+            return;
+
+        while (!q.empty())
+        {
+            Node *currN = q.front();
+            q.pop();
+            if (currN-&gt;left)
+                q.push(currN-&gt;left);
+            if (currN-&gt;right)
+                q.push(currN-&gt;right);
+
+            cout &lt;&lt; currN-&gt;data &lt;&lt; " ";
+        }
+    }
+
+    int Height()
+    {
+        return findHeight(root);
+    }
+
+    void printLevelOrderNodeData(Node *node, int level)
+    {
+        if (node == nullptr)
+            return;
+
+        if (level == 1)
+        {
+            cout &lt;&lt; node-&gt;data &lt;&lt; " ";
+            return;
+        }
+        else
+        {
+            printLevelOrderNodeData(node-&gt;left, level - 1);
+            printLevelOrderNodeData(node-&gt;right, level - 1);
+        }
+    }
+
+    void leverOrderTraversal()
+    {
+        int h = Height();
+        for (int i = 1; i &lt;= h; i++)
+        {
+            printLevelOrderNodeData(root, i);
+        }
+    }
+    void deleteTree(Node *node)
+    {
+        if (node)
+        {
+            deleteTree(node-&gt;left);
+            deleteTree(node-&gt;right);
+            cout &lt;&lt; "deleting node:" &lt;&lt; node-&gt;data &lt;&lt; endl;
+            delete node;
+        }
+    }
+    void deleteT()
+    {
+        deleteTree(root);
+        root = nullptr;
+    }
+    void iterativeTraversalForAllOrder()
+    {
+        if (root == nullptr)
+            return;
+
+        vector&lt;int&gt; pre, post, in;
+
+        stack&lt;pair&lt;Node *, int&gt;&gt; st;
+        st.push({root, 1});
+
+        while (!st.empty())
+        {
+            Node *temp = st.top().first;
+            int val = st.top().second;
+            st.pop();
+            if (val == 1)
+            {
+                pre.push_back(temp-&gt;data);
+                st.push({temp, val + 1});
+                if (temp-&gt;left)
+                    st.push({temp-&gt;left, 1});
+            }
+            else if (val == 2)
+            {
+                in.push_back(temp-&gt;data);
+                st.push({temp, val + 1});
+                if (temp-&gt;right)
+                    st.push({temp-&gt;right, 1});
+            }
+            else
+            {
+                post.push_back(temp-&gt;data);
+            }
+        }
+
+        cout &lt;&lt; "Preorder traversal:";
+        for (auto x : pre)
+            cout &lt;&lt; x &lt;&lt; " ";
+        cout &lt;&lt; endl;
+        cout &lt;&lt; "Inorder traversal:";
+        for (auto x : in)
+            cout &lt;&lt; x &lt;&lt; " ";
+        cout &lt;&lt; endl;
+        cout &lt;&lt; "Postorder traversal:";
+        for (auto x : post)
+            cout &lt;&lt; x &lt;&lt; " ";
+        cout &lt;&lt; endl;
+    }
+
+    ~BinaryTree()
+    {
+        deleteTree(root);
+    }
+};
+
+int main()
+{
+    BinaryTree obj1;
+    obj1.insert(10);
+    obj1.insert(5);
+    obj1.insert(7);
+    obj1.insert(4);
+    obj1.insert(15);
+    obj1.insert(12);
+    obj1.insert(17);
+    obj1.insert(19);
+    cout &lt;&lt; "In order traversal output:\n";
+    obj1.inorder();
+    cout &lt;&lt; endl;
+    cout &lt;&lt; "Pre order traversal output:\n";
+    obj1.preinorder();
+    cout &lt;&lt; endl;
+    cout &lt;&lt; "Post order traversal output:\n";
+    obj1.postorder();
+    cout &lt;&lt; endl;
+    obj1.iterativePostorderTraversal();
+    cout &lt;&lt; "Level order traversal output:\n";
+    obj1.levelorder();
+    cout &lt;&lt; endl;
+    cout &lt;&lt; "Height of the tree is:" &lt;&lt; obj1.Height();
+    cout &lt;&lt; endl;
+    obj1.leverOrderTraversal();
+    cout &lt;&lt; endl;
+    obj1.iterativeTraversalForAllOrder();
+    cout &lt;&lt; endl;
+    obj1.deleteT();
+    cout &lt;&lt; "Height of the tree is:" &lt;&lt; obj1.Height();
+    return 0;
+}
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>
