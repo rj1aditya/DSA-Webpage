@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Print all the Nodes at a distance of K in Binary Tree</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #008000;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Print all the Nodes at a distance of K in Binary Tree</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector&lt;int&gt; distanceK(TreeNode* root, TreeNode* target, int k) {
+        queue&lt;TreeNode*&gt; q;
+        map&lt;TreeNode*,TreeNode*&gt; parentsNode;
+
+        q.push(root);
+        //first store the parent node of each node
+        while(!q.empty())
+        {
+            TreeNode* tmp = q.front();
+            q.pop();
+
+            if(tmp-&gt;left)
+            {
+                q.push(tmp-&gt;left);
+                parentsNode[tmp-&gt;left] = tmp;
+            }
+            if(tmp-&gt;right)
+            {
+                q.push(tmp-&gt;right);
+                parentsNode[tmp-&gt;right] = tmp;
+            }
+        }
+
+        //
+        unordered_map&lt;TreeNode*, bool&gt; vis;
+        int dis=0;
+        queue&lt;TreeNode*&gt; que;
+        que.push(target);
+        vis[target] = 1;
+        while(!que.empty())
+        {
+            int size = que.size();
+            if(dis++ == k)
+                break;
+            for(int i = 0; i &lt; size; i++)
+            {
+                TreeNode* tmp = que.front();
+                que.pop();
+                if(tmp-&gt;left && !vis[tmp-&gt;left])
+                {
+                    que.push(tmp-&gt;left);
+                    vis[tmp-&gt;left] = 1;
+                }
+                if(tmp-&gt;right && !vis[tmp-&gt;right])
+                {
+                    que.push(tmp-&gt;right);
+                    vis[tmp-&gt;right] = 1;
+                }
+                if(parentsNode[tmp] && !vis[parentsNode[tmp]])
+                {
+                    que.push(parentsNode[tmp]);
+                    vis[parentsNode[tmp]] = 1;
+                }
+            }
+        }
+
+        vector&lt;int&gt; ans;
+        while(!que.empty())
+        {
+            ans.push_back(que.front()-&gt;val);
+            que.pop();
+        }
+        return ans;
+    }
+};
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

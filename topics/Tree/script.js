@@ -89,6 +89,44 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "Tree/rightSideViewBT.html",
       nt: "",
     },
+    {
+      title: "Check for Symmetrical Binary Trees",
+      description: ["https://www.geeksforgeeks.org/problems/symmetric-tree/1"],
+      solution: "Tree/SymmetricalBT.html",
+      nt: "Symmetrical Binary Trees is when we part BT in 2 part from middle of it them mirror of it should be same.",
+    },
+    {
+      title: "Print Root to Node Path in Binary Tree ",
+      description: [
+        "https://www.youtube.com/watch?v=_-QHfMDde90&list=PLgUwDviBIf0q8Hkd7bK2Bpryj2xVJk8Vk&index=28",
+      ],
+      solution: "Tree/printRootToNodePathInBT.html",
+      nt: "",
+    },
+    {
+      title: "Maximum Width of Binary Tree",
+      description: [
+        "https://leetcode.com/problems/maximum-width-of-binary-tree/description/",
+      ],
+      solution: "Tree/maximumWidthOfBinaryTree.html",
+      nt: "Maximum Width of Binary Tree means, on the same level max number of nodes could exists",
+    },
+    {
+      title: "Children Sum Property in Binary Tree ",
+      description: [
+        "https://www.naukri.com/code360/problems/childrensumproperty_790723?leftPanelTabValue=SUBMISSION",
+      ],
+      solution: "Tree/childrenSumPropertyBT.html",
+      nt: "",
+    },
+    {
+      title: "Print all the Nodes at a distance of K in Binary Tree",
+      description: [
+        "https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/description/",
+      ],
+      solution: "Tree/printAllNodesAtKDistanceInBT.html",
+      nt: "",
+    },
     // Add more question objects here
   ];
   {
