@@ -127,6 +127,46 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "Tree/printAllNodesAtKDistanceInBT.html",
       nt: "",
     },
+    {
+      title: "Minimum time taken to BURN the Binary Tree from a Node",
+      description: [
+        "https://www.geeksforgeeks.org/problems/burning-tree/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card",
+      ],
+      solution: "Tree/burningTree.html",
+      nt: "",
+    },
+    {
+      title: "Count total Nodes in a COMPLETE Binary Tree",
+      description: [
+        "https://www.geeksforgeeks.org/problems/burning-tree/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card",
+      ],
+      solution: "Tree/countTotalNodesInCBT.html",
+      nt: "",
+    },
+    {
+      title: "Construct a Binary Tree from Preorder and Inorder Traversal",
+      description: [
+        "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/",
+      ],
+      solution: "Tree/ConstructAUniqueBTFromPreOrderInorder.html",
+      nt: "",
+    },
+    {
+      title: "Construct a Binary Tree from Postorder and Inorder Traversal",
+      description: [
+        "https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/submissions/1331447809/	",
+      ],
+      solution: "Tree/ConstructAUniqueBTFromPostOrderInorder.html",
+      nt: "",
+    },
+    {
+      title: "Serialize and De-serialize Binary Tree",
+      description: [
+        "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
+      ],
+      solution: "Tree/serializeNdeserializeBT.html",
+      nt: "",
+    },
     // Add more question objects here
   ];
   {

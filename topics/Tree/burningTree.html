@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ffff</title>
+    <title>Minimum time taken to BURN the Binary Tree</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>fffff</h2>
+        <h2>Minimum time taken to BURN the Binary Tree</h2>
       </div>
     </div>
     <div class="container">
@@ -58,7 +58,96 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+/*
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
 
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+};
+*/
+class Solution {
+  public:
+    int minTimeToBurn(map&lt;Node*,Node*&gt; &m, Node* tar)
+    {
+        map&lt;Node*, int&gt; vis;
+        vis[tar] = 1;
+        
+        queue&lt;Node*&gt; q;
+        q.push(tar);
+        int ans = 0;
+        while(!q.empty())
+        {
+            int size = q.size();
+            int burn = 0;
+            for(int i = 0; i &lt; size; i++)
+            {
+                Node* tmp = q.front();
+                q.pop();
+                if(tmp-&gt;left && vis[tmp-&gt;left] != 1)
+                {
+                    vis[tmp-&gt;left] = 1;
+                    q.push(tmp-&gt;left);
+                    burn = 1;
+                }
+                if(tmp-&gt;right && vis[tmp-&gt;right] != 1)
+                {
+                    vis[tmp-&gt;right] = 1;
+                    q.push(tmp-&gt;right);
+                    burn = 1;
+                }
+                if(m[tmp] && vis[m[tmp]] != 1)
+                {
+                    vis[m[tmp]] = 1;
+                    q.push(m[tmp]);
+                    burn = 1;
+                }
+            }
+            if(burn)
+                ans++;
+        }
+        return ans;
+    }
+    
+    Node* mapParentNodes(Node* root, int target, map&lt;Node*, Node*&gt; &m)
+    {
+        queue&lt;Node*&gt; q;
+        q.push(root);
+        Node* ret = nullptr;
+        while(!q.empty())
+        {
+            Node* tmp = q.front();
+            q.pop();
+            
+            if(tmp-&gt;data == target)
+                ret = tmp;
+            
+            if(tmp-&gt;left)
+            {
+                m[tmp-&gt;left] = tmp;
+                q.push(tmp-&gt;left);
+            }
+            if(tmp-&gt;right)
+            {
+                m[tmp-&gt;right] = tmp;
+                q.push(tmp-&gt;right);
+            }
+        }
+        return ret;
+    }
+    int minTime(Node* root, int target) 
+    {
+        // Your code goes here
+        map&lt;Node*, Node*&gt; m;
+        Node* tar = mapParentNodes(root, target, m);
+        
+        return minTimeToBurn(m, tar);
+    }
+};
         </code></pre>
         <!-- <img
           src="images/"

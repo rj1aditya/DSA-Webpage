@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ffff</title>
+    <title>Serialize and De-serialize Binary Tree</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>fffff</h2>
+        <h2>Serialize and De-serialize Binary Tree</h2>
       </div>
     </div>
     <div class="container">
@@ -58,7 +58,101 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ #include&lt;sstream&gt;
+class Codec {
+public:
+    // Encodes a tree to a single string.
+    string serialize(TreeNode* root) {
+        if(!root)
+            return "";
+        string str;
 
+        queue&lt;TreeNode*&gt; q;
+        q.push(root);
+
+        while(!q.empty())
+        {
+            TreeNode* tmp = q.front();
+            q.pop();
+
+            if(tmp == nullptr)
+            {
+                str = str + "#,";
+            }
+            else
+                str = str + to_string(tmp-&gt;val) + ',';
+
+            if(tmp != nullptr)
+            {
+                q.push(tmp-&gt;left);
+                q.push(tmp-&gt;right);
+            }
+        }
+        cout &lt;&lt;str;
+        return str;
+    }
+
+    // Decodes your encoded data to tree.
+    TreeNode* deserialize(string data) {
+        if(data.size() == 0)
+            return nullptr;
+
+        stringstream ss(data);
+
+        string str;
+        getline(ss, str, ',');
+
+        TreeNode* root = new TreeNode(stoi(str));
+        queue&lt;TreeNode*&gt; q;
+        q.push(root);
+
+        while(!q.empty())
+        {
+            TreeNode* tmp = q.front();
+            q.pop();
+
+            getline(ss, str, ',');
+
+            if(str == "#")
+            {
+                tmp-&gt;left = nullptr;
+            }
+            else
+            {
+                TreeNode* left = new TreeNode(stoi(str));
+                tmp-&gt;left = left;
+                q.push(left);
+            }
+
+            getline(ss, str, ',');
+
+            if(str == "#")
+            {
+                tmp-&gt;right = nullptr;
+            }
+            else
+            {
+                TreeNode* right = new TreeNode(stoi(str));
+                tmp-&gt;right = right;
+                q.push(right);
+            }
+        }
+        return root;
+    }
+};
+
+// Your Codec object will be instantiated and called as such:
+// Codec ser, deser;
+// TreeNode* ans = deser.deserialize(ser.serialize(root));
         </code></pre>
         <!-- <img
           src="images/"
