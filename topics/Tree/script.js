@@ -167,6 +167,30 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "Tree/serializeNdeserializeBT.html",
       nt: "",
     },
+    {
+      title: "Morris Traversal | Preorder | Inorder",
+      description: [
+        "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
+      ],
+      solution: "Tree/morrisTraversal.html",
+      nt: "",
+    },
+    {
+      title: "Flatten a Binary Tree to Linked List | 3 Approaches",
+      description: [
+        "https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/",
+      ],
+      solution: "Tree/flattensBT.html",
+      nt: "",
+    },
+    {
+      title: "Ceil & Floor value of BST",
+      description: [
+        "https://www.geeksforgeeks.org/problems/implementing-ceil-in-bst/1 https://www.geeksforgeeks.org/problems/floor-in-bst/0",
+      ],
+      solution: "Tree/Ceil_FloorBST.html",
+      nt: "",
+    },
     // Add more question objects here
   ];
   {

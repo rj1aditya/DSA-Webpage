@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flatten a Binary Tree to Linked List | 3 Approaches</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #008000;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Flatten a Binary Tree to Linked List | 3 Approaches</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+    TreeNode* prev{nullptr};
+public:
+    //Morris Algo
+    void flatten(TreeNode* root) {
+        TreeNode* cur = root;
+
+        while(cur)
+        {
+            if(cur-&gt;left)
+            {
+                TreeNode* prev = cur-&gt;left;
+                while(prev-&gt;right)
+                    prev = prev-&gt;right;
+                prev-&gt;right = cur-&gt;right;
+                cur-&gt;right = cur-&gt;left;
+                cur-&gt;left = nullptr;
+            }
+            cur = cur-&gt;right;
+        }
+    }
+    /*
+    //using stack
+    void flatten(TreeNode* root) {
+        if(!root)
+            return;
+        stack&lt;TreeNode*&gt; s;
+        s.push(root);
+        while(!s.empty())
+        {
+            TreeNode *cur = s.top();
+            s.pop();
+
+            if(cur-&gt;right)
+                s.push(cur-&gt;right);
+            if(cur-&gt;left)
+                s.push(cur-&gt;left);
+            
+            if(!s.empty())
+            {
+                cur-&gt;right = s.top();
+            }
+            cur-&gt;left = nullptr;
+        }
+    }*/
+
+    
+    /*
+    //Inorder Traversal
+    void flatten(TreeNode* root) {
+        if(!root)
+            return;
+
+        flatten(root-&gt;right);
+        flatten(root-&gt;left);
+
+        root-&gt;right = prev;
+        root-&gt;left = nullptr;
+        prev = root;
+    }*/
+};
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>
