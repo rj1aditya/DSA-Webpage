@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Insert a node in BST</title>
+    <title>Check if a tree is a BST or BT | Validate a BST</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Insert a node in BST</h2>
+        <h2>Check if a tree is a BST or BT | Validate a BST</h2>
       </div>
     </div>
     <div class="container">
@@ -58,7 +58,33 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+    bool helper(long low, long high, TreeNode* root)
+    {
+        if(!root)
+            return true;
+        
+        if(root-&gt;val &gt;= high || root-&gt;val &lt;= low)
+            return false;
+        
+        return helper(low, root-&gt;val, root-&gt;left) && helper(root-&gt;val, high, root-&gt;right);
+    }
+public:
+    bool isValidBST(TreeNode* root) {
+        return helper(LONG_MIN, LONG_MAX, root);
+    }
+};
         </code></pre>
         <!-- <img
           src="images/"

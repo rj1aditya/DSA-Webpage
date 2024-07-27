@@ -191,6 +191,66 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "Tree/Ceil_FloorBST.html",
       nt: "",
     },
+    {
+      title: "Insert a node in BST",
+      description: [
+        "https://leetcode.com/problems/insert-into-a-binary-search-tree/description/",
+      ],
+      solution: "Tree/insertNodeInBST.html",
+      nt: "",
+    },
+    {
+      title: "Delete a Node in Binary Search Tree",
+      description: [
+        "https://leetcode.com/problems/delete-node-in-a-bst/description/",
+      ],
+      solution: "Tree/deleteANodeInBST.html",
+      nt: "",
+    },
+    {
+      title: "K-th Smallest/Largest Element in BST",
+      description: [
+        "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
+      ],
+      solution: "Tree/KthSmallestElementInBST.html",
+      nt: [
+        "We will solver this problem using Morris inorder traversal",
+        "Since Morris inorder traversal takes only BigO(N) TC, and BigO(1) SC",
+        "Inorder traversal with BST will always be sorted",
+        "Instead of vector we can take the counter",
+      ],
+    },
+    {
+      title: "Check if a tree is a BST or BT | Validate a BST",
+      description: [
+        "https://leetcode.com/problems/validate-binary-search-tree/",
+      ],
+      solution: "Tree/validateBST.html",
+      nt: "Algo: we will do inoder traversal, and we will pass the range for each node where that node should be fall in the range of that range.",
+    },
+    {
+      title: "LCA in Binary Search Tree",
+      description: [
+        "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/",
+      ],
+      solution: "Tree/LCAofBST.html",
+      nt: "",
+    },
+    {
+      title: "Lowest Common Ancestor in Binary Tree",
+      description: [
+        "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/",
+      ],
+      solution: "Tree/LCAofBT.html",
+      nt: "",
+    },
+    //Dummy
+    {
+      title: "",
+      description: [""],
+      solution: "Tree/.html",
+      nt: "",
+    },
     // Add more question objects here
   ];
   {

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Insert a node in BST</title>
+    <title>Lowest Common Ancestor in Binary Tree</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Insert a node in BST</h2>
+        <h2>Lowest Common Ancestor in Binary Tree</h2>
       </div>
     </div>
     <div class="container">
@@ -58,7 +58,32 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(root == nullptr || root == p || root == q)
+            return root;
 
+        TreeNode* left = lowestCommonAncestor(root-&gt;left, p, q);
+        TreeNode* right = lowestCommonAncestor(root-&gt;right, p ,q);
+
+        if(left && right)
+            return root;
+        else if(left == nullptr)
+            return right;
+        else
+            return left;
+    }
+};
         </code></pre>
         <!-- <img
           src="images/"

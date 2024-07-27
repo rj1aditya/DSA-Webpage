@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Insert a node in BST</title>
+    <title>Delete a Node in Binary Search Tree</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Insert a node in BST</h2>
+        <h2>Delete a Node in Binary Search Tree</h2>
       </div>
     </div>
     <div class="container">
@@ -58,7 +58,72 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        if(!root)
+            return root;
+        
+        if(root-&gt;val == key)
+        {
+            return helper(root);
+        }
 
+        TreeNode* cur = root;
+
+        while(cur)
+        {
+            if(cur-&gt;val &gt; key)
+            {
+                if(cur-&gt;left && cur-&gt;left-&gt;val == key)
+                {
+                    cur-&gt;left = helper(cur-&gt;left);
+                    break;
+                }
+                else
+                    cur = cur-&gt;left;
+            }
+            else
+            {
+                if(cur-&gt;right && cur-&gt;right-&gt;val == key)
+                {
+                    cur-&gt;right = helper(cur-&gt;right);
+                    break;
+                }
+                else
+                    cur = cur-&gt;right;
+            }
+        }
+        return root;
+    }
+
+    TreeNode* helper(TreeNode* cur)
+    {
+        if(cur-&gt;left == nullptr)
+            return cur-&gt;right;
+        else if(cur-&gt;right == nullptr)
+            return cur-&gt;left;
+
+        TreeNode* r = cur-&gt;left;
+
+        while(r-&gt;right)
+            r = r-&gt;right;
+        
+        r-&gt;right = cur-&gt;right;
+        return cur-&gt;left;
+    }
+};
         </code></pre>
         <!-- <img
           src="images/"

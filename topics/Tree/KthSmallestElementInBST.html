@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Insert a node in BST</title>
+    <title>K-th Smallest/Largest Element in BST</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Insert a node in BST</h2>
+        <h2>K-th Smallest/Largest Element in BST</h2>
       </div>
     </div>
     <div class="container">
@@ -58,7 +58,58 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    //Morris inorder traversal
+    //Since Morris inorder traversal takes only BigO(N) TC, and BigO(1) SC
+    //Inorder traversal with BST will always be sorted
+    //Instead of vector we can take the counter
+    int kthSmallest(TreeNode* root, int k) {
+        vector&lt;int&gt; in;
 
+        TreeNode* tmp = root;
+
+        while(tmp)
+        {
+            if(tmp-&gt;left == nullptr)
+            {
+                in.push_back(tmp-&gt;val);
+                tmp = tmp-&gt;right;
+            }
+            else
+            {
+                TreeNode* prev = tmp-&gt;left;
+
+                while(prev-&gt;right && prev-&gt;right != tmp)
+                    prev = prev-&gt;right;
+                
+                if(prev-&gt;right == nullptr)
+                {
+                    prev-&gt;right = tmp;
+                    tmp = tmp-&gt;left;
+                }
+                else
+                {
+                    prev-&gt;right = nullptr;
+                    in.push_back(tmp-&gt;val);
+                    tmp = tmp-&gt;right;
+                }
+            }
+        }
+        return in[k-1];
+    }
+};
         </code></pre>
         <!-- <img
           src="images/"

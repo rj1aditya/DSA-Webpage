@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Insert a node in BST</title>
+    <title>LCA in Binary Search Tree</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Insert a node in BST</h2>
+        <h2>LCA in Binary Search Tree</h2>
       </div>
     </div>
     <div class="container">
@@ -58,7 +58,35 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
 
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if (root == nullptr) {
+            return root;
+        }
+        int cur = root-&gt;val;
+        if ((cur &lt; p-&gt;val) && (cur &lt; q-&gt;val)) {
+            // Move right if both p and q are greater than the current node
+            return lowestCommonAncestor(root-&gt;right, p, q);
+        }
+        if ((cur &gt; p-&gt;val) && (cur &gt; q-&gt;val)) {
+            // Move left if both p and q are smaller than the current node
+            return lowestCommonAncestor(root-&gt;left, p, q);
+        }
+        // If the current node is between p and q, it is the LCA
+        return root;
+    }
+};
         </code></pre>
         <!-- <img
           src="images/"
