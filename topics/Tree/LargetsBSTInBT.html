@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>aaaaa</title>
+    <title>Largest BST in Binary Tree</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>aaaaa</h2>
+        <h2>Largest BST in Binary Tree</h2>
       </div>
     </div>
     <div class="container">
@@ -58,15 +58,68 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+#include &lt;climits&gt; // For INT_MIN and INT_MAX
+#include &lt;algorithm&gt; // For max and min functions
 
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+};
+
+class nodeValue {
+public:
+    int max_val;
+    int min_val;
+    int size;
+    
+    nodeValue() {
+        max_val = INT_MIN;
+        min_val = INT_MAX;
+        size = 0;
+    }
+
+    nodeValue(int x, int y, int s) {
+        max_val = x;
+        min_val = y;
+        size = s;
+    }
+};
+
+class Solution {
+    nodeValue findLargestBST(Node* root) {
+        if (!root)
+            return nodeValue();
+
+        auto leftSide = findLargestBST(root-&gt;left);
+        auto rightSide = findLargestBST(root-&gt;right);
+
+        if (leftSide.max_val &lt; root-&gt;data && rightSide.min_val &gt; root-&gt;data)
+            return nodeValue(std::max(root-&gt;data, rightSide.max_val),
+                             std::min(root-&gt;data, leftSide.min_val),
+                             leftSide.size + rightSide.size + 1);
+        else
+            return nodeValue(INT_MAX, INT_MIN, std::max(leftSide.size, rightSide.size));
+    }
+public:
+    // Return the size of the largest sub-tree which is also a BST
+    int largestBst(Node *root) {
+        return findLargestBST(root).size;
+    }
+};
         </code></pre>
-        <!-- <img
-          src="images/"
-          alt="Longest Common Subsequence Image"
+        <img
+          src="images/img6.png"
+          alt="Largest BST in Binary Tree"
           width="700"
           height="450"
           style="display: block; margin: 0 auto"
-        /> -->
+        />
       </div>
 
       <h2>Java Solution</h2>

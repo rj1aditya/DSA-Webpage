@@ -244,6 +244,52 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "Tree/LCAofBT.html",
       nt: "",
     },
+    {
+      title: "Construct a BST from a preorder traversal",
+      description: [
+        "https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/",
+      ],
+      solution: "Tree/constructABSTFromPreorder.html",
+      nt: "",
+    },
+    {
+      title: "Inorder Successor/Predecessor in BST",
+      description: [
+        "https://www.geeksforgeeks.org/problems/predecessor-and-successor/1",
+      ],
+      solution: "Tree/InorderSuccessorPredessorInBST.html",
+      nt: "",
+    },
+    {
+      title: "Binary Search Tree Iterator | BST | O(H) Space",
+      description: [
+        "https://leetcode.com/problems/binary-search-tree-iterator/",
+      ],
+      solution: "Tree/BSTIterator.html",
+      nt: "",
+    },
+    {
+      title: "Two Sum In BST | Check if there exists a pair with Sum K",
+      description: [
+        "https://leetcode.com/problems/two-sum-iv-input-is-a-bst/submissions/1336448045/",
+      ],
+      solution: "Tree/twoSumInBST.html",
+      nt: "",
+    },
+    {
+      title: "Recover BST | Correct BST with two nodes swapped",
+      description: [
+        "https://leetcode.com/problems/recover-binary-search-tree/",
+      ],
+      solution: "Tree/RecoverBST.html",
+      nt: "",
+    },
+    {
+      title: "Largest BST in Binary Tree",
+      description: ["https://www.geeksforgeeks.org/problems/largest-bst/1"],
+      solution: "Tree/LargetsBSTInBT.html",
+      nt: "",
+    },
     //Dummy
     {
       title: "",

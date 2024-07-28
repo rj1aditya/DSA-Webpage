@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>aaaaa</title>
+    <title>Inorder Successor/Predecessor in BST</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>aaaaa</h2>
+        <h2>Inorder Successor/Predecessor in BST</h2>
       </div>
     </div>
     <div class="container">
@@ -58,7 +58,75 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+struct Node
+{
+	int key;
+	struct Node *left;
+	struct Node *right;
+	
+	Node(int x){
+	    key = x;
+	    left = NULL;
+	    right = NULL;
+	}
+};
+*/
 
+// This function finds predecessor and successor of key in BST.
+// It sets pre and suc as predecessor and successor respectively
+class Solution
+{
+    public:
+    void findSuccessor(Node* root, Node*& s, int key)
+    {
+        if(!root)
+        {
+            s == nullptr;
+            return;
+        }
+        
+        Node* cur = root;
+        while(cur)
+        {
+            if(cur-&gt;key &lt;= key)
+            {
+                cur = cur-&gt;right;
+            }
+            else
+            {
+                s = cur;
+                cur = cur-&gt;left;
+            }
+        }
+    }
+    
+    void findPredecessor(Node* root, Node* &p, int key)
+    {
+        if(!root)
+        {
+            p = nullptr;
+            return;
+        }
+        Node* cur = root;
+        while(cur)
+        {
+            if(cur-&gt;key &gt;= key)
+                cur = cur-&gt;left;
+            else
+            {
+                p = cur;
+                cur = cur-&gt;right;
+            }
+        }
+    }
+    
+    void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
+    {
+        // Your code goes here
+        findSuccessor(root, suc, key);
+        findPredecessor(root, pre, key);
+    }
+};
         </code></pre>
         <!-- <img
           src="images/"

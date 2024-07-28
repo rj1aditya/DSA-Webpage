@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>aaaaa</title>
+    <title>Recover BST</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>aaaaa</h2>
+        <h2>Recover BST</h2>
       </div>
     </div>
     <div class="container">
@@ -58,7 +58,56 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+    TreeNode* prev;
+    TreeNode* first;
+    TreeNode* second;
+    TreeNode* middle;
+public:
+    Solution()
+    {
+        first = second = middle = nullptr;
+        prev = new TreeNode(INT_MIN);
+    }
+    void inorder(TreeNode* root)
+    {
+        if(!root)
+            return;
+        
+        inorder(root-&gt;left);
+        if(prev != nullptr && root-&gt;val &lt; prev-&gt;val)
+        {
+            if(first == nullptr)
+            {
+                first = prev;
+                middle = root;
+            }
+            else
+                second = root;
+        }
+        prev = root;
+        inorder(root-&gt;right);
+    }
 
+    void recoverTree(TreeNode* root) {
+        inorder(root);
+        if(first && second)
+            swap(first-&gt;val, second-&gt;val);
+        else if(first && middle)
+            swap(first-&gt;val, middle-&gt;val);
+    }
+};
         </code></pre>
         <!-- <img
           src="images/"
