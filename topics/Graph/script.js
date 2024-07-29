@@ -1,5 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
   const questions = [
+    {
+      title: "Breadth-First Search (BFS)",
+      description: [
+        "https://www.geeksforgeeks.org/problems/bfs-traversal-of-graph/1",
+      ],
+      solution: "Graph/bfsAlgo.html",
+      nt: "",
+    },
+    {
+      title: "Depth-First Search (DFS)",
+      description: [
+        "https://www.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1",
+      ],
+      solution: "Graph/DFS.html",
+      nt: "",
+    },
     //Dummy
     {
       title: "",
