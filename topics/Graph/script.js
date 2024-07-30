@@ -16,6 +16,44 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "Graph/DFS.html",
       nt: "",
     },
+    {
+      title: "Number of Provinces",
+      description: [
+        "https://leetcode.com/problems/number-of-provinces/description/",
+      ],
+      solution: "Graph/NumberOfProvinces.html",
+      nt: "",
+    },
+    {
+      title: "Number of Islands",
+      description: [
+        "https://leetcode.com/problems/number-of-islands/description/",
+      ],
+      solution: "Graph/NumberOfIsland.html",
+      nt: "",
+    },
+    {
+      title: "Flood Fill Algorithm",
+      description: ["https://leetcode.com/problems/flood-fill/description/"],
+      solution: "Graph/FloodFillAlgorithm.html",
+      nt: "",
+    },
+    {
+      title: "Rotten Oranges",
+      description: [
+        "https://leetcode.com/problems/rotting-oranges/description/",
+      ],
+      solution: "Graph/RottenOranges.html",
+      nt: "",
+    },
+    {
+      title: "Detect a Cycle in an Undirected Graph using BFS/DFS",
+      description: [
+        "https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1",
+      ],
+      solution: "Graph/detectCycleUsingBFS.html",
+      nt: "",
+    },
     //Dummy
     {
       title: "",
