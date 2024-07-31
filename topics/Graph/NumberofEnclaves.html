@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Number of Enclaves</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #85144b;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Number of Enclaves</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+class Solution {
+    public:
+        int numEnclaves(vector&lt;vector&lt;int&gt;&gt;& grid) {
+            
+            int n=grid.size();
+            int m=grid[0].size();
+    
+            vector&lt;vector&lt;int&gt;&gt; vis(n, vector&lt;int&gt;(m, 0));
+    
+            // row,col
+            queue&lt;pair&lt;int, int&gt;&gt; q;
+    
+            // traverse in all 4 boundaries
+            for(int i=0;i&lt;n;i++)
+            {
+                for(int j=0;j&lt;m;j++)
+                {
+                    if(i==0 || j==0 || i==n-1 || j==m-1)
+                    {
+                        if(grid[i][j]==1)
+                        {
+                            vis[i][j]=1;
+                            q.push({i, j});
+                        }
+                    }
+                }
+            }
+    
+            int delrow[]={-1, 0, +1, 0};
+            int delcol[]={0, +1, 0, -1};
+    
+            while(!q.empty())
+            {
+                int row=q.front().first;
+                int col=q.front().second;
+                q.pop();
+    
+                // 4 directions
+                for(int i=0;i&lt;4;i++)
+                {
+                    int nrow=row+delrow[i];
+                    int ncol=col+delcol[i];
+    
+                    if(nrow&gt;=0 && nrow&lt;n && ncol&gt;=0 && ncol&lt;m 
+                            && !vis[nrow][ncol] && grid[nrow][ncol]==1)
+                    {
+                        vis[nrow][ncol]=1;
+                        q.push({nrow, ncol});
+                    }        
+                }
+            }
+    
+            int cnt=0;
+            for(int i=0;i&lt;n;i++)
+            {
+                for(int j=0;j&lt;m;j++)
+                {
+                    if(!vis[i][j] && grid[i][j]==1)
+                    {
+                        cnt++;
+                    }
+                }
+            }
+    
+            return cnt;
+        }
+};
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

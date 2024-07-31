@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Surrounded Regions | Replace O's with X's</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #85144b;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Surrounded Regions | Replace O's with X's</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+class Solution
+{
+
+    vector&lt;int&gt; dr{-1, 0, 1, 0};
+    vector&lt;int&gt; dc{0, 1, 0, -1};
+    int n1;
+    int m1;
+    void dfs(int row, int col, vector&lt;vector&lt;char&gt;&gt; &mat, vector&lt;vector&lt;int&gt;&gt; &vis)
+    {
+        vis[row][col] = 1;
+        // ans[row][col] = '1';
+
+        for (int i = 0; i &lt; 4; i++)
+        {
+            int nr = row + dr[i];
+            int nc = col + dc[i];
+            if (nr &gt;= 0 && nr &lt; n1 && nc &gt;= 0 && nc &lt; m1 && vis[nr][nc] == 0 && mat[nr][nc] == 'O')
+            {
+                dfs(nr, nc, mat, vis);
+            }
+        }
+    }
+
+public:
+    vector&lt;vector&lt;char&gt;&gt; fill(int n, int m, vector&lt;vector&lt;char&gt;&gt; mat)
+    {
+        // Set class member variables
+        n1 = n;
+        m1 = m;
+
+        vector&lt;vector&lt;int&gt;&gt; vis(n, vector&lt;int&gt;(m, 0));
+
+        // Make sure take M here Check 0th and m-1th row boundary
+        for (int i = 0; i &lt; m; i++)
+        {
+            if (vis[0][i] == 0 && mat[0][i] == 'O')
+            {
+                dfs(0, i, mat, vis);
+            }
+
+            if (vis[n - 1][i] == 0 && mat[n - 1][i] == 'O')
+            {
+                dfs(n - 1, i, mat, vis);
+            }
+        }
+
+        // Make sure take N here Check 0th and n-1th col boundary
+        for (int i = 0; i &lt; n; i++)
+        {
+            if (vis[i][0] == 0 && mat[i][0] == 'O')
+            {
+                dfs(i, 0, mat, vis);
+            }
+
+            if (vis[i][m - 1] == 0 && mat[i][m - 1] == 'O')
+            {
+                dfs(i, m - 1, mat, vis);
+            }
+        }
+
+        for (int i = 0; i &lt; n; i++)
+        {
+            for (int j = 0; j &lt; m; j++)
+            {
+                if (vis[i][j] == 0 && mat[i][j] == 'O')
+                    mat[i][j] = 'X';
+            }
+        }
+
+        return mat;
+    }
+};
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

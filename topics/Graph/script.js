@@ -54,6 +54,56 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "Graph/detectCycleUsingBFS.html",
       nt: "",
     },
+    {
+      title: "Distance of nearest cell having 1 | 0/1 Matrix",
+      description: [
+        "https://www.geeksforgeeks.org/problems/distance-of-nearest-cell-having-1-1587115620/1",
+      ],
+      solution: "Graph/DistanceOfNearestCell.html",
+      nt: "",
+    },
+    {
+      title: "Surrounded Regions | Replace O's with X's",
+      description: [
+        "https://www.geeksforgeeks.org/problems/replace-os-with-xs0052/1",
+      ],
+      solution: "Graph/SurroundedRegions.html",
+      nt: "",
+    },
+    {
+      title: "Number of Enclaves",
+      description: [
+        "https://leetcode.com/problems/number-of-enclaves/description/",
+      ],
+      solution: "Graph/NumberofEnclaves.html",
+      nt: "",
+    },
+    {
+      title: "Number of Distinct Islands",
+      description: [
+        "https://www.geeksforgeeks.org/problems/number-of-distinct-islands/0",
+      ],
+      solution: "Graph/NumberofDistinctIslands.html",
+      nt: "",
+    },
+    {
+      title: "Bipartite Graph",
+      description: [""],
+      solution: "Graph/BipartiteGraph.html",
+      nt: "",
+    },
+    {
+      title: "",
+      description: [""],
+      solution: "Graph/.html",
+      nt: "",
+    },
+    {
+      title: "",
+      description: [""],
+      solution: "Graph/.html",
+      nt: "",
+    },
     //Dummy
     {
       title: "",
