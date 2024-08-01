@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detect a Cycle in Directed Graph using BFS/Kanh's Algo</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #85144b;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Detect a Cycle in Directed Graph using BFS/Kanh's Algo</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+// C++ solution code goes here
+class Solution
+{
+	public:
+	//Function to return list containing vertices in Topological order. 
+	bool isCyclic(int V, vector&lt;int&gt; adj[]) 
+	{
+	    // code here
+	    //Kanh's algo
+	    
+	    int indegree[V] = {0};
+	    
+	    //Figuring out the indegree of the nodes
+	    for(int i = 0; i &lt; V; i++)
+	    {
+	        for(auto x: adj[i])
+	            indegree[x]++;
+	    }
+	    
+	    queue&lt;int&gt; q;
+	    
+	    //Take those nodes in the queue first
+	    //Whose indegree is 0
+	    for(int i = 0; i &lt; V; i++)
+	    {
+	        if(indegree[i] == 0)
+	            q.push(i);
+	    }
+	    
+	    vector&lt;int&gt; topo;
+	    while(!q.empty())
+	    {
+	        auto tmp = q.front();
+	        topo.push_back(tmp);
+	        q.pop();
+	        
+	        for(auto n: adj[tmp])
+	        {
+	            //start removing the edge and reducing the degree
+	            indegree[n]--;
+	            //now after reducing the indegree, 
+	            //if indegree become 0 then insert it in the queue
+	            if(indegree[n] == 0)
+	                q.push(n);
+	        }
+	    }
+	    //Note topo.size() != V means there is a cycle
+	    return topo.size() != V;
+	}
+};
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

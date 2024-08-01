@@ -88,21 +88,52 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     {
       title: "Bipartite Graph",
-      description: [""],
+      description: [
+        "https://leetcode.com/problems/is-graph-bipartite/description/",
+      ],
       solution: "Graph/BipartiteGraph.html",
       nt: "",
     },
     {
-      title: "",
-      description: [""],
-      solution: "Graph/.html",
+      title: "Detect cycle in a directed graph using DFS",
+      description: [
+        "https://www.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1",
+      ],
+      solution: "Graph/detectCycleInDirectedGraph.html",
       nt: "",
     },
     {
-      title: "",
+      title: "Find Eventual Safe States",
+      description: [
+        "https://www.geeksforgeeks.org/problems/eventual-safe-states/0",
+      ],
+      solution: "Graph/FindEventualSafeStates.html",
+      nt: [
+        "In this problem, focus which are terminal node, and nodes which are only ending up on the terminal node are safe node, if node are ending up on terminal node and on itself node as well then that is not the safe node.",
+        "Terminal node: Node which has no outdegree or 0 outdegree",
+      ],
+    },
+    {
+      title: "Topological Sort Algorithm",
+      description: [
+        "https://www.geeksforgeeks.org/problems/topological-sort/1",
+      ],
+      solution: "Graph/TopologicalSortAlgo.html",
+      nt: "In Topological Sort Algo, We use Stack DS, So when we visit the node using DFS alog, and when all the nodes attacked to that node is over then we insert the node in the stack.",
+    },
+    {
+      title: "Kahn's Algorithm | Topological Sort Algorithm",
+      description: [
+        "https://www.geeksforgeeks.org/problems/topological-sort/1",
+      ],
+      solution: "Graph/kahnsAlgoForTopoAlgo.html",
+      nt: "In this we use BFS, and indegree graph. So first in the indegree graph we fill it by the indegree of the node. so which ever node has least indegree we insert those node first in the queue.",
+    },
+    {
+      title: "Detect a Cycle in Directed Graph using BFS/Kanh's Algo",
       description: [""],
-      solution: "Graph/.html",
-      nt: "",
+      solution: "Graph/detectCycleInDirectedGraphBFS.html",
+      nt: "Detect a Cycle in Directed Graph using BFS, needs to build this using kanh's algo",
     },
     //Dummy
     {
