@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Find Eventual Safe States</title>
+    <title>Shortest Path in Directed Acyclic Graph</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Find Eventual Safe States</h2>
+        <h2>Shortest Path in Directed Acyclic Graph</h2>
       </div>
     </div>
     <div class="container">
@@ -59,93 +59,62 @@
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
 class Solution {
-    bool detectLoopDFS(int N, int parent, vector&lt;int&gt; adj[], int vis[], int pathVisited[], int check[])
-        {
-            vis[N] = 1;
-            pathVisited[N] = 1;
-            check[N] = 0;
-            for(auto adjacent: adj[N])
-            {
-                if(vis[adjacent] == 0)
-                {
-                    if(detectLoopDFS(adjacent, N, adj, vis, pathVisited, check) == true)
-                        return true;
-                }
-                else if(pathVisited[adjacent])
-                    return true;
+    void dfs(int node, int vis[], vector&lt;pair&lt;int,int&gt;&gt; adj[], stack&lt;int&gt; &stk) {
+        vis[node] = 1;
+        for(auto it: adj[node]) {
+            if(vis[it.first] == 0) {
+                dfs(it.first, vis, adj, stk);
             }
-            pathVisited[N] = 0;
-            check[N] = 1;
-            return false;
         }
-      public:
-        vector&lt;int&gt; eventualSafeNodes(int V, vector&lt;int&gt; adj[]) {
-            // code here
-            int vis[V] = {0};
-            int pathVisited[V] = {0};
-            int check[V] = {0};
-            for(int i = 0; i &lt; V; i++)
-            {
-                if(vis[i] == 0)
-                {
-                    detectLoopDFS(i, -1, adj, vis, pathVisited, check);
-                }
-            }
-            
-            vector&lt;int&gt; safe_node;
-            
-            for(int i = 0; i &lt; V; i++)
-            {
-                if(check[i] == 1)
-                    safe_node.push_back(i);
-            }
-        
-            return safe_node;
-        }
-    };
-
-//Topological BFS Algorithm
-//Topological sort algo using BFS
-class Solution1 {
+        stk.push(node);
+    }
+    
   public:
-    vector&lt;int&gt; eventualSafeNodes(int V, vector&lt;int&gt; adj[]) {
-        // code here
-        vector&lt;int&gt; adjrev[V];
-        int indegree[V] = {0};
-        queue&lt;int&gt; q;
+    vector&lt;int&gt; shortestPath(int N, int M, vector&lt;vector&lt;int&gt;&gt;& edges) {
+        vector&lt;pair&lt;int,int&gt;&gt; adj[N];
+        stack&lt;int&gt; stk;
+        int vis[N] = {0};
         
-        for(int i = 0; i &lt; V; i++)
-        {
-            for( auto it: adj[i])
-            {
-                adjrev[it].push_back(i);
-                indegree[i]++;
+        // Build adjacency list
+        for(auto it: edges) {
+            adj[it[0]].push_back({it[1], it[2]});
+        }
+        
+        // Perform DFS to get topological sort
+        for(int i = 0; i &lt; N; i++) {
+            if(vis[i] == 0) {
+                dfs(i, vis, adj, stk);
             }
         }
         
-        for(int i = 0; i &lt; V; i++)
-        {
-            if(indegree[i] == 0)
-                q.push(i);
-        }
+        // Initialize distances
+        vector&lt;int&gt; dist(N, INT_MAX);
+        dist[0] = 0;  // Assuming 0 is the source node
         
-        vector&lt;int&gt; safeNodes;
-        while(!q.empty())
-        {
-            int node = q.front();
-            q.pop();
-            safeNodes.push_back(node);
+        // Process nodes in topological order
+        while(!stk.empty()) {
+            int node = stk.top();
+            stk.pop();
             
-            for(auto it: adjrev[node])
-            {
-                indegree[it]--;
-                if(indegree[it] == 0)
-                    q.push(it);
+            if (dist[node] != INT_MAX) {
+                for(auto it: adj[node]) {
+                    int v = it.first;
+                    int w = it.second;
+                    if(dist[node] + w &lt; dist[v]) {
+                        dist[v] = dist[node] + w;
+                    }
+                }
             }
         }
         
-        sort(safeNodes.begin(), safeNodes.end());
-        return safeNodes;
+        // Convert distances for non-reachable nodes to -1
+        for(int i = 0; i &lt; N; i++) {
+            if(dist[i] == INT_MAX) {
+                dist[i] = -1;
+            }
+        }
+        
+        return dist;
     }
 };
         </code></pre>

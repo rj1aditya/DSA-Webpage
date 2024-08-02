@@ -135,6 +135,48 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "Graph/detectCycleInDirectedGraphBFS.html",
       nt: "Detect a Cycle in Directed Graph using BFS, needs to build this using kanh's algo",
     },
+    {
+      title: "Course Schedule I| Prerequisite Tasks | Topological Sort",
+      description: ["https://leetcode.com/problems/course-schedule/"],
+      solution: "Graph/CourseSchedule1.html",
+      nt: "",
+    },
+    {
+      title: "Course Schedule II | Prerequisite Tasks | Topological Sort",
+      description: ["https://www.geeksforgeeks.org/problems/course-schedule/1"],
+      solution: "Graph/CourseSchedule2.html",
+      nt: "",
+    },
+    {
+      title: "Alien Dictonary",
+      description: [
+        "https://www.geeksforgeeks.org/problems/alien-dictionary/1",
+      ],
+      solution: "Graph/AlienDictonary.html",
+      nt: "",
+    },
+    {
+      title: "Shortest Path in Directed Acyclic Graph ",
+      description: [
+        "https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph/0",
+      ],
+      solution: "Graph/shortestPathInDirectedAcyclicGraph.html",
+      nt: "",
+    },
+    {
+      title: "Shortest Path in Undirected Graph with Unit Weights",
+      description: [
+        "https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph-having-unit-distance/1",
+      ],
+      solution: "Graph/ShortestPathInUnDirectedGraphWithUnitWeight.html",
+      nt: "",
+    },
+    {
+      title: "",
+      description: [""],
+      solution: "Graph/.html",
+      nt: "",
+    },
     //Dummy
     {
       title: "",

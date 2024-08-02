@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Find Eventual Safe States</title>
+    <title>Alien Dictionary</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Find Eventual Safe States</h2>
+        <h2>Alien Dictionary</h2>
       </div>
     </div>
     <div class="container">
@@ -58,94 +58,73 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-class Solution {
-    bool detectLoopDFS(int N, int parent, vector&lt;int&gt; adj[], int vis[], int pathVisited[], int check[])
-        {
-            vis[N] = 1;
-            pathVisited[N] = 1;
-            check[N] = 0;
-            for(auto adjacent: adj[N])
-            {
-                if(vis[adjacent] == 0)
-                {
-                    if(detectLoopDFS(adjacent, N, adj, vis, pathVisited, check) == true)
-                        return true;
-                }
-                else if(pathVisited[adjacent])
-                    return true;
-            }
-            pathVisited[N] = 0;
-            check[N] = 1;
-            return false;
-        }
-      public:
-        vector&lt;int&gt; eventualSafeNodes(int V, vector&lt;int&gt; adj[]) {
-            // code here
-            int vis[V] = {0};
-            int pathVisited[V] = {0};
-            int check[V] = {0};
-            for(int i = 0; i &lt; V; i++)
-            {
-                if(vis[i] == 0)
-                {
-                    detectLoopDFS(i, -1, adj, vis, pathVisited, check);
-                }
-            }
-            
-            vector&lt;int&gt; safe_node;
-            
-            for(int i = 0; i &lt; V; i++)
-            {
-                if(check[i] == 1)
-                    safe_node.push_back(i);
-            }
+class Solution{
+    public:
+    string findOrder(string dict[], int N, int K) {
+        //code here
+        vector&lt;int&gt; adj[K];
         
-            return safe_node;
+        for(int i = 0; i &lt; N-1; i++)
+        {
+            int len1 = dict[i].length();
+            int len2 = dict[i+1].length();
+            
+            int x = 0;
+            int y = 0;
+            
+            while(x &lt; len1 && y &lt; len2)
+            {
+                if(dict[i][x] != dict[i+1][y])
+                {
+                    adj[dict[i][x] - 'a'].push_back(dict[i+1][y]-'a');
+                    break;
+                }
+                x++;
+                y++;
+            }
         }
-    };
-
-//Topological BFS Algorithm
-//Topological sort algo using BFS
-class Solution1 {
-  public:
-    vector&lt;int&gt; eventualSafeNodes(int V, vector&lt;int&gt; adj[]) {
-        // code here
-        vector&lt;int&gt; adjrev[V];
-        int indegree[V] = {0};
+        
+        int indegree[K] = {0};
+        
         queue&lt;int&gt; q;
         
-        for(int i = 0; i &lt; V; i++)
+        for(int i = 0; i &lt; K; i++)
         {
-            for( auto it: adj[i])
+            for(auto it: adj[i])
             {
-                adjrev[it].push_back(i);
-                indegree[i]++;
+                indegree[it]++;
             }
         }
         
-        for(int i = 0; i &lt; V; i++)
+        for(int i = 0; i &lt; K; i++)
         {
             if(indegree[i] == 0)
                 q.push(i);
         }
         
-        vector&lt;int&gt; safeNodes;
+        vector&lt;int&gt; safeNode;
         while(!q.empty())
         {
-            int node = q.front();
+            auto tmp = q.front();
             q.pop();
-            safeNodes.push_back(node);
+            safeNode.push_back(tmp);
             
-            for(auto it: adjrev[node])
+            for(auto it: adj[tmp])
             {
                 indegree[it]--;
                 if(indegree[it] == 0)
+                {
                     q.push(it);
+                }
             }
         }
         
-        sort(safeNodes.begin(), safeNodes.end());
-        return safeNodes;
+        string ans;
+        for(int i = 0; i &lt; safeNode.size(); i++)
+            ans = ans + char(safeNode[i] + 'a');
+        //cout &lt;&lt; ans&lt;&lt;endl;
+        return ans;
+        
     }
 };
         </code></pre>
