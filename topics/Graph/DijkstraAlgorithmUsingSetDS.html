@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dijkstra's Algorithm using set DS</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #85144b;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Dijkstra's Algorithm using set DS</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+#include &lt;bits/stdc++.h&gt; 
+vector&lt;int&gt; dijkstra(vector&lt;vector&lt;int&gt;&gt; &vec, int vertices, int edges, 
+int source) {
+    // Write your code here.
+
+    vector&lt;pair&lt;int, int&gt;&gt; adj[vertices];
+    for(int i = 0; i &lt; edges; i++)
+    {
+        int u = vec[i][0];
+        int v = vec[i][1];
+        int wt = vec[i][2];
+
+        adj[u].push_back({v, wt});
+        adj[v].push_back({u, wt});
+    }
+
+    set&lt;pair&lt;int,int&gt;&gt; st;
+    st.insert({0, source});
+
+    vector&lt;int&gt; path(vertices, INT_MAX);
+    path[source] = 0;
+
+    while(!st.empty())
+    {
+        auto it = st.begin();
+        int node = it-&gt;second;
+        int dis = it-&gt;first;
+        st.erase(it);
+
+        for(auto adjacentNode: adj[node])
+        {
+            int adjN = adjacentNode.first;
+            int adjNWt = adjacentNode.second;
+
+            if(dis+adjNWt &lt; path[adjN])
+            {
+                if(path[adjN] != INT_MAX)
+                {
+                    st.erase({path[adjN], adjN});
+                }
+                path[adjN] = dis+adjNWt;
+                st.insert({path[adjN], adjN});
+            }
+        }
+    }
+    return path;
+}
+
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

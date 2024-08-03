@@ -172,6 +172,56 @@ document.addEventListener("DOMContentLoaded", function () {
       nt: "",
     },
     {
+      title: "Word Ladder - I | Shortest Path",
+      description: ["https://www.geeksforgeeks.org/problems/word-ladder/1"],
+      solution: "Graph/WordLadderI.html",
+      nt: "",
+    },
+    {
+      title: "Word Ladder - II | Shortest Path",
+      description: ["https://www.geeksforgeeks.org/problems/word-ladder-ii/1"],
+      solution: "Graph/WordLadderII.html",
+      nt: "",
+    },
+    {
+      title: "Dijkstra's Algorithm",
+      description: [
+        "https://www.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1",
+        "https://www.naukri.com/code360/problems/dijkstra-s-shortest-path_920469?count=25&page=1&search=&sort_entity=order&sort_order=ASC&leftPanelTabValue=PROBLEM",
+      ],
+      solution: "Graph/DijkstraAlgorithm.html",
+      nt: "",
+    },
+    {
+      title: "Dijkstra's Algorithm using set DS",
+      description: [
+        "https://www.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1",
+        "https://www.naukri.com/code360/problems/dijkstra-s-shortest-path_920469?count=25&page=1&search=&sort_entity=order&sort_order=ASC&leftPanelTabValue=PROBLEM",
+      ],
+      solution: "Graph/DijkstraAlgorithmUsingSetDS.html",
+      nt: "set ds is already sorted, to pick the top node we can fetch the first element from the set DS, using st.begin() -- it will give us the iterator pointing to the begining of the set",
+    },
+    {
+      title: "Print Shortest Path ",
+      description: [
+        "https://www.geeksforgeeks.org/problems/shortest-path-in-weighted-undirected-graph/1",
+      ],
+      solution: "Graph/PrintShortestPath.html",
+      nt: "",
+    },
+    {
+      title: "",
+      description: [""],
+      solution: "Graph/.html",
+      nt: "",
+    },
+    {
+      title: "",
+      description: [""],
+      solution: "Graph/.html",
+      nt: "",
+    },
+    {
       title: "",
       description: [""],
       solution: "Graph/.html",

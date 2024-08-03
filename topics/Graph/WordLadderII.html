@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Ladder - II</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #85144b;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Word Ladder - II</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+class Solution {
+    public:
+        vector&lt;vector&lt;string&gt;&gt; findSequences(string beginWord, string endWord, vector&lt;string&gt;& wordList) {
+            // code here
+            
+            //take wordList into the set DS
+            unordered_set&lt;string&gt; st(wordList.begin(), wordList.end());
+            
+            //Create a Queue of string vector
+            queue&lt;vector&lt;string&gt;&gt; q;
+            
+            //Take the beginWord into the queue
+            q.push({beginWord});
+            
+            //Ans will be contain
+            vector&lt;vector&lt;string&gt;&gt; ans;
+            
+            //Keep track those word which is used in the queue, So that later we can 
+            //Remove that word from the set once the level is over
+            int level = 0;
+            vector&lt;string&gt; newWord;
+            
+            newWord.push_back(beginWord);
+            
+            while(!q.empty())
+            {
+                //q.front will return the vector of string
+                vector&lt;string&gt; lis = q.front();
+                q.pop();
+                
+                
+                
+                //Check if level is over, so we can remove words from the set
+                if(lis.size() &gt; level)
+                {
+                    level++;
+                    for(auto it: newWord)
+                        st.erase(it);
+                    
+                    newWord.clear();
+                }
+                
+                //take the last word only fron the stack
+                string word = lis.back();
+                
+                //Take the ans if last word in list matches the endWord
+                if(word == endWord)
+                {
+                    if(ans.size() == 0)
+                        ans.push_back(lis);
+                    else
+                    {
+                        int size = ans[0].size();
+                        if(lis.size() == size)
+                            ans.push_back(lis);
+                    }
+                }
+                
+                for(int i = 0; i &lt; word.size(); i++)
+                {
+                    string orignalWord = word;
+                    for(char c='a'; c &lt;= 'z'; c++)
+                    {
+                        word[i] = c;
+                        if(st.find(word) != st.end())
+                        {
+                            lis.push_back(word);
+                            q.push(lis);
+                            newWord.push_back(word);
+                            lis.pop_back();
+                        }
+                    }
+                    word = orignalWord;
+                }
+            }
+            
+            return ans;
+            
+        }
+    };
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>
