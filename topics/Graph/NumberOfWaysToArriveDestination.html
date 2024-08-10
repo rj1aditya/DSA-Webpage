@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Number of Ways to Arrive at Destination</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #85144b;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Number of Ways to Arrive at Destination</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+class Solution {
+    
+    public:
+      int countPaths(int n, vector&lt;vector&lt;int&gt;&gt;& roads) {
+          // code here
+          int mod=(int)(1e9+7);
+          vector&lt;pair&lt;long long,int&gt;&gt; adj[n];
+          for(auto it: roads)
+          {
+              adj[it[0]].push_back({it[1], it[2]});
+              adj[it[1]].push_back({it[0], it[2]});
+          }
+          
+          priority_queue&lt;pair&lt;long long,int&gt;, vector&lt;pair&lt;long long,int&gt;&gt;, greater&lt;pair&lt;long long,int&gt;&gt;&gt; pq;
+          pq.push({0, 0});
+  
+          vector&lt;long long&gt; dist(n, 1e18);
+          vector&lt;int&gt; ways(n, 0);
+          
+          dist[0] = 0;
+          ways[0] = 1;
+          
+          while(!pq.empty())
+          {
+              auto X = pq.top();
+              pq.pop();
+              int node = X.second;
+              long long tm = X.first;
+              
+              for(auto it: adj[node])
+              {
+                  int adjN = it.first;
+                  long long adjNTime = it.second;
+                  
+                  if(adjNTime + tm &lt; dist[adjN])
+                  {
+                      dist[adjN] = adjNTime+tm;
+                      pq.push({dist[adjN],adjN});
+                      ways[adjN] = ways[node]%mod;
+                  }
+                  else if(adjNTime+tm == dist[adjN])
+                  {
+                      ways[adjN] = (ways[adjN] + ways[node])%mod;
+                  }
+              }
+              
+          }
+          return ways[n-1]%mod;
+      }
+  };
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

@@ -210,9 +210,45 @@ document.addEventListener("DOMContentLoaded", function () {
       nt: "",
     },
     {
-      title: "",
-      description: [""],
-      solution: "Graph/.html",
+      title: "Shortest Distance in a Binary Maze",
+      description: ["https://bit.ly/3QLxjET"],
+      solution: "Graph/shortestPathInBinaryMaze.html",
+      nt: "",
+    },
+    {
+      title: "Path With Minimum Effort",
+      description: ["https://bit.ly/3dMBvq6"],
+      solution: "Graph/pathWithMinimumEfforts.html",
+      nt: "",
+    },
+    {
+      title: "Cheapest Flights Within K Stops",
+      description: ["https://bit.ly/3UIneer"],
+      solution: "Graph/CheapestFlightsWithinKStops.html",
+      nt: "",
+    },
+    {
+      title: "Minimum Multiplications to Reach End",
+      description: ["https://bit.ly/3AugzNb"],
+      solution: "Graph/MinimumMultiplicationstoReachEnd.html",
+      nt: "",
+    },
+    {
+      title: "Number of Ways to Arrive at Destination",
+      description: ["https://bit.ly/3Aro6Mq"],
+      solution: "Graph/NumberOfWaysToArriveDestination.html",
+      nt: "",
+    },
+    {
+      title: "Bellman Ford Algorithm",
+      description: ["https://bit.ly/3K7emug"],
+      solution: "Graph/BellmanFordAlgo.html",
+      nt: "this algo is used to find the shortest path which is similar to dijikstra algo, but this algo works in case of -ve edge, while dijikstra doesn't work with -ve edge",
+    },
+    {
+      title: "Floyd Warshall Algorithm",
+      description: ["https://bit.ly/3JZlk4a"],
+      solution: "Graph/floydWarshallAlgo.html",
       nt: "",
     },
     {
