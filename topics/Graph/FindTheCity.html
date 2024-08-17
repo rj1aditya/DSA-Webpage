@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Floyd Warshall Algorithm</title>
+    <title>
+      Find the City With the Smallest Number of Neighbours at a Threshold
+      Distance
+    </title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +53,10 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Floyd Warshall Algorithm</h2>
+        <h2>
+          Find the City With the Smallest Number of Neighbours at a Threshold
+          Distance
+        </h2>
       </div>
     </div>
     <div class="container">
@@ -59,78 +65,62 @@
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
 class Solution {
-  public:
-	void shortest_distance(vector&lt;vector&lt;int&gt;&gt;&matrix){
-	    // Code here
-	    int n = matrix.size();
-	    
-	    for(int i = 0; i &lt; n; i++)
-	    {
-	        for(int j = 0; j &lt; n; j++)
-	        {
-	            if(matrix[i][j] == -1)
-	                matrix[i][j] = 1e9;
-	            else if(i==j)
-	                matrix[i][j] = 0;
-	        }
-	    }
-	    
-	    for(int k = 0; k &lt; n; k++)
-	    {
-	        for(int i = 0; i &lt; n; i++)
-	        {
-	            for(int j = 0; j &lt; n; j++)
-	            {
-	                matrix[i][j] = min(matrix[i][j], matrix[i][k]+matrix[k][j]);
-	            }
-	        }
-	    }
-	    
-	    //How to find if negative cycle is there
-	    for(int i = 0; i &lt; n; i++)
-	    {
-	        if(matrix[i][i] &lt; 0)
-	            cout &lt;&lt;"there is a negative cycle\n";
-	    }
-	    for(int i = 0; i &lt; n; i++)
-	    {
-	        for(int j = 0; j &lt; n; j++)
-	        {
-	            if(matrix[i][j] == 1e9)
-	                matrix[i][j] = -1;
-	        }
-	    }
-	}
-};
+    public:
+      int findCity(int n, int m, vector&lt;vector&lt;int&gt;&gt;& edges, int distanceThreshold) {
+          // Your code here
+          vector&lt;vector&lt;int&gt;&gt; dist(n, vector&lt;int&gt;(n, 1e9));
+          
+          for(auto it: edges)
+          {
+              dist[it[0]][it[1]] = it[2];
+              dist[it[1]][it[0]] = it[2];
+          }
+          
+          for(int i = 0; i &lt; n; i++)
+              dist[i][i] = 0;
+          
+          for(int k = 0; k &lt; n; k++)
+          {
+              for(int i = 0; i &lt; n; i++)
+              {
+                  for(int j = 0; j &lt; n; j++)
+                  {
+                      if((dist[i][k] == 1e9) || (dist[k][j] == 1e9))
+                          continue;
+                      dist[i][j] = min(dist[i][j], dist[i][k]+dist[k][j]);
+                  }
+              }
+          }
+          
+          int cityCnt = n;
+          int cityNo = -1;
+          
+          for(int city = 0; city &lt; n; city++)
+          {
+              int cnt = 0;
+              for(int adjCity = 0; adjCity &lt; n; adjCity++)
+              {
+                  if(dist[city][adjCity] &lt;= distanceThreshold )
+                      cnt++;
+              }
+              if(cnt &lt;= cityCnt)
+              {
+                  cityCnt = cnt;
+                  cityNo = city;
+              }
+          }
+          return cityNo;        
+          
+      }
+  };
         </code></pre>
-        <img
-          src="images/img3.png"
-          alt="Floyd Warshall Algorithm"
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
           width="700"
           height="450"
           style="display: block; margin: 0 auto"
-        />
-        <img
-          src="images/img4.png"
-          alt="Floyd Warshall Algorithm"
-          width="700"
-          height="450"
-          style="display: block; margin: 0 auto"
-        />
-        <img
-          src="images/img5.png"
-          alt="Floyd Warshall Algorithm"
-          width="700"
-          height="450"
-          style="display: block; margin: 0 auto"
-        />
-        <img
-          src="images/img6.png"
-          alt="Floyd Warshall Algorithm"
-          width="700"
-          height="450"
-          style="display: block; margin: 0 auto"
-        />
+        /> -->
       </div>
 
       <h2>Java Solution</h2>

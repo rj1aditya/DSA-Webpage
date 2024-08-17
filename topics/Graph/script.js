@@ -249,18 +249,32 @@ document.addEventListener("DOMContentLoaded", function () {
       title: "Floyd Warshall Algorithm",
       description: ["https://bit.ly/3JZlk4a"],
       solution: "Graph/floydWarshallAlgo.html",
+      nt: [
+        "In Floyd Warshall Algo, we find the shortest path from each nodes to each nodes. So let say in a graph it has 4 nodes: 0, 1, 2, 3.",
+        "So algo is: from 0 node we try to figure out path to 0->1, 0->2, 0->3[here all path figure out via 0, means 0->1 via 0, 0->2 via 0, 0->3 via 0 then 0->1 via 1, 0->2 via 1, 0->3 via 1], then will find path from other nodes e.g. 2->0, 2->1, 2->3. [here 2->0, 2->1, 2->3 via 0| 2->0, 2->1, 2->3 via 1| 2->0, 2->1, 2->3 via 2| 2->0, 2->1, 2->3 via 3",
+        "Check the image in the Solution",
+      ],
+    },
+    {
+      title:
+        "Find the City With the Smallest Number of Neighbours at a Threshold Distance",
+      description: ["https://bit.ly/3PoGo5v"],
+      solution: "Graph/FindTheCity.html",
       nt: "",
     },
     {
-      title: "",
-      description: [""],
-      solution: "Graph/.html",
-      nt: "",
+      title: "Prism Algo to find Minimum Spanning Tree",
+      description: ["https://bit.ly/3ABwwRP"],
+      solution: "Graph/PrismAlgoToFindMST.html",
+      nt: [
+        "Spanning tree is where it has N node, N-1 Edges, and each nodes is reachable from each nodes.",
+        "Minimum Spanning Tree: A **Minimum Spanning Tree (MST)** is a subset of the edges in a connected, undirected graph that connects all the vertices together without any cycles and with the minimum possible total edge weight. In simpler terms, it's a way of connecting all the points (or nodes) in a network with the least total distance or cost, without forming any loops.",
+      ],
     },
     {
-      title: "",
+      title: "Disjoint Set | Union by Rank | Union by Size | Path Compression",
       description: [""],
-      solution: "Graph/.html",
+      solution: "Graph/DisjointSet.html",
       nt: "",
     },
     //Dummy

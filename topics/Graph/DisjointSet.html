@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Floyd Warshall Algorithm</title>
+    <title>
+      Disjoint Set | Union by Rank | Union by Size | Path Compression
+    </title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +52,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Floyd Warshall Algorithm</h2>
+        <h2>Disjoint Set | Union by Rank | Union by Size | Path Compression</h2>
       </div>
     </div>
     <div class="container">
@@ -58,79 +60,86 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-class Solution {
-  public:
-	void shortest_distance(vector&lt;vector&lt;int&gt;&gt;&matrix){
-	    // Code here
-	    int n = matrix.size();
-	    
-	    for(int i = 0; i &lt; n; i++)
-	    {
-	        for(int j = 0; j &lt; n; j++)
-	        {
-	            if(matrix[i][j] == -1)
-	                matrix[i][j] = 1e9;
-	            else if(i==j)
-	                matrix[i][j] = 0;
-	        }
-	    }
-	    
-	    for(int k = 0; k &lt; n; k++)
-	    {
-	        for(int i = 0; i &lt; n; i++)
-	        {
-	            for(int j = 0; j &lt; n; j++)
-	            {
-	                matrix[i][j] = min(matrix[i][j], matrix[i][k]+matrix[k][j]);
-	            }
-	        }
-	    }
-	    
-	    //How to find if negative cycle is there
-	    for(int i = 0; i &lt; n; i++)
-	    {
-	        if(matrix[i][i] &lt; 0)
-	            cout &lt;&lt;"there is a negative cycle\n";
-	    }
-	    for(int i = 0; i &lt; n; i++)
-	    {
-	        for(int j = 0; j &lt; n; j++)
-	        {
-	            if(matrix[i][j] == 1e9)
-	                matrix[i][j] = -1;
-	        }
-	    }
-	}
-};
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+class DisjointSet {
+    vector&lt;int&gt; rank, parent, size; 
+public: 
+    DisjointSet(int n) {
+        rank.resize(n+1, 0); 
+        parent.resize(n+1);
+        size.resize(n+1); 
+        for(int i = 0;i&lt;=n;i++) {
+            parent[i] = i; 
+            size[i] = 1; 
+        }
+    }
+
+    int findUPar(int node) {
+        if(node == parent[node])
+            return node; 
+        return parent[node] = findUPar(parent[node]); 
+    }
+
+    void unionByRank(int u, int v) {
+        int ulp_u = findUPar(u); 
+        int ulp_v = findUPar(v); 
+        if(ulp_u == ulp_v) return; 
+        if(rank[ulp_u] &lt; rank[ulp_v]) {
+            parent[ulp_u] = ulp_v; 
+        }
+        else if(rank[ulp_v] &lt; rank[ulp_u]) {
+            parent[ulp_v] = ulp_u; 
+        }
+        else {
+            parent[ulp_v] = ulp_u; 
+            rank[ulp_u]++; 
+        }
+    }
+
+    void unionBySize(int u, int v) {
+        int ulp_u = findUPar(u); 
+        int ulp_v = findUPar(v); 
+        if(ulp_u == ulp_v) return; 
+        if(size[ulp_u] &lt; size[ulp_v]) {
+            parent[ulp_u] = ulp_v; 
+            size[ulp_v] += size[ulp_u]; 
+        }
+        else {
+            parent[ulp_v] = ulp_u;
+            size[ulp_u] += size[ulp_v]; 
+        }
+    }
+}; 
+int main() {
+    DisjointSet ds(7);
+    ds.unionBySize(1, 2); 
+    ds.unionBySize(2, 3); 
+    ds.unionBySize(4, 5); 
+    ds.unionBySize(6, 7); 
+    ds.unionBySize(5, 6); 
+    // if 3 and 7 same or not 
+    if(ds.findUPar(3) == ds.findUPar(7)) {
+        cout &lt;&lt; "Same\n"; 
+    }
+    else cout &lt;&lt; "Not same\n"; 
+
+    ds.unionBySize(3, 7); 
+
+    if(ds.findUPar(3) == ds.findUPar(7)) {
+        cout &lt;&lt; "Same\n"; 
+    }
+    else cout &lt;&lt; "Not same\n"; 
+	return 0;
+}
         </code></pre>
-        <img
-          src="images/img3.png"
-          alt="Floyd Warshall Algorithm"
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
           width="700"
           height="450"
           style="display: block; margin: 0 auto"
-        />
-        <img
-          src="images/img4.png"
-          alt="Floyd Warshall Algorithm"
-          width="700"
-          height="450"
-          style="display: block; margin: 0 auto"
-        />
-        <img
-          src="images/img5.png"
-          alt="Floyd Warshall Algorithm"
-          width="700"
-          height="450"
-          style="display: block; margin: 0 auto"
-        />
-        <img
-          src="images/img6.png"
-          alt="Floyd Warshall Algorithm"
-          width="700"
-          height="450"
-          style="display: block; margin: 0 auto"
-        />
+        /> -->
       </div>
 
       <h2>Java Solution</h2>

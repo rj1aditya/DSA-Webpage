@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Floyd Warshall Algorithm</title>
+    <title>Prism Algo to find Minimum Spanning Tree</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Floyd Warshall Algorithm</h2>
+        <h2>Prism Algo to find Minimum Spanning Tree</h2>
       </div>
     </div>
     <div class="container">
@@ -58,75 +58,53 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-class Solution {
-  public:
-	void shortest_distance(vector&lt;vector&lt;int&gt;&gt;&matrix){
-	    // Code here
-	    int n = matrix.size();
-	    
-	    for(int i = 0; i &lt; n; i++)
-	    {
-	        for(int j = 0; j &lt; n; j++)
-	        {
-	            if(matrix[i][j] == -1)
-	                matrix[i][j] = 1e9;
-	            else if(i==j)
-	                matrix[i][j] = 0;
-	        }
-	    }
-	    
-	    for(int k = 0; k &lt; n; k++)
-	    {
-	        for(int i = 0; i &lt; n; i++)
-	        {
-	            for(int j = 0; j &lt; n; j++)
-	            {
-	                matrix[i][j] = min(matrix[i][j], matrix[i][k]+matrix[k][j]);
-	            }
-	        }
-	    }
-	    
-	    //How to find if negative cycle is there
-	    for(int i = 0; i &lt; n; i++)
-	    {
-	        if(matrix[i][i] &lt; 0)
-	            cout &lt;&lt;"there is a negative cycle\n";
-	    }
-	    for(int i = 0; i &lt; n; i++)
-	    {
-	        for(int j = 0; j &lt; n; j++)
-	        {
-	            if(matrix[i][j] == 1e9)
-	                matrix[i][j] = -1;
-	        }
-	    }
-	}
+class Solution
+{
+	public:
+	//Function to find sum of weights of edges of the Minimum Spanning Tree.
+    int spanningTree(int n, vector&lt;vector&lt;int&gt;&gt; adj[])
+    {
+        // code here
+        
+        //{weight, node}
+        priority_queue&lt; pair&lt;int,int&gt;, vector&lt;pair&lt;int,int&gt;&gt;, greater&lt;pair&lt;int,int&gt;&gt;&gt; pq;
+        pq.push({0,0});
+        
+        vector&lt;int&gt; visited(n, 0);
+        int sum = 0;
+        
+        while(!pq.empty())
+        {
+            auto it = pq.top();
+            pq.pop();
+            
+            int wt = it.first;
+            int node = it.second;
+            
+            //visited means it already taken into minimum spanning tree so no visit agian
+            if(visited[node] == 1)
+                continue;
+                
+            visited[node] = 1;
+            sum += wt;
+            
+            for(auto it1: adj[node])
+            {
+                int adjNode = it1[0];
+                int adjWt = it1[1];
+                if(!visited[adjNode])
+                {
+                    pq.push({adjWt, adjNode});
+                }
+            }
+        }
+        return sum;
+    }
 };
         </code></pre>
         <img
-          src="images/img3.png"
-          alt="Floyd Warshall Algorithm"
-          width="700"
-          height="450"
-          style="display: block; margin: 0 auto"
-        />
-        <img
-          src="images/img4.png"
-          alt="Floyd Warshall Algorithm"
-          width="700"
-          height="450"
-          style="display: block; margin: 0 auto"
-        />
-        <img
-          src="images/img5.png"
-          alt="Floyd Warshall Algorithm"
-          width="700"
-          height="450"
-          style="display: block; margin: 0 auto"
-        />
-        <img
-          src="images/img6.png"
-          alt="Floyd Warshall Algorithm"
+          src="images/img7.png"
+          alt="Spanning Tree"
           width="700"
           height="450"
           style="display: block; margin: 0 auto"
