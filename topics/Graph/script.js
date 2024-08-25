@@ -277,6 +277,70 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "Graph/DisjointSet.html",
       nt: "",
     },
+    {
+      title: "Kruskal's Algorithm - Minimum Spanning Tree - C++ and Java",
+      description: ["https://bit.ly/3eLuYvH"],
+      solution: "Graph/kruskalAlgo.html",
+      nt: "Kruskal Algorith used to find the sum of MST, minimun spanning tree.",
+    },
+    {
+      title: "",
+      description: ["https://bit.ly/3pl2tr3"],
+      solution: "Graph/NumberOfProvinces.html",
+      nt: "",
+    },
+    {
+      title: "Number of Operations to Make Network Connected - DSU",
+      description: ["https://bit.ly/3QGtkcd"],
+      solution: "Graph/connectTheGraph.html",
+      nt: "",
+    },
+    {
+      title: "Accounts Merge - DSU",
+      description: ["https://bit.ly/3sl2Xia"],
+      solution: "Graph/AccountsMergeDSU.html",
+      nt: "",
+    },
+    {
+      title: "Number of Islands - II - Online Queries - DSU",
+      description: ["https://bit.ly/3w9REfj"],
+      solution: "Graph/numberOfIslands2.html",
+      nt: "",
+    },
+    {
+      title: "Making a Large Island - DSU",
+      description: ["https://bit.ly/3xeLjzF"],
+      solution: "Graph/MakingLargeIsland.html",
+      nt: "",
+    },
+    {
+      title: "Most Stones Removed with Same Row or Column - DSU",
+      description: ["https://bit.ly/3QHZuE6"],
+      solution: "Graph/removeStone.html",
+      nt: "",
+    },
+    {
+      title: "Kosaraju Algo to find strong connected graph",
+      description: [
+        "https://www.naukri.com/code360/problems/count-strongly-connected-components-kosaraju-s-algorithm_1171151?leftPanelTabValue=SUBMISSION",
+      ],
+      solution: "Graph/kosaraju.html",
+      nt: "",
+    },
+    {
+      title: "Critical Connections in a Network",
+      description: [
+        "https://leetcode.com/problems/critical-connections-in-a-network/description/",
+      ],
+      solution: "Graph/CriticalConnectionInNetwork.html",
+      nt: "",
+    },
+    {
+      title: "Articulation Point in Graph",
+      description: ["https://bit.ly/3w9lfp1"],
+      solution: "Graph/articulationPointInGraph.html",
+      nt: "To find articulation point in a graph we will use tarzen algo logic with slight change.",
+    },
     //Dummy
     {
       title: "",

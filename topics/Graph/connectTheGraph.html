@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Prism Algo to find Minimum Spanning Tree</title>
+    <title>Number of Operations to Make Network Connected</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Prism Algo to find Minimum Spanning Tree</h2>
+        <h2>Number of Operations to Make Network Connected</h2>
       </div>
     </div>
     <div class="container">
@@ -58,59 +58,98 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-class Solution
-{
-	public:
-	//Function to find sum of weights of edges of the Minimum Spanning Tree.
-    int spanningTree(int n, vector&lt;vector&lt;int&gt;&gt; adj[])
-    {
+class DisjointSet {
+    vector&lt;int&gt; rank, parent, size; 
+public: 
+    DisjointSet(int n) {
+        rank.resize(n+1, 0); 
+        parent.resize(n+1);
+        size.resize(n+1); 
+        for(int i = 0;i&lt;=n;i++) {
+            parent[i] = i; 
+            size[i] = 1; 
+        }
+    }
+
+    int findUPar(int node) {
+        if(node == parent[node])
+            return node; 
+        return parent[node] = findUPar(parent[node]); 
+    }
+
+    void unionByRank(int u, int v) {
+        int ulp_u = findUPar(u); 
+        int ulp_v = findUPar(v); 
+        if(ulp_u == ulp_v) return; 
+        if(rank[ulp_u] &lt; rank[ulp_v]) {
+            parent[ulp_u] = ulp_v; 
+        }
+        else if(rank[ulp_v] &lt; rank[ulp_u]) {
+            parent[ulp_v] = ulp_u; 
+        }
+        else {
+            parent[ulp_v] = ulp_u; 
+            rank[ulp_u]++; 
+        }
+    }
+
+    void unionBySize(int u, int v) {
+        int ulp_u = findUPar(u); 
+        int ulp_v = findUPar(v); 
+        if(ulp_u == ulp_v) return; 
+        if(size[ulp_u] &lt; size[ulp_v]) {
+            parent[ulp_u] = ulp_v; 
+            size[ulp_v] += size[ulp_u]; 
+        }
+        else {
+            parent[ulp_v] = ulp_u;
+            size[ulp_u] += size[ulp_v]; 
+        }
+    }
+}; 
+class Solution {
+  public:
+    int Solve(int n, vector&lt;vector&lt;int&gt;&gt;& edge) {
         // code here
-        
-        //{weight, node}
-        priority_queue&lt; pair&lt;int,int&gt;, vector&lt;pair&lt;int,int&gt;&gt;, 
-        greater&lt;pair&lt;int,int&gt;&gt;&gt; pq;
-        pq.push({0,0});
-        
-        vector&lt;int&gt; visited(n, 0);
-        int sum = 0;
-        
-        while(!pq.empty())
+        DisjointSet ds(n);
+        int extraEdges = 0;
+        for(auto it: edge)
         {
-            auto it = pq.top();
-            pq.pop();
-            
-            int wt = it.first;
-            int node = it.second;
-            
-            //visited means it already taken into minimum spanning tree so no 
-            //visit agian
-            if(visited[node] == 1)
-                continue;
-                
-            visited[node] = 1;
-            sum += wt;
-            
-            for(auto it1: adj[node])
+            int u = it[0];
+            int v = it[1];
+            if(ds.findUPar(u) == ds.findUPar(v))
             {
-                int adjNode = it1[0];
-                int adjWt = it1[1];
-                if(!visited[adjNode])
-                {
-                    pq.push({adjWt, adjNode});
-                }
+                extraEdges++;
+            }
+            else
+            {
+                ds.unionBySize(u, v);
             }
         }
-        return sum;
+        
+        int component=0;
+        for(int i = 0; i &lt; n; i++)
+        {
+            if(ds.findUPar(i) == i)
+            {
+                component++;
+            }
+        }
+        
+        if(extraEdges &gt;= component-1)
+            return component-1;
+        
+        return -1;
     }
 };
         </code></pre>
-        <img
-          src="images/img7.png"
-          alt="Spanning Tree"
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
           width="700"
           height="450"
           style="display: block; margin: 0 auto"
-        />
+        /> -->
       </div>
 
       <h2>Java Solution</h2>

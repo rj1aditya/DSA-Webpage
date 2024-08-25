@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Prism Algo to find Minimum Spanning Tree</title>
+    <title>Articulation Point in Graph</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Prism Algo to find Minimum Spanning Tree</h2>
+        <h2>Articulation Point in Graph</h2>
       </div>
     </div>
     <div class="container">
@@ -58,59 +58,73 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-class Solution
-{
-	public:
-	//Function to find sum of weights of edges of the Minimum Spanning Tree.
-    int spanningTree(int n, vector&lt;vector&lt;int&gt;&gt; adj[])
+class Solution {
+    int timer{1};
+    void dfs(int node, int parent, vector&lt;int&gt; &vis, vector&lt;int&gt; adj[], 
+            int tin[], int low[], vector&lt;int&gt; &mark)
     {
-        // code here
-        
-        //{weight, node}
-        priority_queue&lt; pair&lt;int,int&gt;, vector&lt;pair&lt;int,int&gt;&gt;, 
-        greater&lt;pair&lt;int,int&gt;&gt;&gt; pq;
-        pq.push({0,0});
-        
-        vector&lt;int&gt; visited(n, 0);
-        int sum = 0;
-        
-        while(!pq.empty())
+        vis[node] = 1;
+        tin[node] = low[node] = timer;
+        timer++;
+        int child = 0;
+        for(auto it: adj[node])
         {
-            auto it = pq.top();
-            pq.pop();
-            
-            int wt = it.first;
-            int node = it.second;
-            
-            //visited means it already taken into minimum spanning tree so no 
-            //visit agian
-            if(visited[node] == 1)
+            if(it == parent)
                 continue;
-                
-            visited[node] = 1;
-            sum += wt;
-            
-            for(auto it1: adj[node])
+            if(!vis[it])
             {
-                int adjNode = it1[0];
-                int adjWt = it1[1];
-                if(!visited[adjNode])
+                dfs(it, node, vis, adj, tin, low, mark);
+                low[node] = min(low[it], low[node]);
+                if(low[it] &gt;= tin[node] && parent != -1)
                 {
-                    pq.push({adjWt, adjNode});
+                    mark[node] = 1;
                 }
+                child++;
+            }
+            else
+            {
+                low[node] = min(low[node], tin[it]);
             }
         }
-        return sum;
+        if(child &gt; 1 && parent == -1)
+            mark[node] = 1;
+    }
+  public:
+    vector&lt;int&gt; articulationPoints(int V, vector&lt;int&gt;adj[]) {
+        // Code here
+        
+        vector&lt;int&gt; vis(V, 0);
+        int tin[V];
+        int low[V];
+        vector&lt;int&gt; mark(V, 0);
+        
+        for(int i = 0; i &lt; V; i++)
+        {
+            if(!vis[i])
+            {
+                dfs(i, -1, vis, adj, tin, low, mark);
+            }
+        }
+        
+        vector&lt;int&gt; ans;
+        for(int i = 0; i &lt; V; i++)
+        {
+            if(mark[i]==1)
+                ans.push_back(i);
+        }
+        if(ans.size()==0)
+            return {-1};
+        return ans;
     }
 };
         </code></pre>
-        <img
-          src="images/img7.png"
-          alt="Spanning Tree"
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
           width="700"
           height="450"
           style="display: block; margin: 0 auto"
-        />
+        /> -->
       </div>
 
       <h2>Java Solution</h2>

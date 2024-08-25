@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Prism Algo to find Minimum Spanning Tree</title>
+    <title>Kosaraju alog</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Prism Algo to find Minimum Spanning Tree</h2>
+        <h2>Kosaraju algo</h2>
       </div>
     </div>
     <div class="container">
@@ -58,55 +58,88 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-class Solution
+#include &lt;iostream&gt;
+#include &lt;stack&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+void topologicalsort(vector&lt;vector&lt;int&gt;&gt; &adj, vector&lt;bool&gt; &vistied, 
+stack&lt;int&gt; &s, int node)
 {
-	public:
-	//Function to find sum of weights of edges of the Minimum Spanning Tree.
-    int spanningTree(int n, vector&lt;vector&lt;int&gt;&gt; adj[])
+    vistied[node] = true;
+    for (auto child : adj[node])
     {
-        // code here
-        
-        //{weight, node}
-        priority_queue&lt; pair&lt;int,int&gt;, vector&lt;pair&lt;int,int&gt;&gt;, 
-        greater&lt;pair&lt;int,int&gt;&gt;&gt; pq;
-        pq.push({0,0});
-        
-        vector&lt;int&gt; visited(n, 0);
-        int sum = 0;
-        
-        while(!pq.empty())
+        if (!vistied[child])
         {
-            auto it = pq.top();
-            pq.pop();
-            
-            int wt = it.first;
-            int node = it.second;
-            
-            //visited means it already taken into minimum spanning tree so no 
-            //visit agian
-            if(visited[node] == 1)
-                continue;
-                
-            visited[node] = 1;
-            sum += wt;
-            
-            for(auto it1: adj[node])
-            {
-                int adjNode = it1[0];
-                int adjWt = it1[1];
-                if(!visited[adjNode])
-                {
-                    pq.push({adjWt, adjNode});
-                }
-            }
+            topologicalsort(adj, vistied, s, child);
         }
-        return sum;
     }
-};
+    s.push(node);
+}
+
+void dfs(vector&lt;vector&lt;int&gt;&gt; &adj, vector&lt;bool&gt; &vistied, int node)
+{
+    vistied[node] = true;
+    for (auto child : adj[node])
+    {
+        if (!vistied[child])
+        {
+            dfs(adj, vistied, child);
+        }
+    }
+}
+
+int stronglyConnectedComponents(int v, vector&lt;vector&lt;int&gt;&gt; &edges)
+{
+    vector&lt;vector&lt;int&gt;&gt; adj(v);
+    for (int i = 0; i &lt; edges.size(); ++i)
+    {
+        int x = edges[i][0];
+        int y = edges[i][1];
+        adj[x].push_back(y);
+    }
+
+    // toplogical sort
+    stack&lt;int&gt; s;
+    vector&lt;bool&gt; vistied(v, false);
+    for (int i = 0; i &lt; v; ++i)
+    {
+        if (!vistied[i])
+        {
+            topologicalsort(adj, vistied, s, i);
+        }
+    }
+
+    // inverse the paths
+    vector&lt;vector&lt;int&gt;&gt; inversedadj(v);
+    for (int i = 0; i &lt; v; ++i)
+    {
+        vistied[i] = false;
+        for (auto child : adj[i])
+        {
+            inversedadj[child].push_back(i);
+        }
+    }
+
+    // perform dfs on this toplogical sort with inversed adj
+    int count = 0;
+    while (!s.empty())
+    {
+        int top = s.top();
+        s.pop();
+        if (!vistied[top])
+        {
+            count++;
+            dfs(inversedadj, vistied, top);
+        }
+    }
+    return count;
+}
+
         </code></pre>
         <img
-          src="images/img7.png"
-          alt="Spanning Tree"
+          src="images/img9.png"
+          alt="kosaraju algo"
           width="700"
           height="450"
           style="display: block; margin: 0 auto"

@@ -1,46 +1,71 @@
 class Solution
 {
+    int timer{1};
+    void dfs(int node, int parent, vector &lt; int &gt; &vis, vector &lt; int &gt; adj[],
+                                                                                   int tin[], int low[], vector &lt;
+             int &gt; &mark)
+    {
+        vis[node] = 1;
+        tin[node] = low[node] = timer;
+        timer++;
+        int child = 0;
+        for (auto it : adj[node])
+        {
+            if (it == parent)
+                continue;
+            if (!vis[it])
+            {
+                dfs(it, node, vis, adj, tin, low, mark);
+                low[node] = min(low[it], low[node]);
+                if (low[it] &gt; = tin[node] && parent != -1)
+                {
+                    mark[node] = 1;
+                }
+                child++;
+            }
+            else
+            {
+                low[node] = min(low[node], tin[it]);
+            }
+        }
+        if (child & gt; 1 && parent == -1)
+            mark[node] = 1;
+    }
+
 public:
-    /*  Function to implement Bellman Ford
-     *   edges: vector of vectors which represents the graph
-     *   S: source vertex to start traversing graph with
-     *   V: number of vertices
-     */
     vector &lt;
     int &gt;
-    bellman_ford(int V, vector &lt; vector & lt; int &gt; &gt; &edges, int S)
+    articulationPoints(int V, vector &lt; int &gt; adj[])
     {
         // Code here
+
         vector & lt;
         int &gt;
-        dist(V, 1e8);
-        dist[S] = 0;
+        vis(V, 0);
+        int tin[V];
+        int low[V];
+        vector & lt;
+        int &gt;
+        mark(V, 0);
 
-        // As per Bellman algo, it say have to iterate all the graph over N-1 times
-        for (int i = 0; i & lt; V - 1; i++)
+        for (int i = 0; i & lt; V; i++)
         {
-            for (auto it : edges)
+            if (!vis[i])
             {
-                int u = it[0];
-                int v = it[1];
-                int wt = it[2];
-                if (dist[u] != 1e8 && dist[u] + wt & lt; dist[v])
-                {
-                    dist[v] = dist[u] + wt;
-                }
+                dfs(i, -1, vis, adj, tin, low, mark);
             }
         }
-        // Nth relaxation to check negative cycle
-        for (auto it : edges)
+
+        vector & lt;
+        int &gt;
+        ans;
+        for (int i = 0; i & lt; V; i++)
         {
-            int u = it[0];
-            int v = it[1];
-            int wt = it[2];
-            if (dist[u] != 1e8 && dist[u] + wt & lt; dist[v])
-            {
-                return {-1};
-            }
+            if (mark[i] == 1)
+                ans.push_back(i);
         }
-        return dist;
+        if (ans.size() == 0)
+            return {-1};
+        return ans;
     }
 };

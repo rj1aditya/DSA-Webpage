@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Prism Algo to find Minimum Spanning Tree</title>
+    <title>
+      https://leetcode.com/problems/critical-connections-in-a-network/description/
+    </title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +52,9 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Prism Algo to find Minimum Spanning Tree</h2>
+        <h2>
+          https://leetcode.com/problems/critical-connections-in-a-network/description/
+        </h2>
       </div>
     </div>
     <div class="container">
@@ -58,55 +62,53 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-class Solution
-{
-	public:
-	//Function to find sum of weights of edges of the Minimum Spanning Tree.
-    int spanningTree(int n, vector&lt;vector&lt;int&gt;&gt; adj[])
+class Solution {
+    int timer{1};
+    void dfs(int node, int parent, vector&lt;int&gt; &vis, vector&lt;int&gt; adj[], int tin[], int low[], 
+                vector&lt;vector&lt;int&gt;&gt; &bridges)
     {
-        // code here
-        
-        //{weight, node}
-        priority_queue&lt; pair&lt;int,int&gt;, vector&lt;pair&lt;int,int&gt;&gt;, 
-        greater&lt;pair&lt;int,int&gt;&gt;&gt; pq;
-        pq.push({0,0});
-        
-        vector&lt;int&gt; visited(n, 0);
-        int sum = 0;
-        
-        while(!pq.empty())
+        vis[node] = 1;
+        tin[node] = low[node] = timer;
+        timer++;
+        for(auto it: adj[node])
         {
-            auto it = pq.top();
-            pq.pop();
-            
-            int wt = it.first;
-            int node = it.second;
-            
-            //visited means it already taken into minimum spanning tree so no 
-            //visit agian
-            if(visited[node] == 1)
-                continue;
-                
-            visited[node] = 1;
-            sum += wt;
-            
-            for(auto it1: adj[node])
+            if(it == parent) continue;
+
+            if(!vis[it])
             {
-                int adjNode = it1[0];
-                int adjWt = it1[1];
-                if(!visited[adjNode])
-                {
-                    pq.push({adjWt, adjNode});
-                }
+                dfs(it, node, vis, adj, tin, low, bridges);
+                low[node] = min(low[node], low[it]);
+                if(low[it] &gt; tin[node])
+                    bridges.push_back({it, node});
+            }
+            else
+            {
+                low[node] = min(low[node], low[it]);
             }
         }
-        return sum;
+    }
+public:
+    vector&lt;vector&lt;int&gt;&gt; criticalConnections(int n, vector&lt;vector&lt;int&gt;&gt;& connections) {
+        vector&lt;int&gt; adj[n];
+        for(auto it: connections)
+        {
+            adj[it[0]].push_back(it[1]);
+            adj[it[1]].push_back(it[0]);
+        }
+
+        vector&lt;int&gt; vis(n, 0);
+        int tin[n];
+        int low[n];
+        vector&lt;vector&lt;int&gt;&gt; bridges;
+
+        dfs(0, -1, vis, adj, tin, low, bridges);
+        return bridges;
     }
 };
         </code></pre>
         <img
-          src="images/img7.png"
-          alt="Spanning Tree"
+          src="images/img10.png"
+          alt="tarzan algo"
           width="700"
           height="450"
           style="display: block; margin: 0 auto"

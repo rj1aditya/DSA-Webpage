@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Making a Large Island - DSU</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #85144b;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Making a Large Island - DSU</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+class DisjointSet {
+     
+    public: 
+        vector&lt;int&gt; rank, parent, size;
+        DisjointSet(int n) {
+            rank.resize(n+1, 0); 
+            parent.resize(n+1);
+            size.resize(n+1); 
+            for(int i = 0;i&lt;=n;i++) {
+                parent[i] = i; 
+                size[i] = 1; 
+            }
+        }
+    
+        int findUPar(int node) {
+            if(node == parent[node])
+                return node; 
+            return parent[node] = findUPar(parent[node]); 
+        }
+    
+        void unionByRank(int u, int v) {
+            int ulp_u = findUPar(u); 
+            int ulp_v = findUPar(v); 
+            if(ulp_u == ulp_v) return; 
+            if(rank[ulp_u] &lt; rank[ulp_v]) {
+                parent[ulp_u] = ulp_v; 
+            }
+            else if(rank[ulp_v] &lt; rank[ulp_u]) {
+                parent[ulp_v] = ulp_u; 
+            }
+            else {
+                parent[ulp_v] = ulp_u; 
+                rank[ulp_u]++; 
+            }
+        }
+    
+        void unionBySize(int u, int v) {
+            int ulp_u = findUPar(u); 
+            int ulp_v = findUPar(v); 
+            if(ulp_u == ulp_v) return; 
+            if(size[ulp_u] &lt; size[ulp_v]) {
+                parent[ulp_u] = ulp_v; 
+                size[ulp_v] += size[ulp_u]; 
+            }
+            else {
+                parent[ulp_v] = ulp_u;
+                size[ulp_u] += size[ulp_v]; 
+            }
+        }
+    }; 
+    class Solution {
+      public:
+        int MaxConnection(vector&lt;vector&lt;int&gt;&gt;& grid) {
+            // code here
+            
+            int dr[] = {-1, 0, 1, 0};
+            int dc[] = {0, 1, 0, -1};
+            
+            int n = grid.size();
+            int m = grid[0].size();
+            
+            DisjointSet ds(n*m);
+            
+            //STEP 1
+            for(int i = 0; i &lt; n; i++)
+            {
+                for(int j = 0; j &lt; m; j++)
+                {
+                    if(grid[i][j] == 1)
+                    {
+                        for(int k = 0; k &lt; 4; k++)
+                        {
+                            int newR = i+dr[k];
+                            int newC = j+dc[k];
+                            if(newR &gt;= 0 && newR &lt; n && newC &gt;= 0 && newC &lt; m)
+                            {
+                                if(grid[newR][newC] == 1)
+                                {
+                                    int node=i*m+j;
+                                    int adjN = newR*m+newC;
+                                    ds.unionBySize(node, adjN);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            //STEP 2
+            
+            int mx = 0;
+            for(int i = 0; i &lt; n; i++)
+            {
+                for(int j = 0; j &lt; m; j++)
+                {
+                    if(grid[i][j] == 0)
+                    {
+                        set&lt;int&gt; component;
+                        for(int k = 0; k &lt; 4; k++)
+                        {
+                            int newR = i+dr[k];
+                            int newC = j+dc[k];
+                            if(newR &gt;= 0 && newR &lt; n && newC &gt;= 0 && newC &lt; m)
+                            {
+                                if(grid[newR][newC] == 1)
+                                {
+                                    int adjN = newR*m+newC;
+                                    component.insert(ds.findUPar(adjN));
+                                }
+                            }                        
+                        }
+                        int sizeTotal=0;
+                        for(auto it: component)
+                        {
+                            sizeTotal += ds.size[it];
+                        }
+                        mx = max(mx, sizeTotal+1);
+                    }
+                }
+            }
+            
+            // If the grid is all 1s, calculate the total size
+            for(int i = 0; i &lt; n * m; i++) {
+                mx = max(mx, ds.size[ds.findUPar(i)]);
+            }
+    
+            return mx;
+        }
+    };
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>
