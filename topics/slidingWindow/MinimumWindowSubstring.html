@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minimum Window Substring</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #ffc72c;
+        color: #555555;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Minimum Window Substring</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+class Solution {
+    public:
+        //Brute Force
+        string minWindow1(string s, string t) {
+            int minIndex = -1;
+            int minlen = 1e9;
+    
+            for(int i = 0; i &lt; s.size(); i++)
+            {
+                map&lt;char,int&gt; hash;
+                int cnt = 0;
+                //Store all the t string characters with its freq into the hash
+                for(int j = 0; j &lt; t.size(); j++)
+                {
+                    hash[t[j]]++;
+                }
+    
+                for(int k = i; k &lt; s.size(); k++)
+                {
+                    if(hash[s[k]] &gt; 0)
+                        cnt++;
+                    
+                    hash[s[k]]--;
+    
+                    if(cnt == t.size())
+                    {
+                        if(k-i+1 &lt; minlen)
+                        {
+                            minlen = k-i+1;
+                            minIndex = i;
+                        }
+                        break;
+                    }
+                }
+            }
+            cout &lt;&lt;minIndex&lt;&lt;endl&lt;&lt;minlen;
+            
+            if(minIndex == -1)
+                return "";
+            return s.substr(minIndex, minlen);
+        }
+    
+        string minWindow(string s, string t) {
+            int l = 0, r = 0, cnt = 0, minIndex=-1;
+            int minlen = 1e9;
+            map&lt;char,int&gt; hash;
+    
+            int n = s.size();
+            int m = t.size();
+    
+            //Store t string into the hash map
+            for(int i = 0; i &lt; m; i++) hash[t[i]]++;
+    
+            while(r &lt; n)
+            {
+                if(hash[s[r]] &gt; 0)
+                    cnt++;
+                hash[s[r]]--;
+    
+                while(cnt == m)
+                {
+                    if(minlen &gt; r-l+1)
+                    {
+                        minlen = r-l+1;
+                        minIndex = l;
+                    }
+                    hash[s[l]]++;
+                    if(hash[s[l]] &gt; 0)
+                        cnt = cnt-1;
+                    l++;
+                }
+                r++;
+            }
+            if(minIndex != -1)
+                return s.substr(minIndex, minlen);
+            
+            return "";
+        }
+    
+    };
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>
