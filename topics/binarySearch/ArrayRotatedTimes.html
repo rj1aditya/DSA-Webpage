@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minimum in Rotated Sorted Array II</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #e97451;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Minimum in Rotated Sorted Array II</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+int findKRotation(vector&lt;int&gt; &arr){
+    // Write your code here.    
+    //The minimun element in the arr stored at what index..
+    //will be the number of rotated array
+
+        // Write your code here.
+    
+        int l = 0, r = arr.size()-1, minelem = 1e9;
+        int indx = arr.size();
+        while(l &lt;= r)
+        {
+            int mid = l + (r-l)/2;
+            //What if all part of array is sorted, so to handle that we use
+            //below condition to check
+            if(arr[mid] &gt;= arr[l] && arr[mid] &lt;= arr[r] && arr[l] &lt;= arr[r])
+            {
+                if(minelem &gt; arr[mid])
+                {
+                    minelem = arr[mid];
+                    indx = mid;
+                }
+                //break;
+            }
+            //Check which part is sorted
+            //left part is sorted
+            if(arr[mid] &gt;= arr[l])
+            {
+                if(minelem &gt; arr[l])
+                {
+                    minelem = arr[l];
+                    indx = l;
+                }
+                l = mid+1;
+            }
+            //right part is sorted
+            else
+            {
+                if(minelem &gt; arr[mid])
+                {
+                    minelem = arr[mid];
+                    indx = mid;
+                }
+                r = mid-1;
+            }
+        }
+        return indx;
+}
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="Longest Common Subsequence Image"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

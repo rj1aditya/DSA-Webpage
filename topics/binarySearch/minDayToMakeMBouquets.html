@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minimum days to make M bouquets | Binary Search</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #e97451;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Minimum days to make M bouquets | Binary Search</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+pair&lt;int,int&gt; findMinAndMax(vector&lt;int&gt; &arr)
+	{
+		int maxi = arr[0];
+		int mini = arr[0];
+	
+		for(int i = 1; i &lt; arr.size(); i++)
+		{
+			maxi = max(maxi, arr[i]);
+			mini = min(mini, arr[i]);
+		}
+	
+		return {mini, maxi};
+	}
+	int isPossibleToMakeBuequet(vector&lt;int&gt; arr, int mid, int flow, int bue)
+	{
+		int cntflower=0;
+		int cntbue=0;
+		for(int i = 0; i &lt; arr.size(); i++)
+		{
+			if(arr[i] &lt;= mid)
+			{
+				cntflower++;
+			}
+			else
+			{
+				cntbue += (cntflower/flow);
+				cntflower=0;
+			}
+		}
+		cntbue += (cntflower/flow);
+		return cntbue &gt;= bue;
+	}
+	
+	int roseGarden(vector&lt;int&gt; arr, int k, int m)
+	{
+		// Write your code here
+	
+		if(arr.empty()) return -1;
+	
+		auto p = findMinAndMax(arr);
+		int maxi = p.second;
+		int mini = p.first;
+	
+		int n = arr.size();
+	
+		//k*m is the total flower needed to make buquete
+		//n is the total flower available in the arr vector
+		if( k*m &gt; n)
+			return -1;
+	
+		while(mini &lt;= maxi)
+		{
+			int mid = mini + (maxi-mini)/2;
+	
+			int x = isPossibleToMakeBuequet(arr, mid, k, m);
+			if(x == 1)
+			{
+				maxi = mid-1;
+			}
+			else
+				mini = mid+1;
+		}
+		return mini;
+	}
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="xyzabc"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>
