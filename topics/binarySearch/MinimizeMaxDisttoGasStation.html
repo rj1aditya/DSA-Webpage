@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minimize Max Distance to Gas Station</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #e97451;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Minimize Max Distance to Gas Station</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+#include&lt;bits/stdc++.h&gt;
+
+//Solved by priority queue
+//here we are trying to figure out the decimal minimal number
+//which will fit and set equally same distance between all station
+double minimiseMaxDistance1(vector&lt;int&gt; &arr, int k){
+	// Write your code here.	
+
+	priority_queue&lt;pair&lt;long double, int&gt;&gt; pq;
+
+	//at which index you are inserting the new gas
+	//station
+	int n = arr.size();
+	vector&lt;int&gt; secondIdx(n-1, 0);
+	for(int i = 0; i &lt; n-1; i++)
+	{
+		long double diff = arr[i+1] - arr[i];
+		pq.push({diff,i});
+	}
+
+	for(int i = 1; i &lt;= k; i++)
+	{
+		int idx = pq.top().second;
+		pq.pop();
+		secondIdx[idx]++;
+
+		//inDiff will give us how many diff has reduces, by installing
+		//new station
+		long double inDiff = (arr[idx+1] - arr[idx])
+								/(long double)(secondIdx[idx]+1);
+
+		pq.push({inDiff, idx});	
+	}
+	return pq.top().first;
+}
+
+//Binary Search algo
+int checkCount(long double mid, vector&lt;int&gt; &arr)
+{
+	int n = arr.size();
+	int cnt=0;
+	for(int i = 1; i &lt; n; i++)
+	{
+		int mincnt = (arr[i]-arr[i-1])/(long double)(mid);
+		if((arr[i]-arr[i-1])/(long double)(mid) == mincnt*mid)
+			mincnt--;
+
+		cnt += mincnt; 
+	}
+
+	return cnt;
+}
+double minimiseMaxDistance(vector&lt;int&gt; &arr, int k) {
+	long double low = 0;
+	long double high=0;
+	int n = arr.size();
+	for(int i = 1; i &lt; n; i++)
+	{
+		high = max(high, (long double)(arr[i]-arr[i-1]));
+	}
+
+	while(high - low &gt; 1e-6)
+	{
+		long double mid = (low+high)/(2.0);
+
+		int cnt = checkCount(mid, arr);
+		if(cnt &gt; k)
+		{
+			low = mid;
+		}
+		else
+			high = mid;
+	}
+
+	return high;
+}
+
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="xyzabc"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

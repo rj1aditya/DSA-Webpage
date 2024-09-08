@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kth Missing Positive Number</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #e97451;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Kth Missing Positive Number</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+
+//Brute Force
+int missingK1(vector &lt; int &gt; vec, int n, int k) {
+    // Write your code here.
+    for(int i = 0; i &lt; n; i++)
+    {
+        if(vec[i] &lt;= k)
+            k++;
+        else
+            return k;
+    }
+    return k;
+}
+
+int missingK(vector&lt;int&gt; arr, int n, int k) {
+    int l = 0, r = n-1;
+
+    while(l &lt;= r)
+    {
+        int mid = l + (r-l)/2;
+
+        int x = arr[mid] - (mid + 1);
+        if(x &lt; k)
+            l = mid+1;
+        else
+            r = mid-1;
+    }
+
+    //how to find the missing number
+    //arr[r] - (r+1) this will give us total missing # till rth index
+    //k - (arr[r] - (r+1)) more number we need to reach the ans
+    //arr[r] + (k - (arr[r] - (r+1))) //below formula will be 
+    //derived if resolve this
+    return k+r+1;
+}
+<p>
+    To remember the logic of finding the missing `k`th number from a sorted array, let's break it down into a simple and memorable explanation:
+
+### Problem:
+You have a sorted array `vec` of size `n` that might have missing numbers in a sequence. You need to find the `k`th missing number.
+
+### Concept:
+- Imagine you are counting numbers from `1` to some large number.
+- If no numbers were missing, the count would naturally be continuous.
+- However, when you encounter a number in the array, it tells you that some numbers before it might be missing.
+- The goal is to find which number should be in the missing `k`th position.
+
+### Key Idea (Intuition):
+- **Move forward**: As you go through the array, check if the current number (`vec[i]`) is less than or equal to `k`. If it is, that means this number is not missing, so **increase `k`** to find the next missing one.
+- **Stop when there's a gap**: As soon as you find a number in the array that is larger than `k`, you know the `k`th missing number is right there, because the gap starts.
+
+### Step-by-Step Explanation:
+1. **Start with `k`**: You’re trying to find the `k`th missing number.
+2. **Iterate through the array**: Go through each number in the sorted array.
+3. **Compare with `k`**:
+   - If `vec[i]` (current number) is less than or equal to `k`, that means this number is not missing, so move `k` up to look for the next missing number.
+   - If `vec[i]` is larger than `k`, this indicates you've found the gap where the `k`th missing number lies, so return `k`.
+4. **Return the final value of `k`**: If the loop completes and all the numbers are smaller than or equal to `k`, the missing number you're looking for is still `k`.
+
+### Code:
+```cpp
+int missingK(vector<int> vec, int n, int k) {
+    for(int i = 0; i < n; i++) {
+        if(vec[i] <= k) {
+            k++;  // This number is not missing, so move to the next missing one.
+        } else {
+            return k;  // Found the gap, return the missing number.
+        }
+    }
+    return k;  // If no gap was found, return the current value of k.
+}
+```
+
+### How to Remember:
+1. **Imagine a race**: Think of the numbers in the array as runners in a race. The `k` value is the missing runner you're looking for.
+2. **Start counting**: Each time a runner (number in the array) is ahead or tied with `k`, you know that this runner isn't missing, so move to the next.
+3. **Look for the gap**: When you find a number that's ahead of `k` (a gap in the race), that's where your missing runner should be.
+
+By visualizing it this way, you can easily recall that you're incrementing `k` each time there's no gap, and stopping as soon as you find the gap. This approach will help you remember the algorithm for a long time!
+</p>
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="xyzabc"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

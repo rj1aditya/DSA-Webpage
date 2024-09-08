@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Median of two Sorted Arrays of Different Sizes</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #e97451;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Median of two Sorted Arrays of Different Sizes</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+//Brute force
+double median1(vector&lt;int&gt;& a, vector&lt;int&gt;& b) {
+	// Write your code here.
+
+	int i = 0, j = 0, n1 = a.size(), n2 = b.size();
+	int n = n1+n2;
+	int elem2m2 = n/2;
+	int elem1m1 = elem2m2-1;
+	int firstmed = INT_MIN, secondmed = INT_MIN;
+	int cnt = 0;
+
+	while(i &lt; n1 && j &lt; n2)
+	{
+		if(a[i] &lt; b[j])
+		{
+			if(cnt == elem1m1) firstmed=a[i]; 
+			if(cnt == elem2m2) secondmed=a[i];
+			cnt++;
+			i++;
+		}
+		else
+		{
+			if(cnt == elem1m1) firstmed=b[j]; 
+			if(cnt == elem2m2) secondmed=b[j];
+			cnt++;
+			j++;
+		}
+	}
+    // Handle remaining elements in `a`
+    while (i &lt; n1) {
+        if (cnt == elem1m1) firstmed = a[i];
+        if (cnt == elem2m2) secondmed = a[i];
+        cnt++;
+        i++;
+    }
+
+    // Handle remaining elements in `b`
+    while (j &lt; n2) {
+        if (cnt == elem1m1) firstmed = b[j];
+        if (cnt == elem2m2) secondmed = b[j];
+        cnt++;
+        j++;
+    }
+	if(n%2 == 0) return (firstmed+secondmed)/2.0;
+	return secondmed;
+}
+
+double median(vector&lt;int&gt; &a, vector&lt;int&gt; &b) {
+  // Ensure that array 'a' is the smaller array
+  int n1 = a.size();
+  int n2 = b.size();
+  if (n1 &gt; n2)
+      return median(b, a);  
+      // Recursively call with swapped arrays if 'a' is larger
+
+  // Initialize low and high pointers for binary search on the smaller array
+  int low = 0, high = n1;
+
+  int left = (n1 + n2 + 1) / 2; 
+  // This represents the number of elements in the left partition
+
+  while (low &lt;= high) {
+
+      // Partition the smaller array 'a' using binary search
+      int mid1 = (low + high) / 2;  
+      // Midpoint of the first array (a)
+      
+      int mid2 = left - mid1;  
+      // The corresponding partition index in the second array (b)
+
+      // Assign boundary values for comparison
+      int l1 = (mid1 &gt; 0) ? a[mid1 - 1] : INT_MIN;  // Left part of array 'a'
+      int l2 = (mid2 &gt; 0) ? b[mid2 - 1] : INT_MIN;  // Left part of array 'b'
+      int r1 = (mid1 &lt; n1) ? a[mid1] : INT_MAX;  // Right part of array 'a'
+      int r2 = (mid2 &lt; n2) ? b[mid2] : INT_MAX;  // Right part of array 'b'
+
+      // Check if we have found the correct partition
+      if (l1 &lt;= r2 && l2 &lt;= r1) {
+          // If the combined length of the arrays is odd, 
+          //return the maximum of the left parts
+          if ((n1 + n2) % 2 == 1) 
+              return max(l1, l2);
+
+          // If the combined length is even, 
+          //return the average of the max of the left parts and 
+          //the min of the right parts
+          return (double)(max(l1, l2) + min(r1, r2)) / 2.0;
+      }
+      // Adjust the binary search range
+      // If the left part of 'a' is too large, move 'high' down
+      else if (l1 &gt; r2)  
+          high = mid1 - 1;
+      else  // Otherwise, move 'low' up
+          low = mid1 + 1;
+  }
+
+  return -1.0;  // Edge case, shouldn't occur as input is assumed to be valid
+}
+        </code></pre>
+        <img
+          src="images/img6.png"
+          alt="median of 2 sorted array"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        />
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

@@ -108,6 +108,49 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "binarySearch/minCapacityToShipPackageinDDays.html",
       nt: "",
     },
+    {
+      title: "Kth Missing Positive Number",
+      description: ["https://bit.ly/3p30UBg"],
+      solution: "binarySearch/kthMissingNumber.html",
+      nt: "How to understand and remeber this also: check its solution page",
+    },
+    {
+      title: "Aggressive Cows",
+      description: ["https://bit.ly/3J9ab1B"],
+      solution: "binarySearch/AggressiveCows.html",
+      nt: "Go Through the video if not understand the problem or solution",
+    },
+    {
+      title: "Allocate Books or Book Allocation",
+      description: [""],
+      solution: "binarySearch/AllocateBooks.html",
+      nt: "",
+    },
+    {
+      title: "Painter's Partition",
+      description: ["https://bit.ly/3XM8oFS"],
+      solution: "binarySearch/painterPartition.html",
+      nt: "This question is exact similar to Allocate Books or Book Allocation problem",
+    },
+    {
+      title: "Split Array - Largest Sum",
+      description: ["https://bit.ly/3Ck7UwL"],
+      solution: "binarySearch/splitArray.html",
+      nt: "This question is exact similar to Allocate Books or Book Allocation problem",
+    },
+    {
+      title: "Minimize Max Distance to Gas Station",
+      description: ["https://bit.ly/43SkwqA"],
+      solution: "binarySearch/MinimizeMaxDisttoGasStation.html",
+      nt: "Prefer priority queque solution, that is easy to understand",
+    },
+    {
+      title:
+        "BS-21. Median of two Sorted Arrays of Different Sizes | Binary Search",
+      description: ["https://bit.ly/43QDw96"],
+      solution: "binarySearch/medianOf2SortedArray.html",
+      nt: "",
+    },
     //Dummy
     {
       title: "",
