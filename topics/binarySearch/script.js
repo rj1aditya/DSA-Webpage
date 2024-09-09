@@ -151,6 +151,44 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "binarySearch/medianOf2SortedArray.html",
       nt: "",
     },
+    {
+      title: "K-th element of two sorted arrays",
+      description: ["https://bit.ly/3MD3mHK"],
+      solution: "binarySearch/kthElemOf2SortedArr.html",
+      nt: "",
+    },
+    {
+      title: "Row with maximum number of 1s",
+      description: ["https://bit.ly/3P0n95t"],
+      solution: "binarySearch/rowsWithMaxNumberOf1s.html",
+      nt: "",
+    },
+    {
+      title: "Search in a 2D Matrix - I",
+      description: ["https://leetcode.com/problems/search-a-2d-matrix/"],
+      solution: "binarySearch/searchIn2DMatrix_I.html",
+      nt: "",
+    },
+    {
+      title: "Search in a 2D Matrix - II ",
+      description: [
+        "https://leetcode.com/problems/search-a-2d-matrix-ii/submissions/1384047949/",
+      ],
+      solution: "binarySearch/searchIn2DMatrix_II.html",
+      nt: "",
+    },
+    {
+      title: "Find Peak Element-II | Binary Search",
+      description: ["https://bit.ly/3Ckb4Rb"],
+      solution: "binarySearch/FindPeakElement_II.html",
+      nt: "",
+    },
+    {
+      title: "Median in a Row Wise Sorted Matrix",
+      description: ["https://bit.ly/4ghD5vq"],
+      solution: "binarySearch/medianInRowWiseSortedMatrix.html",
+      nt: "",
+    },
     //Dummy
     {
       title: "",
