@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Find The Single Element</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #527450;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Find The Single Element</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+#include&lt;vector&gt;
+
+//this can be solved using map DS, where will return that key
+//which vlues has only 1 value
+//map&lt;long long, int&gt; m
+//iterate all arr and m[arr[i]]++
+
+//Using XOR
+//TLE
+int getSingleElement1(vector&lt;int&gt; &arr){
+	// Write your code here.	
+
+	int xor1 = 0;
+	for(int i = 0; i &lt; arr.size(); i++)
+	{
+		xor1 ^= arr[i];//same number will be cancelled out 2^2 = 0
+		//0^3=3
+	}
+
+	return xor1;
+}
+
+//Given array is sorted
+//Try to solve using binary search
+int getSingleElement(vector&lt;int&gt; &arr) {
+
+	int l = 0;
+	int r = arr.size()-1;
+
+	while(l &lt;= r)
+	{
+		int m = (l+r)/2;
+
+		if(arr[m] != arr[m-1] && arr[m] != arr[m+1])
+			return arr[m];
+		//below we are check the right part of the arr
+		else if(m%2 == 1 && arr[m] == arr[m+1] || m%2==0 && arr[m] == arr[m-1])
+		{
+			r = m-1;
+		}
+		//here it will consider the left part of the array
+		else
+		{
+			l = m+1;
+		}
+	}
+	return -1;
+}
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="xyzabc"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>
