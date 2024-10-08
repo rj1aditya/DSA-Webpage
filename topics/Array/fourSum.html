@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4 Sum</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #527450;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>4 Sum</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+vector&lt;vector&lt;int&gt;&gt; fourSum(vector&lt;int&gt;& arr, int target) {
+    // Write your code here
+
+    vector&lt;vector&lt;int&gt;&gt; ans;
+    sort(arr.begin(), arr.end());
+    for(int i = 0; i &lt; arr.size(); i++)
+    {
+        if(i &gt; 0 && arr[i] == arr[i-1])
+            continue;
+        for(int j = i+1; j &lt; arr.size(); j++)
+        {
+            if(j &gt; i+1 && arr[j] == arr[j-1])
+                continue;
+            int k = j+1;
+            int l = arr.size()-1;
+
+            while(k &lt; l)
+            {
+                long long sum = arr[i] + arr[j] + arr[k] + arr[l];
+
+                if(sum &lt; target)
+                {
+                    k++;
+                }
+                else if(sum &gt; target)
+                {
+                    l--;
+                }
+                else
+                {
+                    ans.push_back({arr[i], arr[j], arr[k], arr[l]});
+                    k++;
+                    l--;
+                    while(k&lt;l && arr[k] == arr[k-1])
+                        k++;
+                    while(k&lt;l && arr[l] == arr[l+1])
+                        l--;
+                }
+            }
+        }
+        
+    }
+    return ans;
+}
+
+
+
+
+
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+vector&lt;vector&lt;int&gt;&gt; fourSum(vector&lt;int&gt;& nums, int target) {
+    int n = nums.size(); //size of the array
+    set&lt;vector&lt;int&gt;&gt; st;
+
+    //checking all possible quadruplets:
+    for (int i = 0; i &lt; n; i++) {
+        for (int j = i + 1; j &lt; n; j++) {
+            set&lt;long long&gt; hashset;
+            for (int k = j + 1; k &lt; n; k++) {
+                // taking bigger data type
+                // to avoid integer overflow:
+                long long sum = nums[i] + nums[j];
+                sum += nums[k];
+                long long fourth = target - sum;
+                if (hashset.find(fourth) != hashset.end()) {
+                    vector&lt;int&gt; temp = {nums[i], nums[j], nums[k], (int)(fourth)};
+                    sort(temp.begin(), temp.end());
+                    st.insert(temp);
+                }
+                // put the kth element into the hashset:
+                hashset.insert(nums[k]);
+            }
+        }
+    }
+    vector&lt;vector&lt;int&gt;&gt; ans(st.begin(), st.end());
+    return ans;
+}
+
+int main()
+{
+    vector&lt;int&gt; nums = {4, 3, 3, 4, 4, 2, 1, 2, 1, 1};
+    int target = 9;
+    vector&lt;vector&lt;int&gt;&gt; ans = fourSum(nums, target);
+    cout &lt;&lt; "The quadruplets are: \n";
+    for (auto it : ans) {
+        cout &lt;&lt; "[";
+        for (auto ele : it) {
+            cout &lt;&lt; ele &lt;&lt; " ";
+        }
+        cout &lt;&lt; "] ";
+    }
+    cout &lt;&lt; "\n";
+    return 0;
+}
+
+
+
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="xyzabc"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

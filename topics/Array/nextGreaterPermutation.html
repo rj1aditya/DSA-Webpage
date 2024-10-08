@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Next Greater Permutation</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #527450;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Next Greater Permutation</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+vector&lt;int&gt; nextGreaterPermutation(vector&lt;int&gt; &A) {
+    // Write your code here.
+
+    int ind = -1;
+    int n = A.size();
+    
+    //Step 1
+    //find the break point
+    for(int i = n-2; i &gt;= 0; i--)
+    {
+        //we need next permutation, which will be greater number
+        //than current number
+        //So we are looking for that break point where A[i] &lt; A[i+1]
+        if(A[i] &lt; A[i+1])
+        {
+            ind = i;
+            break;
+        }
+    }
+    //Corner case if given input itself is the last permutation
+    //So we will reverse the number, to get the very first 
+    //permutation, e.g. 5 4 3 2 1 -> 1 2 3 4 5
+    if (ind== -1) {
+        reverse(A.begin(), A.end());
+        return A;
+    }
+
+    //Step 2
+    //find the minimum number which is greater than A[ind]
+    for(int i = n-1; i &gt; ind; i--)
+    {
+        if(A[ind] &lt; A[i])
+        {
+            swap(A[ind], A[i]);
+            break;
+        }
+    }
+
+    //Step 3
+    //Reverse the Array from A[ind+1] -&gt; A[n]
+    reverse(A.begin()+ind+1, A.end());
+
+    return A;
+}
+        </code></pre>
+        <img
+          src="images/img1.png"
+          alt="nextGreaterPermutation"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        />
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>
