@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Merge Sorted Arrays Without Extra Space</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #527450;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Merge Sorted Arrays Without Extra Space</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+#include&lt;vector&gt;
+
+void mergeTwoSortedArraysWithoutExtraSpace1(vector&lt;long long&gt; &a, vector&lt;long long&gt; &b){
+	// Write your code here.
+
+	int n = a.size();
+	int m = b.size();
+
+	int left = n-1;
+	int right = 0;
+
+	while(a[left] &gt; b[right])
+	{
+		swap(a[left], b[right]);
+		left--;
+		right++;
+	}
+
+	sort(a.begin(), a.end());
+	sort(b.begin(), b.end());
+
+}
+void swapIfGreater(vector&lt;long long&gt; &arr1,vector&lt;long long&gt; &arr2, int ind1, int ind2) {
+    if (arr1[ind1] &gt; arr2[ind2]) {
+        swap(arr1[ind1], arr2[ind2]);
+    }
+}
+//shell sort algo
+void mergeTwoSortedArraysWithoutExtraSpace(vector&lt;long long&gt; &arr1,vector&lt;long long&gt; &arr2) {
+
+    // len of the imaginary single array:
+	int n = arr1.size();
+	int m = arr2.size();
+    int len = n + m;
+
+    // Initial gap:
+    int gap = (len / 2) + (len % 2);
+
+    while (gap &gt; 0) {
+        // Place 2 pointers:
+        int left = 0;
+        int right = left + gap;
+        while (right &lt; len) {
+            // case 1: left in arr1[]
+            //and right in arr2[]:
+            if (left &lt; n && right &gt;= n) {
+                swapIfGreater(arr1, arr2, left, right - n);
+            }
+            // case 2: both pointers in arr2[]:
+            else if (left &gt;= n) {
+                swapIfGreater(arr2, arr2, left - n, right - n);
+            }
+            // case 3: both pointers in arr1[]:
+            else {
+                swapIfGreater(arr1, arr1, left, right);
+            }
+            left++, right++;
+        }
+        // break if iteration gap=1 is completed:
+        if (gap == 1) break;
+
+        // Otherwise, calculate new gap:
+        gap = (gap / 2) + (gap % 2);
+    }
+}
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="xyzabc"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

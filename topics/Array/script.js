@@ -174,6 +174,30 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "Array/mergeOverlapIntervals.html",
       nt: "",
     },
+    {
+      title: "Merge Two Sorted Arrays Without Extra Space",
+      description: ["https://bit.ly/3jLQGSS"],
+      solution: "Array/merge2SortedArrayWOExtraSpace.html",
+      nt: "",
+    },
+    {
+      title: "Find the Missing and Repeating Number",
+      description: ["https://bit.ly/3vK0LT4"],
+      solution: "Array/findMissingAndRepeatingNumber.html",
+      nt: "",
+    },
+    {
+      title: "Reverse Pairs",
+      description: ["https://bit.ly/3Zj9U2L"],
+      solution: "Array/ReversePairs.html",
+      nt: "",
+    },
+    {
+      title: " Subarray With Maximum Product",
+      description: ["https://bit.ly/3VPdyyq"],
+      solution: "Array/subarrWithMaxProduct.html",
+      nt: "",
+    },
     //Dummy #aa8fab
     {
       title: "",
