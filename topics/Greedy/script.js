@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
   const questions = [
     {
-      title: "",
-      description: [""],
-      solution: "Greedy/.html",
+      title: "Assign Cookies",
+      description: ["https://leetcode.com/problems/assign-cookies/"],
+      solution: "Greedy/assignCookies.html",
       nt: "",
     },
     //Dummy #aa8fab
