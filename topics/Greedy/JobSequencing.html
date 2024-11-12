@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Sequencing Problem</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #041e42;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Job Sequencing Problem</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+struct Job
+{
+    int id, deadline, profit;
+};
+
+// Comparator function to sort jobs by profit in descending order
+bool compa(const vector&lt;int&gt; &j1, const vector&lt;int&gt; &j2)
+{
+    return j1[2] &gt; j2[2]; // Sort by profit (j[2]) in descending order
+}
+
+vector&lt;int&gt; jobScheduling(vector&lt;vector&lt;int&gt;&gt; &jobs)
+{
+    // Sort jobs by profit in descending order
+    sort(jobs.begin(), jobs.end(), compa);
+
+    // Find the maximum deadline to set up our scheduling array
+    int maximumDeadline = -1;
+    for (int i = 0; i &lt; jobs.size(); i++)
+    {
+        maximumDeadline = max(maximumDeadline, jobs[i][1]);
+    }
+
+    // Initialize the slot array with -1 (unoccupied)
+    vector&lt;int&gt; hash(maximumDeadline + 1, -1);
+
+    int jobsCnt = 0;
+    int maxProfit = 0;
+
+    // Iterate over each job
+    for (int i = 0; i &lt; jobs.size(); i++)
+    {
+        // Try to find a free slot for this job, starting from its deadline
+        for (int j = jobs[i][1]; j &gt; 0; j--)//job index started from 1 not 0 so j&gt;0 taken
+        {
+            if (hash[j] == -1) // If the slot is free
+            {
+                hash[j] = i; // Assign this slot
+                maxProfit += jobs[i][2]; // Add the profit
+                jobsCnt++; // Increment job count
+                break; // Move to the next job
+            }
+        }
+    }
+
+    // Return the total number of jobs done and the total profit
+    return {jobsCnt, maxProfit};
+}
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="xyzabc"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

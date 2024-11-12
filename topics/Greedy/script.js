@@ -6,6 +6,96 @@ document.addEventListener("DOMContentLoaded", function () {
       solution: "Greedy/assignCookies.html",
       nt: "",
     },
+    {
+      title: "Lemonade Change",
+      description: [
+        "https://leetcode.com/problems/lemonade-change/description/",
+      ],
+      solution: "Greedy/LemonadeChange.html",
+      nt: "",
+    },
+    {
+      title: "Shortest Job First (or SJF) CPU Scheduling",
+      description: [
+        "https://www.geeksforgeeks.org/problems/shortest-job-first/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=shortest-job-first",
+      ],
+      solution: "Greedy/SJF.html",
+      nt: "",
+    },
+    {
+      title: "JumpGame1",
+      description: ["https://leetcode.com/problems/jump-game/description/"],
+      solution: "Greedy/JumpGame1.html",
+      nt: "",
+    },
+    {
+      title: "JumpGame2",
+      description: ["https://leetcode.com/problems/jump-game-ii/description/"],
+      solution: "Greedy/JumpGame2.html",
+      nt: "",
+    },
+    {
+      title: "Job Sequencing Problem",
+      description: [
+        "https://www.naukri.com/code360/problems/job-sequencing-problem_1169460?leftPanelTabValue=PROBLEM",
+      ],
+      solution: "Greedy/JobSequencing.html",
+      nt: "",
+    },
+    {
+      title: "N Meeting in One Room",
+      description: [
+        "https://leetcode.com/problems/maximum-length-of-pair-chain/description/",
+      ],
+      solution: "Greedy/NMeetingInOneroom.html",
+      nt: "",
+    },
+    {
+      title: "Non Overlapping Intervals",
+      description: [
+        "https://leetcode.com/problems/non-overlapping-intervals/description/",
+      ],
+      solution: "Greedy/nonOverLappingIntervals.html",
+      nt: "This problem is similar to prev problem[N Meeting in One Room]",
+    },
+    {
+      title: "insert intervals",
+      description: [
+        "https://leetcode.com/problems/insert-interval/description/",
+      ],
+      solution: "Greedy/insertintervals.html",
+      nt: "",
+    },
+    {
+      title: "Minimum number of platforms required in a railway station",
+      description: [
+        "https://www.geeksforgeeks.org/problems/minimum-platforms-1587115620/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card",
+      ],
+      solution: "Greedy/minimumPlatform.html",
+      nt: "",
+    },
+    {
+      title: "Valid Parenthesis String",
+      description: [
+        "https://leetcode.com/problems/valid-parenthesis-string/description/",
+      ],
+      solution: "Greedy/validParenthesis.html",
+      nt: "",
+    },
+    {
+      title: "Candy Problem",
+      description: ["https://leetcode.com/problems/candy/"],
+      solution: "Greedy/CandyProblem.html",
+      nt: "",
+    },
+    {
+      title: "Fractional Knapsack Algorithm",
+      description: [
+        "https://www.geeksforgeeks.org/problems/fractional-knapsack-1587115620/1",
+      ],
+      solution: "Greedy/FractionalKnapsackAlgo.html",
+      nt: "",
+    },
     //Dummy #aa8fab
     {
       title: "",
