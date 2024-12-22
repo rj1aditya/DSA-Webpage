@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trapping Rain Water</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #c4a484;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Trapping Rain Water</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+//Solution 1
+//SC - O(N)
+//TC - O(2N)
+class Solution1 {
+public:
+    int trap(vector&lt;int&gt;& height) {
+
+        int n = height.size();
+        int leftMax = height[0];
+        int total = 0;
+        vector&lt;int&gt; rightMax(n);
+        rightMax[n-1] = height[n-1];
+
+        for(int i = n-2; i &gt;= 0; i--)
+        {
+            if(height[i] &gt; rightMax[i+1])
+                rightMax[i] = height[i];
+            else
+                rightMax[i] = rightMax[i+1];
+        }
+
+        for(int i = 1; i &lt; n; i++)
+        {
+            int maxi = min(leftMax, rightMax[i]);
+            if(maxi &gt; height[i]) 
+                total += maxi-height[i];
+            leftMax = max(leftMax, height[i]);
+        }
+
+        return total;
+    }
+};
+
+//Solution 2
+//SC - O(1)
+//TC - O(N)
+class Solution {
+public:
+    int trap(vector&lt;int&gt;& height) {
+
+        int leftMax = 0;
+        int rightMax = 0;
+        int total = 0;
+
+        int n = height.size();
+        int l = 0; 
+        int r = n-1;
+
+        while(l &lt; r)
+        {
+            if(height[l] &lt;= height[r])
+            {
+                if(height[l] &gt;= leftMax)
+                    leftMax = height[l];
+                else
+                {
+                    total += leftMax - height[l];
+                }
+                l++;
+            }
+            else
+            {
+                if(height[r] &gt;= rightMax)
+                    rightMax = height[r];
+                else
+                    total += rightMax - height[r];
+
+                r--;
+            }
+        }
+
+        return total;
+    }
+};
+        </code></pre>
+        <img
+          src="images/img1.png"
+          alt="trap rain water"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        />
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

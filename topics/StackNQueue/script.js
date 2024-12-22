@@ -1,10 +1,114 @@
 document.addEventListener("DOMContentLoaded", function () {
   const questions = [
+    {
+      title: "Check for Balanced Parentheses | Stack and Queue",
+      description: [
+        "https://leetcode.com/problems/valid-parentheses/description/",
+      ],
+      solution: "StackNQueue/checkParenthesis.html",
+      nt: "",
+    },
+    {
+      title: "Conversion - Infix to Postfix, Infix to Prefix and so on",
+      description: [
+        "https://www.naukri.com/code360/problems/day-23-:-infix-to-postfix-_1382146?leftPanelTabValue=PROBLEM",
+      ],
+      solution: "StackNQueue/conversions.html",
+      nt: "",
+    },
+    {
+      title: "Min Stack",
+      description: ["https://leetcode.com/problems/min-stack/description/"],
+      solution: "StackNQueue/minstack.html",
+      nt: "",
+    },
+    {
+      title: "Next Greater Element",
+      description: [
+        "https://www.naukri.com/code360/problems/next-greater-element_670312?leftPanelTabValue=PROBLEM",
+      ],
+      solution: "StackNQueue/NGE.html",
+      nt: "",
+    },
+    {
+      title: "Next Greater Element II",
+      description: [
+        "https://leetcode.com/problems/next-greater-element-ii/description/",
+      ],
+      solution: "StackNQueue/nge2.html",
+      nt: "",
+    },
+    {
+      title: "Smaller on Left",
+      description: [
+        "https://www.geeksforgeeks.org/problems/smallest-number-on-left3403/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card",
+      ],
+      solution: "StackNQueue/smallerOnLeft.html",
+      nt: "",
+    },
+    {
+      title: "Trapping Rain Water",
+      description: [
+        "https://leetcode.com/problems/trapping-rain-water/description/",
+      ],
+      solution: "StackNQueue/trapRain.html",
+      nt: "",
+    },
+    {
+      title: "Sum of Subarray Minimum",
+      description: [
+        "https://leetcode.com/problems/sum-of-subarray-minimums/description/",
+      ],
+      solution: "StackNQueue/SumofSubarrayMinimum.html",
+      nt: "",
+    },
+    {
+      title: "",
+      description: [""],
+      solution: "StackNQueue/.html",
+      nt: "",
+    },
+    {
+      title: "",
+      description: [""],
+      solution: "StackNQueue/.html",
+      nt: "",
+    },
+    {
+      title: "",
+      description: [""],
+      solution: "StackNQueue/.html",
+      nt: "",
+    },
+    {
+      title: "",
+      description: [""],
+      solution: "StackNQueue/.html",
+      nt: "",
+    },
+    {
+      title: "",
+      description: [""],
+      solution: "StackNQueue/.html",
+      nt: "",
+    },
+    {
+      title: "",
+      description: [""],
+      solution: "StackNQueue/.html",
+      nt: "",
+    },
+    {
+      title: "",
+      description: [""],
+      solution: "StackNQueue/.html",
+      nt: "",
+    },
     //Dummy #aa8fab
     {
       title: "",
       description: [""],
-      solution: "Greedy/.html",
+      solution: "StackNQueue/.html",
       nt: "",
     },
     // Add more question objects here
