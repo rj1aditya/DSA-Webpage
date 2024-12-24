@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LFU Cache</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #c4a484;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>LFU Cache</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+class Node {
+public:
+    // key-value pair and frequency count
+    int key, value, cnt; 
+    Node* next;
+    Node* prev;
+
+    // Constructor to initialize a node with key, value, 
+    //and frequency count = 1
+    Node(int k, int v) : key(k), value(v), cnt(1), next(nullptr), prev(nullptr) {}
+};
+
+class List {
+public:
+    Node* head; 
+    Node* tail;
+
+    // Tracks the number of nodes in this frequency list
+    int listSize; 
+
+    List() : head(nullptr), tail(nullptr), listSize(0) {}
+
+    void insertNode(Node* node) {
+        listSize++;
+        if (!head) {
+            head = tail = node;
+        } else {
+            node-&gt;next = head;
+            head-&gt;prev = node;
+            head = node;
+        }
+    }
+
+    void deleteNode(Node* node) {
+        listSize--;
+        if (node-&gt;prev) node-&gt;prev-&gt;next = node-&gt;next;
+        if (node-&gt;next) node-&gt;next-&gt;prev = node-&gt;prev;
+        if (node == head) head = node-&gt;next;
+        if (node == tail) tail = node-&gt;prev;
+        node-&gt;prev = node-&gt;next = nullptr;
+    }
+};
+
+class LFUCache {
+    // Maximum capacity of the cache
+    int cap; 
+
+    // Tracks the current minimum frequency in the cache
+    int minimumFreq; 
+
+    // Maps frequency to a linked list of nodes with that frequency
+    unordered_map&lt;int, List*&gt; freqMaplist; 
+
+    // Maps keys to their corresponding node in the cache
+    unordered_map&lt;int, Node*&gt; nodeAddress; 
+
+    // Helper function to update the frequency of a node
+    void updateFreq(Node* node) {
+        int freq = node-&gt;cnt;
+        freqMaplist[freq]-&gt;deleteNode(node);
+
+        // If the current list becomes empty and the node's frequency 
+        //matches the minimum, update minimumFreq
+        if (freqMaplist[freq]-&gt;listSize == 0) {
+            delete freqMaplist[freq]; // Clean up the empty list
+            freqMaplist.erase(freq);
+            if (minimumFreq == freq) minimumFreq++;
+        }
+
+        // Increment the node's frequency
+        node-&gt;cnt++;
+        // Add the node to the new frequency list
+        if (freqMaplist.find(node-&gt;cnt) == freqMaplist.end()) {
+            freqMaplist[node-&gt;cnt] = new List();
+        }
+        freqMaplist[node-&gt;cnt]-&gt;insertNode(node);
+    }
+
+public:
+    // Constructor to initialize the LFU Cache with a given capacity
+    LFUCache(int capacity) : cap(capacity), minimumFreq(0) {}
+
+    // Get the value of the key if it exists in the cache
+    int get(int key) {
+        if (nodeAddress.find(key) == nodeAddress.end()) return -1; // Key not found
+        Node* node = nodeAddress[key];
+        updateFreq(node); // Update the frequency of the accessed node
+        return node-&gt;value;
+    }
+
+    // Put a key-value pair in the cache
+    void put(int key, int value) {
+        if (cap == 0) return; // If capacity is 0, do nothing
+
+        if (nodeAddress.find(key) != nodeAddress.end()) {
+            // If the key exists, update its value and frequency
+            Node* node = nodeAddress[key];
+            node-&gt;value = value;
+            updateFreq(node);
+        } else {
+            // If the key doesn't exist
+            if (nodeAddress.size() == cap) {
+                // If the cache is full, evict the least frequently used node
+                List* minFreqList = freqMaplist[minimumFreq];
+                Node* toDelete = minFreqList-&gt;tail; // Tail holds the least recently used node
+                nodeAddress.erase(toDelete-&gt;key);  // Remove from the node map
+                minFreqList-&gt;deleteNode(toDelete); // Remove from the frequency list
+                if (minFreqList-&gt;listSize == 0) {
+                    delete freqMaplist[minimumFreq]; // Clean up the empty list
+                    freqMaplist.erase(minimumFreq);
+                }
+            }
+
+            // Add the new node with frequency 1
+            Node* newNode = new Node(key, value);
+            minimumFreq = 1; // Reset minimum frequency to 1
+            if (freqMaplist.find(minimumFreq) == freqMaplist.end()) {
+                freqMaplist[minimumFreq] = new List();
+            }
+            freqMaplist[minimumFreq]-&gt;insertNode(newNode);
+            nodeAddress[key] = newNode;
+        }
+    }
+
+    // Destructor to clean up dynamically allocated memory
+    ~LFUCache() {
+        for (auto& [freq, list] : freqMaplist) {
+            delete list; // Delete all lists
+        }
+        for (auto& [key, node] : nodeAddress) {
+            delete node; // Delete all nodes
+        }
+    }
+};
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="xyzabc"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

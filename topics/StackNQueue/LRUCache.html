@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LRU Cache</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #c4a484;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>LRU Cache</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+class Node
+{
+    public:
+    Node *left;
+    Node *right;
+    int val;
+    int key;
+    Node(int k, int v): val(v), key(k)
+    {
+        left = right = NULL;
+    }
+};
+
+class LRUCache {
+
+int size;
+int cap;
+Node* head;
+Node* tail;
+unordered_map&lt;int, Node*&gt; m;
+public:
+LRUCache(int capacity) {
+    cap = capacity;
+    size = 0;
+    head = tail = nullptr;
+}
+void insert_node(Node* ptr)
+{
+    if(head == nullptr)
+        head = tail = ptr;
+    else
+    {
+        tail-&gt;right = ptr;
+        ptr-&gt;left = tail;
+        tail = ptr;
+    }
+}
+
+void delete_node(Node* ptr)
+{
+    if(ptr-&gt;left == NULL)
+        head = head-&gt;right;
+    else
+        ptr-&gt;left-&gt;right = ptr-&gt;right;
+    
+    if(ptr-&gt;right == NULL)
+        tail = tail-&gt;left;
+    else
+        ptr-&gt;right-&gt;left = ptr-&gt;left;
+    
+    ptr-&gt;right = ptr-&gt;left = nullptr;
+}
+
+
+int get(int key) {
+    if(m.find(key) == m.end())
+        return -1;
+    
+    Node* ans = m[key];
+    
+    delete_node(ans);
+    insert_node(ans);
+
+    return ans-&gt;val;
+    
+}
+
+void put(int key, int value) {
+    if(m.find(key) == m.end())
+    {
+        Node* newN = new Node(key, value);
+        
+        if(size == cap)
+        {
+            m.erase(head-&gt;key);
+            delete_node(head);
+            insert_node(newN);
+        }
+        else
+        {
+            size++;
+            insert_node(newN);
+        }
+        m[key] = newN;
+    }
+    else
+    {
+        Node *temp = m[key];
+        temp-&gt;val = value;
+        delete_node(temp);
+        insert_node(temp);
+    }
+}
+};
+
+/**
+* Your LRUCache object will be instantiated and called as such:
+* LRUCache* obj = new LRUCache(capacity);
+* int param_1 = obj-&gt;get(key);
+* obj-&gt;put(key,value);
+*/
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="xyzabc"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

@@ -123,15 +123,15 @@ document.addEventListener("DOMContentLoaded", function () {
       nt: "",
     },
     {
-      title: "",
-      description: [""],
-      solution: "StackNQueue/.html",
+      title: "Implement LRU Cache",
+      description: ["https://leetcode.com/problems/lru-cache/description/"],
+      solution: "StackNQueue/LRUCache.html",
       nt: "",
     },
     {
-      title: "",
-      description: [""],
-      solution: "StackNQueue/.html",
+      title: "LFU Cache",
+      description: ["https://leetcode.com/problems/lfu-cache/description/"],
+      solution: "StackNQueue/LFUCache.html",
       nt: "",
     },
     //Dummy #aa8fab
