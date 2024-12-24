@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sum of Subarray Minimum</title>
+    <title>Maximum Rectangle</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Sum of Subarray Minimum</h2>
+        <h2>Maximum Rectangle</h2>
       </div>
     </div>
     <div class="container">
@@ -59,68 +59,71 @@
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
 class Solution {
-    vector&lt;int&gt; findNSE(vector&lt;int&gt; &arr) {
-        stack&lt;int&gt; st;
-        vector&lt;int&gt; nse(arr.size(), arr.size());
-        for (int i = arr.size() - 1; i &gt;= 0; i--) {
-            while (!st.empty() && arr[st.top()] &gt;= arr[i])
-                st.pop();
 
-            if (!st.empty()) {
-                nse[i] = st.top();
+    int findMaximumRectangleInHistogram(vector&lt;int&gt; matrix)
+    {
+        stack&lt;int&gt; st;
+        st.push(-1);
+        int maxi = 0;
+        for(int i = 0; i &lt; matrix.size(); i++)
+        {
+            while(st.top() != -1 && matrix[st.top()] &gt; matrix[i])
+            {
+                int ind = st.top();
+                st.pop();
+                int width = i - st.top() - 1;
+                maxi = max(maxi, matrix[ind]*width);
             }
             st.push(i);
         }
-        return nse;
+    
+        while(st.top() != -1)
+        {
+            int ind = st.top();
+            st.pop();
+            int width = matrix.size() - st.top() - 1;
+            maxi = max(maxi, matrix[ind]*width);
+        }
+    
+        return maxi;
     }
-
-    vector&lt;int&gt; findPSEE(vector&lt;int&gt; &arr) {
-        stack&lt;int&gt; st;
-        vector&lt;int&gt; psee(arr.size(), -1);
-        for (int i = 0; i &lt; arr.size(); i++) {
-            while (!st.empty() && arr[st.top()] &gt; arr[i])
-                st.pop();
-
-            if (!st.empty()) {
-                psee[i] = st.top();
+    
+    public:
+        int maximalRectangle(vector&lt;vector&lt;char&gt;&gt;& matrix) {
+            int n = matrix.size();
+            int m = matrix[0].size();
+            int maxi = 0;
+            //making prefixsum
+            vector&lt;vector&lt;int&gt;&gt; newM(n, vector&lt;int&gt;(m, 0));
+            for(int j = 0; j &lt; m; j++)
+            {
+                int sum = 0;
+                for(int i = 0; i &lt; n; i++)
+                {
+                    sum += matrix[i][j] - '0';
+                    if(matrix[i][j] == '0')
+                        sum = 0;
+                    
+                    newM[i][j] = sum;
+                }
             }
-            st.push(i);
+    
+            for(int i = 0; i &lt; n; i++)
+            {
+                maxi = max(maxi, findMaximumRectangleInHistogram(newM[i]));
+            }
+    
+            return maxi;
         }
-        return psee;
-    }
-
-public:
-    int sumSubarrayMins(vector&lt;int&gt;& arr) {
-        int mod = 1e9 + 7;
-        vector&lt;int&gt; nse = findNSE(arr);
-        vector&lt;int&gt; psee = findPSEE(arr);
-
-        long long total = 0; // Use long long for intermediate calculations
-        for (int i = 0; i &lt; arr.size(); i++) {
-            long long x = i - psee[i];
-            long long y = nse[i] - i;
-
-            total = (total + (x * y % mod) * arr[i] % mod) % mod;
-        }
-
-        return total;
-    }
-};
+    };
         </code></pre>
-        <img
-          src="images/img2.png"
+        <!-- <img
+          src="images/"
           alt="xyzabc"
           width="700"
           height="450"
           style="display: block; margin: 0 auto"
-        />
-        <img
-          src="images/img3.png"
-          alt="xyzabc"
-          width="700"
-          height="450"
-          style="display: block; margin: 0 auto"
-        />
+        /> -->
       </div>
 
       <h2>Java Solution</h2>

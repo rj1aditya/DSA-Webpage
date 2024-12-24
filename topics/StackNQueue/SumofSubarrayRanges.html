@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sum of Subarray Minimum</title>
+    <title>Sum of Subarray Ranges</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Sum of Subarray Minimum</h2>
+        <h2>Sum of Subarray Ranges</h2>
       </div>
     </div>
     <div class="container">
@@ -59,63 +59,109 @@
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
 class Solution {
-    vector&lt;int&gt; findNSE(vector&lt;int&gt; &arr) {
+    vector&lt;int&gt; nse(vector&lt;int&gt;& nums)
+    {
         stack&lt;int&gt; st;
-        vector&lt;int&gt; nse(arr.size(), arr.size());
-        for (int i = arr.size() - 1; i &gt;= 0; i--) {
-            while (!st.empty() && arr[st.top()] &gt;= arr[i])
+        int n = nums.size();
+        vector&lt;int&gt; ans(n, n);
+        for(int i  = n-1; i &gt;= 0; i--)
+        {
+            while(!st.empty() && nums[st.top()] &gt;= nums[i])
                 st.pop();
+            
+            if(!st.empty())
+                ans[i] = st.top();
 
-            if (!st.empty()) {
-                nse[i] = st.top();
-            }
-            st.push(i);
+            st.push(i); 
         }
-        return nse;
+        return ans;
+    }
+    vector&lt;int&gt; psee(vector&lt;int&gt;& nums)
+    {
+        stack&lt;int&gt; st;
+        int n = nums.size();
+        vector&lt;int&gt; ans(n, -1);
+        for(int i  = 0; i &lt; n ; i++)
+        {
+            while(!st.empty() && nums[st.top()] &gt; nums[i])
+                st.pop();
+            
+            if(!st.empty())
+                ans[i] = st.top();
+
+            st.push(i); 
+        }
+        return ans;
     }
 
-    vector&lt;int&gt; findPSEE(vector&lt;int&gt; &arr) {
+    vector&lt;int&gt; nme(vector&lt;int&gt;& nums)
+    {
         stack&lt;int&gt; st;
-        vector&lt;int&gt; psee(arr.size(), -1);
-        for (int i = 0; i &lt; arr.size(); i++) {
-            while (!st.empty() && arr[st.top()] &gt; arr[i])
+        int n = nums.size();
+        vector&lt;int&gt; ans(n, n);
+        for(int i  = n-1; i &gt;= 0; i--)
+        {
+            while(!st.empty() && nums[st.top()] &lt;= nums[i])
                 st.pop();
+            
+            if(!st.empty())
+                ans[i] = st.top();
 
-            if (!st.empty()) {
-                psee[i] = st.top();
-            }
-            st.push(i);
+            st.push(i); 
         }
-        return psee;
+        return ans;
     }
+    vector&lt;int&gt; pmee(vector&lt;int&gt;& nums)
+    {
+        stack&lt;int&gt; st;
+        int n = nums.size();
+        vector&lt;int&gt; ans(n, -1);
+        for(int i  = 0; i &lt; n ; i++)
+        {
+            while(!st.empty() && nums[st.top()] &lt; nums[i])
+                st.pop();
+            
+            if(!st.empty())
+                ans[i] = st.top();
 
+            st.push(i); 
+        }
+        return ans;
+    }
 public:
-    int sumSubarrayMins(vector&lt;int&gt;& arr) {
-        int mod = 1e9 + 7;
-        vector&lt;int&gt; nse = findNSE(arr);
-        vector&lt;int&gt; psee = findPSEE(arr);
+    long long subArrayRanges(vector&lt;int&gt;& nums) {
 
-        long long total = 0; // Use long long for intermediate calculations
-        for (int i = 0; i &lt; arr.size(); i++) {
-            long long x = i - psee[i];
-            long long y = nse[i] - i;
+        int n = nums.size();
+        vector&lt;int&gt; p = nse(nums);
+        vector&lt;int&gt; q = psee(nums);
+        vector&lt;int&gt; r = nme(nums);
+        vector&lt;int&gt; t = pmee(nums);
 
-            total = (total + (x * y % mod) * arr[i] % mod) % mod;
+        long long largestSum = 0;
+        long long smallestSum = 0;
+
+        //finding smallestsum
+        for(int i = 0; i &lt; n; i++)
+        {
+            long long a = p[i] - i;
+            long long b = i - q[i];
+            smallestSum = (smallestSum + (a*b)*nums[i]);
         }
 
-        return total;
+        //finding largestsum
+        for(int i = 0; i &lt; n; i++)
+        {
+            long long a = r[i] - i;
+            long long b = i - t[i];
+            largestSum = (largestSum + (a*b)*nums[i]);
+        }
+
+        return largestSum-smallestSum;
     }
 };
         </code></pre>
         <img
-          src="images/img2.png"
-          alt="xyzabc"
-          width="700"
-          height="450"
-          style="display: block; margin: 0 auto"
-        />
-        <img
-          src="images/img3.png"
+          src="images/img4.png"
           alt="xyzabc"
           width="700"
           height="450"

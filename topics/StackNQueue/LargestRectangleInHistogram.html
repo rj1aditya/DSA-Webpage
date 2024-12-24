@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sum of Subarray Minimum</title>
+    <title>Largest Rectangle in Histogram</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>Sum of Subarray Minimum</h2>
+        <h2>Largest Rectangle in Histogram</h2>
       </div>
     </div>
     <div class="container">
@@ -59,63 +59,42 @@
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
 class Solution {
-    vector&lt;int&gt; findNSE(vector&lt;int&gt; &arr) {
-        stack&lt;int&gt; st;
-        vector&lt;int&gt; nse(arr.size(), arr.size());
-        for (int i = arr.size() - 1; i &gt;= 0; i--) {
-            while (!st.empty() && arr[st.top()] &gt;= arr[i])
-                st.pop();
-
-            if (!st.empty()) {
-                nse[i] = st.top();
-            }
-            st.push(i);
-        }
-        return nse;
-    }
-
-    vector&lt;int&gt; findPSEE(vector&lt;int&gt; &arr) {
-        stack&lt;int&gt; st;
-        vector&lt;int&gt; psee(arr.size(), -1);
-        for (int i = 0; i &lt; arr.size(); i++) {
-            while (!st.empty() && arr[st.top()] &gt; arr[i])
-                st.pop();
-
-            if (!st.empty()) {
-                psee[i] = st.top();
-            }
-            st.push(i);
-        }
-        return psee;
-    }
-
-public:
-    int sumSubarrayMins(vector&lt;int&gt;& arr) {
-        int mod = 1e9 + 7;
-        vector&lt;int&gt; nse = findNSE(arr);
-        vector&lt;int&gt; psee = findPSEE(arr);
-
-        long long total = 0; // Use long long for intermediate calculations
-        for (int i = 0; i &lt; arr.size(); i++) {
-            long long x = i - psee[i];
-            long long y = nse[i] - i;
-
-            total = (total + (x * y % mod) * arr[i] % mod) % mod;
-        }
-
-        return total;
-    }
-};
+  public:
+      int largestRectangleArea(vector&lt;int&gt;& heights) {
+          stack&lt;int&gt; st;
+          int maxi = 0;
+          int n = heights.size();
+  
+          // Push a sentinel index to mark the base
+          st.push(-1);
+  
+          for (int i = 0; i &lt; n; i++) {
+              // Process all bars that are taller than the current bar
+              while (st.top() != -1 && heights[i] &lt; heights[st.top()]) {
+                  int ind = st.top();
+                  st.pop();
+                  int height = heights[ind];
+                  int width = i - st.top() - 1; // Calculate width
+                  maxi = max(maxi, height * width);
+              }
+              st.push(i);
+          }
+  
+          // Process the remaining bars in the stack
+          while (st.top() != -1) {
+              int ind = st.top();
+              st.pop();
+              int height = heights[ind];
+              int width = n - st.top() - 1; // Calculate width
+              maxi = max(maxi, height * width);
+          }
+  
+          return maxi;
+      }
+  };
         </code></pre>
         <img
-          src="images/img2.png"
-          alt="xyzabc"
-          width="700"
-          height="450"
-          style="display: block; margin: 0 auto"
-        />
-        <img
-          src="images/img3.png"
+          src="images/img5.png"
           alt="xyzabc"
           width="700"
           height="450"
