@@ -99,6 +99,30 @@ document.addEventListener("DOMContentLoaded", function () {
       nt: "",
     },
     {
+      title: "Stock Span Problem",
+      description: [
+        "https://leetcode.com/problems/online-stock-span/description/",
+      ],
+      solution: "StackNQueue/StockSpan.html",
+      nt: "",
+    },
+    {
+      title: "Sliding Window Maximum",
+      description: [
+        "https://leetcode.com/problems/sliding-window-maximum/description/",
+      ],
+      solution: "StackNQueue/SlidingWindowMaximum.html",
+      nt: "",
+    },
+    {
+      title: "The Celebrity Problem",
+      description: [
+        "https://www.geeksforgeeks.org/problems/the-celebrity-problem/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card",
+      ],
+      solution: "StackNQueue/celebrityProblem.html",
+      nt: "",
+    },
+    {
       title: "",
       description: [""],
       solution: "StackNQueue/.html",
