@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>aaaaa</title>
+    <title>Single Number 3</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>aaaaa</h2>
+        <h2>Single Number 3</h2>
       </div>
     </div>
     <div class="container">
@@ -58,15 +58,43 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-
+class Solution {
+    public:
+        vector&lt;int&gt; singleNumber(vector&lt;int&gt;& nums) {
+            long long xorr = nums[0];  // XOR all elements (long long to avoid overflow)
+    
+            int n = nums.size();
+            for(int i = 1; i &lt; n; i++) {
+                xorr = xorr ^ nums[i];  // XOR the current number with previous result
+            }
+    
+            // Find the rightmost set bit (differentiates the two unique numbers)
+            long long rightMostBitSetNumber = (xorr & (xorr - 1)) ^ xorr;
+    
+            // Initialize two numbers to hold the result
+            int b1 = 0, b2 = 0;
+    
+            // Divide the numbers into two groups based on the rightmost set bit
+            for(int i = 0; i &lt; n; i++) {
+                if (rightMostBitSetNumber & nums[i]) {  // Check if the rightmost bit is set
+                    b1 = b1 ^ nums[i];  // XOR the number into b1
+                } else {
+                    b2 = b2 ^ nums[i];  // XOR the number into b2
+                }
+            }
+    
+            // Return the two unique numbers
+            return {b1, b2};
+        }
+    };
         </code></pre>
-        <!-- <img
-          src="images/"
+        <img
+          src="images/img7.png"
           alt="xyzabc"
           width="700"
           height="450"
           style="display: block; margin: 0 auto"
-        /> -->
+        />
       </div>
 
       <h2>Java Solution</h2>

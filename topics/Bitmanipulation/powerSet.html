@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>aaaaa</title>
+    <title>Power Set</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>aaaaa</h2>
+        <h2>Power Set</h2>
       </div>
     </div>
     <div class="container">
@@ -58,15 +58,42 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-
+class Solution{
+	public:
+		vector&lt;string&gt; AllPossibleStrings(string str){
+		    // Code here
+		    
+		    int size = str.length();
+		    vector&lt;string&gt; ans;
+		    //loop will run through 2^size -1
+		    for(int num = 0; num &lt; (1 &lt;&lt; size); num++)
+		    {
+		        //check which bit is set in a num
+		        string s = "";
+                for(int n = 0; n &lt; size; n++)
+                {
+                    int x = 1;
+                    x = x &lt;&lt; n;
+                    if(x & num)
+                    {
+                        s = s+ str[n];
+                    }
+                }
+                if(s.length() &gt; 0)
+                    ans.push_back(s);
+		    }
+		    sort(ans.begin(), ans.end());
+		    return ans;
+		}
+};
         </code></pre>
-        <!-- <img
-          src="images/"
+        <img
+          src="images/img2.png"
           alt="xyzabc"
           width="700"
           height="450"
           style="display: block; margin: 0 auto"
-        /> -->
+        />
       </div>
 
       <h2>Java Solution</h2>

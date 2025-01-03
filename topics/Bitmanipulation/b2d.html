@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>aaaaa</title>
+    <title>Binary to decimal</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>aaaaa</h2>
+        <h2>Binary to decimal</h2>
       </div>
     </div>
     <div class="container">
@@ -58,7 +58,23 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-
+class Solution {
+    public:
+      int binary_to_decimal(string &b) {
+          // Code here.
+          
+          int p2=1;
+          int ans = 0;
+          for(int i = b.length()-1; i &gt;= 0; i--)
+          {
+              if(b[i] == '1')
+                  ans += p2;
+              
+              p2 = p2*2;
+          }
+          return ans;
+      }
+  };
         </code></pre>
         <!-- <img
           src="images/"

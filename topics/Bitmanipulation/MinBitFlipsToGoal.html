@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>aaaaa</title>
+    <title>Minimum Bit Flips to Convert Number</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>aaaaa</h2>
+        <h2>Minimum Bit Flips to Convert Number</h2>
       </div>
     </div>
     <div class="container">
@@ -58,15 +58,32 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-
+class Solution {
+    public:
+        int minBitFlips(int start, int goal) {
+            
+            //it will set and flip all those bit which needed 
+            //to be flip to make goal from start
+            int ans = start ^ goal;
+    
+            //count number of bit set in ans
+            int count = 0;
+            while(ans)
+            {
+                ans = ans & (ans-1);
+                count++;
+            }
+            return count;
+        }
+    };
         </code></pre>
-        <!-- <img
-          src="images/"
+        <img
+          src="images/img1.png"
           alt="xyzabc"
           width="700"
           height="450"
           style="display: block; margin: 0 auto"
-        /> -->
+        />
       </div>
 
       <h2>Java Solution</h2>

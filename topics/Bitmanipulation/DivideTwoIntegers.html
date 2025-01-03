@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>aaaaa</title>
+    <title>Divide Two Integers</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>aaaaa</h2>
+        <h2>Divide Two Integers</h2>
       </div>
     </div>
     <div class="container">
@@ -58,7 +58,39 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-
+class Solution {
+    public:
+        int divide(int dividend, int divisor) {
+            // Handle overflow case
+            if (dividend == INT_MIN && divisor == -1) return INT_MAX;
+    
+            // Determine the sign of the result
+            bool sign = (dividend &lt; 0) == (divisor &lt; 0);
+    
+            // Convert to positive values using long to avoid overflow
+            long N = abs((long)dividend);
+            long d = abs((long)divisor);
+    
+            long quotient = 0;
+    
+            // Perform bitwise division
+            while (N &gt;= d) {
+                long cnt = 0;
+                while (N &gt;= (d &lt;&lt; (cnt + 1))) {
+                    cnt++;
+                }
+                quotient += (1L &lt;&lt; cnt);  // Add 2^cnt to quotient
+                N -= (d &lt;&lt; cnt);         // Subtract d * 2^cnt from N
+            }
+    
+            // Apply sign and clamp the result
+            quotient = sign ? quotient : -quotient;
+            if (quotient &gt; INT_MAX) return INT_MAX;
+            if (quotient &lt; INT_MIN) return INT_MIN;
+    
+            return quotient;
+        }
+    };
         </code></pre>
         <!-- <img
           src="images/"

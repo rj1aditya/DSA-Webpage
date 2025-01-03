@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Single Numer 2</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #232d3f;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Single Numer 2</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+class Solution {
+    public:
+        int singleNumber1(vector&lt;int&gt;& nums) {
+            //will check all the bits in the number from 0 to 31
+            //we check same bit in all the number
+            //then move to another bit
+            int ans = 0;
+            for(int bitIndex = 0; bitIndex &lt; 32; bitIndex++)
+            {
+                int count = 0;
+                //here we check the bit in all the number
+                //then count the number of that bit set in which number
+                for(int i = 0; i &lt; nums.size(); i++)
+                {
+                    if(nums[i] & ( 1 &lt;&lt; bitIndex ) )
+                        count++;
+                }
+                //if number is more than 3 times and not multiple of 3 
+                //it means this bit is part of that unique number
+                if(count % 3 == 1)
+                    ans = ans | ( 1&lt;&lt;bitIndex );
+            }
+            return ans;
+        }
+        
+        int singleNumber2(vector&lt;int&gt;& nums) {
+    
+            sort(nums.begin(), nums.end());
+            for(int i = 1; i &lt; nums.size(); i = i+3)
+            {
+                if(nums[i] != nums[i-1])
+                    return nums[i-1];
+            }
+    
+            return nums[nums.size()-1];
+        }
+    
+        int singleNumber(vector&lt;int&gt;& nums) {
+            int ones = 0;
+            int twos = 0;
+    
+            for(int i = 0; i &lt; nums.size(); i++)
+            {
+                //It means if number is not in two so ADD in ones, if
+                //Number in already in ones then delete this number from One,
+                //later statement will add this number
+                ones = ones ^ nums[i] & (~twos);
+
+                //It means if number is in ones so ADD in two
+                twos = twos ^ nums[i] & (~ones);
+            }
+            return ones;
+        }
+    };
+        </code></pre>
+        <img
+          src="images/img4.png"
+          alt="xyzabc"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        />
+        <img
+          src="images/img5.png"
+          alt="xyzabc"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        />
+        <img
+          src="images/img6.png"
+          alt="xyzabc"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        />
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

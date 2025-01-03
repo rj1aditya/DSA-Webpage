@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>aaaaa</title>
+    <title>Single Number</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>aaaaa</h2>
+        <h2>Single Number</h2>
       </div>
     </div>
     <div class="container">
@@ -58,15 +58,25 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-
+class Solution {
+    public:
+        int singleNumber(vector&lt;int&gt;& nums) {
+            int ans = nums[0];
+    
+            for(int i = 1; i &lt; nums.size(); i++)
+                ans = ans ^ nums[i];
+    
+            return ans;
+        }
+    };
         </code></pre>
-        <!-- <img
-          src="images/"
+        <img
+          src="images/img3.png"
           alt="xyzabc"
           width="700"
           height="450"
           style="display: block; margin: 0 auto"
-        /> -->
+        />
       </div>
 
       <h2>Java Solution</h2>

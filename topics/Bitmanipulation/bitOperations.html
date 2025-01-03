@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bit Operations</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #232d3f;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Bit Operations</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+//Swap 2 number
+
+void swap(int &x, int &y) {
+    cout &lt;&lt; "Before swap value of x and y are: " &lt;&lt; x &lt;&lt; " " &lt;&lt; y &lt;&lt; endl;
+
+    // XOR swap logic
+    x = x ^ y; // Step 1: x now holds (x XOR y)
+    y = x ^ y; // Step 2: y now holds the original value of x
+    x = x ^ y; // Step 3: x now holds the original value of y
+
+    cout &lt;&lt; "After swap value of x and y are: " &lt;&lt; x &lt;&lt; " " &lt;&lt; y &lt;&lt; endl;
+}
+
+
+// Function to check if the nth bit is set
+bool checkNthBit(int num, int nth) {
+    int x = 1;        // Start with 1 (000...001 in binary)
+    x = x &lt;&lt; nth;     // Shift 1 left by `nth` positions (to create a mask)
+
+    // Perform bitwise AND to isolate the nth bit and return true if it's set.
+    return (num & x); 
+}
+
+
+// Function to check if the nth bit is set using right shift operator
+bool checkNthBit(int num, int nth) {
+    num = num &gt;&gt; nth;  // Right-shift the number by `nth` positions
+    return (num & 1);  // Check the least significant bit (LSB)
+}
+
+// Function to set the nth bit
+void setNthBit(int &num, int nth) {
+    int x = 1;        // Start with 1 (000...001 in binary)
+    x = x &lt;&lt; nth;     // Shift 1 left by `nth` positions to create a mask
+
+    num = num | x;    // Use bitwise OR to set the nth bit
+}
+
+// Function to clear the nth bit
+void clearNthBit(int &num, int nth) {
+    int x = 1;         // Start with 1 (000...001 in binary)
+    x = x &lt;&lt; nth;      // Shift 1 left by `nth` positions to create a mask
+    x = ~x;            // Flip all bits to create a mask where the nth bit is 0 and all others are 1
+
+    num = num & x;     // Use bitwise AND to clear the nth bit
+}
+
+// Function to toggle the nth bit
+void toggleNthBit(int &num, int nth) {
+    int x = 1;         // Start with 1 (000...001 in binary)
+    x = x &lt;&lt; nth;      // Shift 1 left by `nth` positions to create a mask
+
+    num = num ^ x;     // Use bitwise XOR to toggle the nth bit
+}
+
+// Function to remove the last set bit
+void removeLastSetBit(int &num) {
+    num = num & (num - 1); // Clears the last set bit
+}
+
+bool checkNumberIsPowerOf2(int num)
+{
+    // A number is a power of 2 if:
+    // 1. It is greater than 0.
+    // 2. It has only one set bit, which is true when `num & (num - 1) == 0`.
+    return num &gt; 0 && (num & (num - 1)) == 0;
+}
+
+// Function to count set bits using bitwise right shift
+int countSetBits1(unsigned int n) 
+{ 
+     int count = 0; 
+     while (n) 
+     { 
+          count += n & 1; //[n&1 equivalent to n%2 == 1]// if last bit is set it means its a odd
+          n &gt;&gt;= 1; //equivalent to n/2
+      } 
+      return count; 
+}
+
+// Function to count set bits using bitwise right shift
+int countSetBits1(unsigned int n) 
+{
+    int count = 0;
+    while(n)
+    {
+        n = n & (n-1); //we have down the last bit set
+        count++;
+    }
+
+    return count;
+}
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="xyzabc"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>
