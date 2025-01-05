@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Count Prime in range</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0; /* Light gray background color */
+      }
+
+      .header {
+        background-color: #ffa8b6;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background color for container */
+        padding: 20px;
+        border-radius: 5px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+      }
+
+      pre {
+        background-color: #f9f9f9; /* Light gray background color for code blocks */
+        padding: 10px; /* Add padding to create space around the code */
+        border-radius: 5px; /* Rounded corners for code blocks */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        margin: 0; /* Remove any default margins */
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Andale Mono", monospace;
+        padding: 0; /* Remove any default padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-content">
+        <!-- <h1>Data Structure Algorithm</h1>-->
+        <h2>Count Prime in range</h2>
+      </div>
+    </div>
+    <div class="container">
+      <h2>C++ Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-cpp line-numbers">
+// C++ solution code goes here
+                                
+#include &lt;vector&gt;
+#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+// Function to generate sieve of Eratosthenes
+// to find all prime numbers up to a specified
+// up to a specified integer 'n'
+vector&lt;int&gt; getSieve(int n) {
+    // Create a Sieve with size 'n + 1'
+    // and initialize all elements to 1,
+    // assuming all numbers are prime initially
+    vector&lt;int&gt; prime(n + 1, 1);
+    // Mark 0 and 1 as not prime
+    prime[0] = prime[1] = 0;
+    
+    // Iterate from 2 to the
+    // square root of 'n'
+    for (int i = 2; i &lt;= sqrt(n); ++i) {
+        // Check if the current
+        // number 'i' is prime
+        if (prime[i] == 1) {
+            // Mark multiples of
+            // 'i' as not prime
+            for (int j = i * i; j &lt;= n; j += i) {
+                prime[j] = 0;
+            }
+        }
+    }
+    
+    // Return the vector
+    // containing prime indicators
+    return prime;
+}
+
+// Function to count primes
+// between given numbers in queries
+vector&lt;int&gt; countPrimes(vector&lt;vector&lt;int&gt;&gt;& queries) {
+    // Generate sieve of Eratosthenes
+    // up to a limit of 1000000
+    vector&lt;int&gt; prime = getSieve(1000000);
+    // Initialize vector 'ans' to store
+    // the counts of primes for each query
+    vector&lt;int&gt; ans;
+    
+    // Count the number of primes
+    // up to each index in the sieve
+    int cnt = 0;
+    for (int i = 2; i &lt;= 1000000; i++) {
+        cnt += prime[i];
+        prime[i] = cnt;
+    }
+    
+    // Process each query
+    for (int i = 0; i &lt; queries.size(); i++) {
+        // Extract the left and right
+        // endpoints of the current query
+        int l = queries[i][0];
+        int r = queries[i][1];
+        // Calculate the number of primes
+        // between 'l' and 'r' using precomputed
+        // counts from the sieve
+        ans.push_back(prime[r] - prime[l - 1]);
+    }
+    
+    // Return the vector containing
+    // counts of primes for each query
+    return ans;
+}
+
+
+int main() {
+    int Q = 3;
+    vector&lt;vector&lt;int&gt;&gt; queries = {{3, 10}, {8, 20}, {1, 5}};
+    cout &lt;&lt; "No. of Queries: "&lt;&lt; queries.size() &lt;&lt; endl;
+    cout &lt;&lt; "Queries: ";
+    for(auto query: queries){
+        cout &lt;&lt; "("&lt;&lt; query[0]&lt;&lt; ", " &lt;&lt; query[1] &lt;&lt; ")  ";
+    }
+    
+    vector&lt;int&gt; result = countPrimes(queries);
+    
+    cout &lt;&lt; endl&lt;&lt; "Number of primes between the ranges: ";
+    for (int i = 0; i &lt; result.size(); i++) {
+        cout &lt;&lt; result[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+    
+    return 0;
+}
+        </code></pre>
+        <!-- <img
+          src="images/"
+          alt="xyzabc"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        /> -->
+      </div>
+
+      <h2>Java Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-java line-numbers">
+            // Java solution code goes here
+        </code></pre>
+      </div>
+
+      <h2>Python Solution</h2>
+      <div class="codeC">
+        <pre><code class="language-python line-numbers">
+        # Python solution code goes here
+        </code></pre>
+      </div>
+    </div>
+  </body>
+</html>

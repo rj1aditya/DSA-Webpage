@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>aaaaa</title>
+    <title>All prime factors of a number</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>aaaaa</h2>
+        <h2>All prime factors of a number</h2>
       </div>
     </div>
     <div class="container">
@@ -58,15 +58,69 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
+class Solution{
+	public:
+	vector&lt;int&gt; AllPrimeFactors(int N) {
+	    // Code here
+	    
+	    //BRTUE FORCE
+	    //GENERATE ALL THE FACTOR AND SIMULTANEOUSLY CHECK IF IT IS PRIME OR NOT
+	    
+	    //OPTIMIZE APPROACH, OLD SCHOLL STLYLE TO FIND PRIME NUMBERS
+	    
+	    vector&lt;int&gt; ans;
+	    /*
+	    for(int i = 2; i &lt;= N; i++) //TC(13) FOR N=780
+	    {
+	       if(N%i == 0)
+	       {
+	           ans.push_back(i);
+	           while(N%i == 0)
+	           {
+	               N = N/i;
+	           }
+	       }
+	    }
+	    */
+	    
+	    //IN CASE OF GIVEN N=PRIME NO.
+	    //E.G. N=37 TC(N)
+	    
+	    //HOW TO OPTIMIZE IT
+	    for(int i = 2; i*i &lt;= N; i++)
+	    {
+	       if(N%i == 0)
+	       {
+	           ans.push_back(i);
+	           while(N%i == 0)
+	           {
+	               N = N/i;
+	           }
+	       }
+	    }
 
+	    if(N != 1)
+	        ans.push_back(N);
+	    
+	    
+	    return ans;
+	}
+};
         </code></pre>
-        <!-- <img
-          src="images/"
+        <img
+          src="images/img1.png"
           alt="xyzabc"
           width="700"
           height="450"
           style="display: block; margin: 0 auto"
-        /> -->
+        />
+        <img
+          src="images/img2.png"
+          alt="xyzabc"
+          width="700"
+          height="450"
+          style="display: block; margin: 0 auto"
+        />
       </div>
 
       <h2>Java Solution</h2>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>aaaaa</title>
+    <title>Prime Number</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css"
@@ -50,7 +50,7 @@
     <div class="header">
       <div class="header-content">
         <!-- <h1>Data Structure Algorithm</h1>-->
-        <h2>aaaaa</h2>
+        <h2>Prime Number</h2>
       </div>
     </div>
     <div class="container">
@@ -58,7 +58,31 @@
       <div class="codeC">
         <pre><code class="language-cpp line-numbers">
 // C++ solution code goes here
-
+class Solution {
+    public:
+      bool isPrime(int n) {
+          // code here
+          int cnt = 0;
+          for(int i = 1; i*i &lt;= n; i++)
+          {
+              int factor = i;
+              int otherFactor = n/i;
+              
+              if(n%factor == 0)
+                  cnt++;
+              if(factor != otherFactor && n%otherFactor == 0)
+                  cnt++;
+              
+              if(cnt &gt; 2)
+                  break;
+          }
+          
+          if(cnt == 2)
+              return true;
+          
+          return false;
+      }
+  };
         </code></pre>
         <!-- <img
           src="images/"

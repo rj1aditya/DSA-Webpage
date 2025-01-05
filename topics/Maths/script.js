@@ -1,144 +1,52 @@
 document.addEventListener("DOMContentLoaded", function () {
   const questions = [
     {
-      title: "Check for Balanced Parentheses | Stack and Queue",
+      title: "Prime Number",
       description: [
-        "https://leetcode.com/problems/valid-parentheses/description/",
+        "https://www.geeksforgeeks.org/problems/prime-number2314/1",
       ],
-      solution: "StackNQueue/checkParenthesis.html",
+      solution: "Maths/PrimeNumber.html",
       nt: "",
     },
     {
-      title: "Conversion - Infix to Postfix, Infix to Prefix and so on",
+      title: "All prime factors of a number",
       description: [
-        "https://www.naukri.com/code360/problems/day-23-:-infix-to-postfix-_1382146?leftPanelTabValue=PROBLEM",
+        "https://www.geeksforgeeks.org/problems/prime-factors5052/0",
       ],
-      solution: "StackNQueue/conversions.html",
+      solution: "Maths/primefactors.html",
       nt: "",
     },
     {
-      title: "Min Stack",
-      description: ["https://leetcode.com/problems/min-stack/description/"],
-      solution: "StackNQueue/minstack.html",
+      title: "Power Exponentiation",
+      description: ["https://leetcode.com/problems/powx-n/description/"],
+      solution: "Maths/PowerExponentiation.html",
       nt: "",
     },
     {
-      title: "Next Greater Element",
+      title: "Sieve of Eratosthenes",
       description: [
-        "https://www.naukri.com/code360/problems/next-greater-element_670312?leftPanelTabValue=PROBLEM",
+        "https://www.geeksforgeeks.org/problems/sieve-of-eratosthenes5242/1",
       ],
-      solution: "StackNQueue/NGE.html",
+      solution: "Maths/SieveofEratosthenes.html",
       nt: "",
     },
     {
-      title: "Next Greater Element II",
-      description: [
-        "https://leetcode.com/problems/next-greater-element-ii/description/",
-      ],
-      solution: "StackNQueue/nge2.html",
+      title: "Count Prime in range",
+      description: ["Count Prime in range"],
+      solution: "Maths/CountPrimeInRange.html",
       nt: "",
     },
     {
-      title: "Smaller on Left",
-      description: [
-        "https://www.geeksforgeeks.org/problems/smallest-number-on-left3403/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card",
-      ],
-      solution: "StackNQueue/smallerOnLeft.html",
-      nt: "",
-    },
-    {
-      title: "Trapping Rain Water",
-      description: [
-        "https://leetcode.com/problems/trapping-rain-water/description/",
-      ],
-      solution: "StackNQueue/trapRain.html",
-      nt: "",
-    },
-    {
-      title: "Sum of Subarray Minimum",
-      description: [
-        "https://leetcode.com/problems/sum-of-subarray-minimums/description/",
-      ],
-      solution: "StackNQueue/SumofSubarrayMinimum.html",
-      nt: "",
-    },
-    {
-      title: "Sum of Subarray Ranges",
-      description: ["https://leetcode.com/problems/sum-of-subarray-ranges/"],
-      solution: "StackNQueue/SumofSubarrayRanges.html",
-      nt: "",
-    },
-    {
-      title: "Asteroid Collision",
-      description: ["https://leetcode.com/problems/asteroid-collision/"],
-      solution: "StackNQueue/AsteroidCollision.html",
-      nt: "",
-    },
-    {
-      title: "Largest Rectangle in Histogram",
-      description: [
-        "https://leetcode.com/problems/largest-rectangle-in-histogram/description/",
-      ],
-      solution: "StackNQueue/LargestRectangleInHistogram.html",
-      nt: "",
-    },
-    {
-      title: "Maximal Rectangle",
-      description: [
-        "https://leetcode.com/problems/maximal-rectangle/description/",
-      ],
-      solution: "StackNQueue/MaximalRectangle.html",
-      nt: "",
-    },
-    {
-      title: "Remove K Digits",
-      description: [
-        "https://leetcode.com/problems/remove-k-digits/description/",
-      ],
-      solution: "StackNQueue/RemoveKDigits.html",
-      nt: "",
-    },
-    {
-      title: "Stock Span Problem",
-      description: [
-        "https://leetcode.com/problems/online-stock-span/description/",
-      ],
-      solution: "StackNQueue/StockSpan.html",
-      nt: "",
-    },
-    {
-      title: "Sliding Window Maximum",
-      description: [
-        "https://leetcode.com/problems/sliding-window-maximum/description/",
-      ],
-      solution: "StackNQueue/SlidingWindowMaximum.html",
-      nt: "",
-    },
-    {
-      title: "The Celebrity Problem",
-      description: [
-        "https://www.geeksforgeeks.org/problems/the-celebrity-problem/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card",
-      ],
-      solution: "StackNQueue/celebrityProblem.html",
-      nt: "",
-    },
-    {
-      title: "Implement LRU Cache",
-      description: ["https://leetcode.com/problems/lru-cache/description/"],
-      solution: "StackNQueue/LRUCache.html",
-      nt: "",
-    },
-    {
-      title: "LFU Cache",
-      description: ["https://leetcode.com/problems/lfu-cache/description/"],
-      solution: "StackNQueue/LFUCache.html",
+      title: "",
+      description: [""],
+      solution: "Maths/.html",
       nt: "",
     },
     //Dummy #aa8fab
     {
       title: "",
       description: [""],
-      solution: "StackNQueue/.html",
+      solution: "Maths/.html",
       nt: "",
     },
     // Add more question objects here
