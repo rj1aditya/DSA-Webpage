@@ -14,7 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     {
       title: "Check for Balanced Binary Tree",
-      description: ["Balanced Binary Tree is leftH-rightH <=1"],
+      description: [
+        "https://leetcode.com/problems/balanced-binary-tree/description",
+        "Balanced Binary Tree is leftH-rightH <=1",
+      ],
       solution: "Tree/checkBalanceBinaryTree.html",
       nt: "",
     },
@@ -98,9 +101,17 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       title: "Print Root to Node Path in Binary Tree ",
       description: [
-        "https://www.youtube.com/watch?v=_-QHfMDde90&list=PLgUwDviBIf0q8Hkd7bK2Bpryj2xVJk8Vk&index=28",
+        "https://takeuforward.org/plus/dsa/problems/print-root-to-note-path-in-bt",
       ],
       solution: "Tree/printRootToNodePathInBT.html",
+      nt: "",
+    },
+    {
+      title: "Lowest Common Ancestor in Binary Tree",
+      description: [
+        "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/",
+      ],
+      solution: "Tree/lowestCommanAncestorInBT.html",
       nt: "",
     },
     {
@@ -114,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       title: "Children Sum Property in Binary Tree ",
       description: [
-        "https://www.naukri.com/code360/problems/childrensumproperty_790723?leftPanelTabValue=SUBMISSION",
+        "https://www.naukri.com/code360/problems/childrensumproperty_790723?leftPanelTabValue=PROBLEM",
       ],
       solution: "Tree/childrenSumPropertyBT.html",
       nt: "",
@@ -138,9 +149,17 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       title: "Count total Nodes in a COMPLETE Binary Tree",
       description: [
-        "https://www.geeksforgeeks.org/problems/burning-tree/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card",
+        "https://leetcode.com/problems/count-complete-tree-nodes/description",
       ],
       solution: "Tree/countTotalNodesInCBT.html",
+      nt: "",
+    },
+    {
+      title: "Construct a Binary Tree from Preorder and Postorder Traversal",
+      description: [
+        "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/description",
+      ],
+      solution: "Tree/ConstructAUniqueBTFromPreOrderInorder.html",
       nt: "",
     },
     {
@@ -170,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       title: "Morris Traversal | Preorder | Inorder",
       description: [
-        "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
+        "https://leetcode.com/problems/binary-tree-inorder-traversal",
       ],
       solution: "Tree/morrisTraversal.html",
       nt: "",
