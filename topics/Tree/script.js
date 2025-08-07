@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
       description: [
         "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/description",
       ],
-      solution: "Tree/ConstructAUniqueBTFromPreOrderInorder.html",
+      solution: "Tree/ConstructBTUsingPreOrderPostOrder.html",
       nt: "",
     },
     {
